@@ -49,6 +49,27 @@
         "notes": {
           "type": "string",
           "description": "Optional operator notes (not shown on the dashboard)"
+        },
+        "customAdapter": {
+          "type": "string",
+          "enum": ["paypal-atom"],
+          "description": "Required for adapter custom; selects implementation"
+        },
+        "options": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "maxLatencyMs": {
+              "type": "integer",
+              "minimum": 100,
+              "description": "http-ping: treat responses slower than this as degraded"
+            },
+            "acceptableStatuses": {
+              "type": "array",
+              "items": { "type": "integer", "minimum": 100, "maximum": 599 },
+              "description": "http-ping: allowed HTTP status codes (default 2xx–3xx)"
+            }
+          }
         }
       },
       "allOf": [
@@ -67,6 +88,13 @@
             "required": ["adapter"]
           },
           "then": { "required": ["url"] }
+        },
+        {
+          "if": {
+            "properties": { "adapter": { "const": "custom" } },
+            "required": ["adapter"]
+          },
+          "then": { "required": ["customAdapter"] }
         }
       ]
     }
