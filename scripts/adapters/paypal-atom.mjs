@@ -48,7 +48,11 @@ export function parsePaypalAtomFeed(entries, nowMs = Date.now()) {
 
     const title = entry.title.replace(/\s+/g, " ").trim();
     if (RESOLVED_RE.test(title)) continue;
-    if (MAINTENANCE_RE.test(title)) continue;
+
+    if (MAINTENANCE_RE.test(title)) {
+      active.push({ title, severity: "degraded" });
+      continue;
+    }
 
     if (/initial notification|update:/i.test(title)) {
       active.push({ title, severity: severityFromTitle(title) });

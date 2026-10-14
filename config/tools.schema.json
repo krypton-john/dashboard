@@ -52,7 +52,7 @@
         },
         "customAdapter": {
           "type": "string",
-          "enum": ["paypal-atom"],
+          "enum": ["paypal-atom", "salesforce"],
           "description": "Required for adapter custom; selects implementation"
         },
         "options": {

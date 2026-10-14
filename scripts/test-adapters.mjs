@@ -4,6 +4,7 @@ import {
   parseAtomEntries,
   parsePaypalAtomFeed,
 } from "./adapters/paypal-atom.mjs";
+import { parseSalesforceStatus } from "./adapters/salesforce.mjs";
 import { parseStatuspageSummary } from "./adapters/statuspage.mjs";
 
 const statuspageOperational = {
@@ -44,5 +45,20 @@ assert.equal(
   parsePaypalAtomFeed(entries, Date.parse("2026-10-14T13:00:00Z")).state,
   "degraded"
 );
+
+const maintenanceAtom = `<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom">
+<entry><title>Rescheduled: PayPal Live Site Maintenance</title><updated>2026-10-14T12:00:00Z</updated></entry>
+</feed>`;
+assert.equal(
+  parsePaypalAtomFeed(parseAtomEntries(maintenanceAtom), Date.parse("2026-10-14T13:00:00Z")).state,
+  "degraded"
+);
+
+const sf = parseSalesforceStatus(
+  [{ type: "Degradation", additionalInformation: "Stale analytics", IncidentImpacts: [{ severity: "minor" }] }],
+  [],
+  Date.parse("2026-10-14T13:00:00Z")
+);
+assert.equal(sf.state, "degraded");
 
 console.log("adapter tests passed");
