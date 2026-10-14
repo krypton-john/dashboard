@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-14T20:26:37.136Z",
+  "generatedAt": "2026-10-14T22:31:43.605Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-14T20:26:34.031Z",
+      "polledAt": "2026-10-14T22:31:43.117Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -15,7 +15,7 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-14T20:26:35.708Z",
+      "polledAt": "2026-10-14T22:31:43.178Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -26,7 +26,7 @@
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-14T20:26:35.835Z",
+      "polledAt": "2026-10-14T22:31:43.179Z",
       "error": null,
       "state": "degraded",
       "description": "Advanced Analytics data is stale as of 09/14/26 1:40 PM UTC",
@@ -37,7 +37,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-14T20:26:35.883Z",
+      "polledAt": "2026-10-14T22:31:43.182Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -48,7 +48,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-14T20:26:35.888Z",
+      "polledAt": "2026-10-14T22:31:43.183Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -59,7 +59,7 @@
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-14T20:26:35.899Z",
+      "polledAt": "2026-10-14T22:31:43.184Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
@@ -70,10 +70,10 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-14T20:26:35.908Z",
+      "polledAt": "2026-10-14T22:31:43.185Z",
       "error": null,
       "state": "degraded",
-      "description": "Rescheduled: PayPal Live Site Maintenance (PP-LIVE-109965)",
+      "description": "Initial Notification: Hyperwallet (PP-LIVE-110014)",
       "daysSinceLastIncident": 0,
       "incidentOngoing": true,
       "trackingSince": "2026-10-14T20:14:24.969Z"
