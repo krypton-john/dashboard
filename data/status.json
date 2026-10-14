@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-14T20:09:31.936Z",
+  "generatedAt": "2026-10-14T20:14:24.969Z",
   "tools": [
     {
       "id": "cloudflare",
       "name": "Cloudflare",
-      "polledAt": "2026-10-14T20:09:31.779Z",
+      "polledAt": "2026-10-14T20:14:23.726Z",
       "error": null,
       "state": "major",
       "description": "Partial System Outage",
@@ -15,7 +15,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-14T20:09:31.608Z",
+      "polledAt": "2026-10-14T20:14:23.122Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -26,13 +26,46 @@
     {
       "id": "google-cloud",
       "name": "Google Cloud",
-      "polledAt": "2026-10-14T20:09:31.903Z",
+      "polledAt": "2026-10-14T20:14:23.733Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
       "trackingSince": "2026-10-14T20:06:46.301Z"
+    },
+    {
+      "id": "paypal",
+      "name": "PayPal",
+      "polledAt": "2026-10-14T20:14:23.752Z",
+      "error": null,
+      "state": "operational",
+      "description": "No active incidents in feed",
+      "daysSinceLastIncident": null,
+      "incidentOngoing": false,
+      "trackingSince": "2026-10-14T20:14:24.969Z"
+    },
+    {
+      "id": "shopify",
+      "name": "Shopify",
+      "polledAt": "2026-10-14T20:14:23.746Z",
+      "error": null,
+      "state": "operational",
+      "description": "All Systems Operational",
+      "daysSinceLastIncident": null,
+      "incidentOngoing": false,
+      "trackingSince": "2026-10-14T20:14:24.969Z"
+    },
+    {
+      "id": "vtex",
+      "name": "VTEX",
+      "polledAt": "2026-10-14T20:14:23.748Z",
+      "error": null,
+      "state": "operational",
+      "description": "All Systems Operational",
+      "daysSinceLastIncident": null,
+      "incidentOngoing": false,
+      "trackingSince": "2026-10-14T20:14:24.969Z"
     }
   ]
 }

@@ -1,4 +1,6 @@
+import { fetchCustom } from "./custom.mjs";
 import { fetchGcloud } from "./gcloud.mjs";
+import { fetchHttpPing } from "./http-ping.mjs";
 import { fetchStatuspage } from "./statuspage.mjs";
 
 /** @typedef {import('../lib/states.mjs').ToolState} ToolState */
@@ -10,6 +12,8 @@ import { fetchStatuspage } from "./statuspage.mjs";
  * @property {'statuspage' | 'gcloud' | 'http-ping' | 'custom'} adapter
  * @property {string} [url]
  * @property {boolean} enabled
+ * @property {string} [customAdapter]
+ * @property {{ maxLatencyMs?: number; acceptableStatuses?: number[] }} [options]
  */
 
 /**
@@ -59,13 +63,11 @@ export async function pollTool(tool) {
         parsed = await fetchGcloud(tool.url, controller.signal);
         break;
       case "http-ping":
+        parsed = await fetchHttpPing(tool.url, controller.signal, tool.options);
+        break;
       case "custom":
-        return {
-          ...base,
-          state: "unknown",
-          description: `Adapter "${tool.adapter}" not implemented yet`,
-          error: "unsupported_adapter",
-        };
+        parsed = await fetchCustom(tool, controller.signal);
+        break;
       default:
         return {
           ...base,

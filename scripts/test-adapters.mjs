@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
 import { parseGcloudIncidents } from "./adapters/gcloud.mjs";
+import {
+  parseAtomEntries,
+  parsePaypalAtomFeed,
+} from "./adapters/paypal-atom.mjs";
 import { parseStatuspageSummary } from "./adapters/statuspage.mjs";
 
 const statuspageOperational = {
@@ -29,5 +33,16 @@ const gcloudOutage = [
   },
 ];
 assert.equal(parseGcloudIncidents(gcloudOutage).state, "major");
+
+const atom = `<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom">
+<entry><title>Resolved: test</title><updated>2026-10-14T12:00:00Z</updated></entry>
+<entry><title>Initial Notification: API errors</title><updated>2026-10-14T12:00:00Z</updated></entry>
+</feed>`;
+const entries = parseAtomEntries(atom);
+assert.equal(entries.length, 2);
+assert.equal(
+  parsePaypalAtomFeed(entries, Date.parse("2026-10-14T13:00:00Z")).state,
+  "degraded"
+);
 
 console.log("adapter tests passed");

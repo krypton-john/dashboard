@@ -12,7 +12,7 @@ Internal traffic-light dashboard for vendor status pages, hosted on **GitHub Pag
 | `data/incidents.json` | Incident history and per-tool tracking metadata |
 | `public/` | Static dashboard (HTML, CSS, JS) |
 | `scripts/poll.mjs` | Fetches enabled tools and updates `data/status.json` |
-| `scripts/adapters/` | `statuspage` and `gcloud` normalizers |
+| `scripts/adapters/` | Vendor-specific fetchers and normalizers |
 | `.github/workflows/pages.yml` | Builds and deploys `public/` + `data/` to Pages |
 | `.github/workflows/poll-status.yml` | Scheduled status poll; commits when data changes |
 
@@ -42,23 +42,56 @@ The script writes `data/status.json` only when tool state, description, or error
 ## GitHub Pages setup
 
 1. Push this repo to GitHub on the `main` branch.
-2. In the repo **Settings → Pages**, set **Source** to **GitHub Actions**.
+2. In the repo **Settings → Pages**, set **Source** to **GitHub Actions** (not “Deploy from a branch”).
 3. Push to `main` (or run **Deploy GitHub Pages** manually). The workflow copies `public/` and `data/` into the site artifact.
+
+`public/.nojekyll` is included so GitHub does not run Jekyll over the static site.
 
 ## Adding a tool
 
 1. Add an entry to `config/tools.json` (must match `config/tools.schema.json`).
-2. Set `adapter` to `statuspage`, `gcloud`, `http-ping`, or `custom`.
-3. Enable the tool once the poller supports that adapter (`statuspage` and `gcloud` today).
+2. Pick an **adapter** (see table below).
+3. Set `enabled: true` when ready.
+
+| Adapter | Use when | `url` should be |
+|--------|-----------|------------------|
+| `statuspage` | Vendor uses Atlassian Statuspage (`*/api/v2/summary.json`) | Summary JSON URL |
+| `gcloud` | Google Cloud | `https://status.cloud.google.com/incidents.json` |
+| `http-ping` | No status API; you only need reachability/latency | Homepage or health URL |
+| `custom` | Bespoke feed (see `customAdapter`) | Feed or API URL |
+
+### `http-ping` options
+
+```json
+{
+  "id": "my-app",
+  "name": "My App",
+  "adapter": "http-ping",
+  "url": "https://app.example.com/health",
+  "enabled": true,
+  "options": {
+    "maxLatencyMs": 5000,
+    "acceptableStatuses": [200]
+  }
+}
+```
+
+### PayPal (`custom` + `paypal-atom`)
+
+PayPal does not expose a public Statuspage JSON API. The poller reads their **Atom feed** and treats recent non-resolved “Initial Notification” / “Update” entries as active incidents (maintenance-only items are ignored).
 
 Enable **Actions** on the repo so **Poll status** can run on schedule (or trigger it manually under Actions).
+
+### Scheduled Actions note
+
+GitHub disables scheduled workflows after **60 days of repository inactivity**. Merging PRs or running **Poll status** manually counts as activity; keep the repo active or re-enable workflows if polling stops.
 
 ## Build phases
 
 - **Phase 1:** layout, tool config schema, hello-world Pages site  
 - **Phase 2:** fetch script + cron Action  
 - **Phase 3:** incident tracking (two-poll confirmation, `incidents.json`)  
-- **Phase 4 (current):** dashboard UI (cards, stale warning, auto-refresh)  
-- **Phase 5+:** remaining vendors and hardening  
+- **Phase 4:** dashboard UI (cards, stale warning, auto-refresh)  
+- **Phase 5 (current):** Shopify, VTEX, PayPal, `http-ping`, docs and tests  
 
 Details: [Plan.md](./Plan.md).

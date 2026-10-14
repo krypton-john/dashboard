@@ -78,10 +78,7 @@ async function main() {
     (t) => t.enabled
   );
 
-  const results = [];
-  for (const tool of tools) {
-    results.push(await pollTool(tool));
-  }
+  const results = await Promise.all(tools.map((tool) => pollTool(tool)));
 
   results.sort((a, b) => a.id.localeCompare(b.id));
 
