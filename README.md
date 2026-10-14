@@ -11,7 +11,10 @@ Internal traffic-light dashboard for vendor status pages, hosted on **GitHub Pag
 | `data/status.json` | Latest normalized status (written by the poller) |
 | `data/incidents.json` | Incident history for “days since last incident” |
 | `public/` | Static dashboard (HTML, CSS, JS) |
+| `scripts/poll.mjs` | Fetches enabled tools and updates `data/status.json` |
+| `scripts/adapters/` | `statuspage` and `gcloud` normalizers |
 | `.github/workflows/pages.yml` | Builds and deploys `public/` + `data/` to Pages |
+| `.github/workflows/poll-status.yml` | Scheduled status poll; commits when data changes |
 
 ## Local preview
 
@@ -24,6 +27,17 @@ python3 -m http.server 8080 --directory _site
 
 Open [http://localhost:8080](http://localhost:8080).
 
+## Run the poller locally
+
+Requires Node 18+ (for `fetch`):
+
+```bash
+node scripts/poll.mjs
+node scripts/test-adapters.mjs
+```
+
+The script writes `data/status.json` only when tool state, description, or errors change (timestamps alone do not trigger a write).
+
 ## GitHub Pages setup
 
 1. Push this repo to GitHub on the `main` branch.
@@ -34,12 +48,14 @@ Open [http://localhost:8080](http://localhost:8080).
 
 1. Add an entry to `config/tools.json` (must match `config/tools.schema.json`).
 2. Set `adapter` to `statuspage`, `gcloud`, `http-ping`, or `custom`.
-3. Enable the tool once the poller supports that adapter (phase 2+).
+3. Enable the tool once the poller supports that adapter (`statuspage` and `gcloud` today).
+
+Enable **Actions** on the repo so **Poll status** can run on schedule (or trigger it manually under Actions).
 
 ## Build phases
 
-- **Phase 1 (current):** layout, tool config schema, hello-world Pages site  
-- **Phase 2:** fetch script + cron Action  
+- **Phase 1:** layout, tool config schema, hello-world Pages site  
+- **Phase 2 (current):** fetch script + cron Action  
 - **Phase 3:** incident tracking  
 - **Phase 4:** full dashboard UI  
 - **Phase 5+:** remaining vendors and hardening  

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Normalized status snapshot",
+  "type": "object",
+  "required": ["generatedAt", "tools"],
+  "additionalProperties": false,
+  "properties": {
+    "generatedAt": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "When this snapshot was last written to the repo"
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "state", "description", "polledAt", "error"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "state": {
+            "type": "string",
+            "enum": ["operational", "degraded", "major", "unknown"]
+          },
+          "description": { "type": "string" },
+          "polledAt": { "type": "string", "format": "date-time" },
+          "error": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

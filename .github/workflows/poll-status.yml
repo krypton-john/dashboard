@@ -1,0 +1,39 @@
+name: Poll status
+
+on:
+  schedule:
+    # GitHub cron is best-effort; often 5–15+ minutes between runs.
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: poll-status
+  cancel-in-progress: false
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch vendor status
+        id: fetch
+        run: node scripts/poll.mjs
+
+      - name: Commit status data
+        if: steps.fetch.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/status.json
+          git commit -m "chore: update status snapshot"
+          git push
