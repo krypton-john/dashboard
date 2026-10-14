@@ -11,7 +11,7 @@
   "tools": {
     "cloudflare": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 2,
+      "nonGreenPolls": 3,
       "pendingStart": "2026-10-14T20:06:46.301Z"
     },
     "github": {
