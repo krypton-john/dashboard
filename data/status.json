@@ -1,4 +1,29 @@
 {
-  "generatedAt": null,
-  "tools": []
+  "generatedAt": "2026-10-14T19:19:37.811Z",
+  "tools": [
+    {
+      "id": "cloudflare",
+      "name": "Cloudflare",
+      "polledAt": "2026-10-14T19:19:37.537Z",
+      "error": null,
+      "state": "major",
+      "description": "Partial System Outage"
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "polledAt": "2026-10-14T19:19:37.077Z",
+      "error": null,
+      "state": "operational",
+      "description": "All Systems Operational"
+    },
+    {
+      "id": "google-cloud",
+      "name": "Google Cloud",
+      "polledAt": "2026-10-14T19:19:37.679Z",
+      "error": null,
+      "state": "operational",
+      "description": "No active incidents"
+    }
+  ]
 }
