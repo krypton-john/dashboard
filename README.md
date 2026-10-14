@@ -78,7 +78,11 @@ The script writes `data/status.json` only when tool state, description, or error
 
 ### PayPal (`custom` + `paypal-atom`)
 
-PayPal does not expose a public Statuspage JSON API. The poller reads their **Atom feed** and treats recent non-resolved “Initial Notification” / “Update” entries as active incidents (maintenance-only items are ignored).
+PayPal does not expose a public Statuspage JSON API. The poller reads their **Atom feed** and treats recent non-resolved “Initial Notification” / “Update” entries as active incidents. Titles mentioning **maintenance** or **rescheduled** count as **degraded**.
+
+### Salesforce (`custom` + `salesforce`)
+
+Uses the [Salesforce Trust API](https://api.status.salesforce.com/v1): active incidents plus any **maintenance whose planned window includes now** (degraded). Set `url` to `https://api.status.salesforce.com/v1`.
 
 Enable **Actions** on the repo so **Poll status** can run on schedule (or trigger it manually under Actions).
 
