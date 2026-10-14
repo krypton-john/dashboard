@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Incident history",
+  "type": "object",
+  "required": ["version", "incidents", "tools"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "incidents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["toolId", "start", "end", "worstSeverity"],
+        "additionalProperties": false,
+        "properties": {
+          "toolId": { "type": "string" },
+          "start": { "type": "string", "format": "date-time" },
+          "end": { "type": ["string", "null"], "format": "date-time" },
+          "worstSeverity": { "type": "string", "enum": ["degraded", "major"] }
+        }
+      }
+    },
+    "tools": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["trackingSince", "nonGreenPolls", "pendingStart"],
+        "additionalProperties": false,
+        "properties": {
+          "trackingSince": { "type": "string", "format": "date-time" },
+          "nonGreenPolls": { "type": "integer", "minimum": 0 },
+          "pendingStart": { "type": ["string", "null"], "format": "date-time" }
+        }
+      }
+    }
+  }
+}

@@ -2,11 +2,14 @@
   color-scheme: light dark;
   --bg: #0f1419;
   --surface: #1a2332;
+  --surface-2: #222d3f;
   --text: #e7ecf3;
   --muted: #9aa8bc;
   --accent: #5b9fd4;
   --ok: #3d9a6a;
   --warn: #c9a227;
+  --danger: #d64550;
+  --unknown: #8b95a8;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -14,6 +17,7 @@
   :root {
     --bg: #f4f6f9;
     --surface: #ffffff;
+    --surface-2: #eef2f8;
     --text: #1a2332;
     --muted: #5c6b7f;
     --accent: #2563a8;
@@ -42,7 +46,7 @@ body {
 }
 
 .page {
-  max-width: 40rem;
+  max-width: 56rem;
   margin: 0 auto;
   padding: 2.5rem 1.25rem 3rem;
 }
@@ -57,7 +61,7 @@ body {
 }
 
 h1 {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.5rem;
   font-size: clamp(1.75rem, 4vw, 2.25rem);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -67,57 +71,127 @@ h1 {
   margin: 0;
   color: var(--muted);
   font-size: 1.05rem;
+  max-width: 36rem;
 }
 
-.panel {
-  margin-top: 2rem;
-  padding: 1.25rem 1.5rem;
-  background: var(--surface);
-  border-radius: 12px;
-  border: 1px solid color-mix(in srgb, var(--muted) 25%, transparent);
-  box-shadow: 0 8px 24px color-mix(in srgb, #000 15%, transparent);
-}
-
-.panel h2 {
-  margin: 0 0 1rem;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.meta {
-  margin: 0;
-  display: grid;
-  gap: 0.75rem;
-}
-
-.meta dt {
-  font-size: 0.8rem;
-  color: var(--muted);
-  font-weight: 500;
-}
-
-.meta dd {
-  margin: 0.15rem 0 0;
-  font-weight: 600;
-}
-
-.meta dd.ok {
-  color: var(--ok);
-}
-
-.meta dd.pending {
-  color: var(--warn);
-}
-
-.footer {
-  margin-top: 2rem;
+.last-updated {
+  margin: 1.25rem 0 0;
   font-size: 0.875rem;
   color: var(--muted);
 }
 
-code {
-  font-size: 0.85em;
-  padding: 0.1em 0.35em;
-  border-radius: 4px;
-  background: color-mix(in srgb, var(--muted) 18%, transparent);
+.banner {
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid color-mix(in srgb, var(--warn) 45%, transparent);
+  background: color-mix(in srgb, var(--warn) 12%, var(--surface));
+  color: var(--text);
+}
+
+.banner--hidden {
+  display: none;
+}
+
+.banner--warn {
+  border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+  background: color-mix(in srgb, var(--warn) 14%, var(--surface));
+}
+
+.banner--danger {
+  border-color: color-mix(in srgb, var(--danger) 50%, transparent);
+  background: color-mix(in srgb, var(--danger) 14%, var(--surface));
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  position: relative;
+  padding: 1.15rem 1.15rem 1.15rem 3rem;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--muted) 22%, transparent);
+  box-shadow: 0 6px 20px color-mix(in srgb, #000 12%, transparent);
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.card-status {
+  margin: 0.35rem 0 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.card--operational .card-status {
+  color: var(--ok);
+}
+
+.card--degraded .card-status {
+  color: var(--warn);
+}
+
+.card--major .card-status {
+  color: var(--danger);
+}
+
+.card--unknown .card-status {
+  color: var(--unknown);
+}
+
+.card-desc {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.card-incident {
+  margin: 0.75rem 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--muted) 18%, transparent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.light {
+  position: absolute;
+  left: 1rem;
+  top: 1.2rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: var(--unknown);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--unknown) 25%, transparent);
+}
+
+.card--operational .light {
+  background: var(--ok);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 28%, transparent);
+}
+
+.card--degraded .light {
+  background: var(--warn);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--warn) 28%, transparent);
+}
+
+.card--major .light {
+  background: var(--danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 28%, transparent);
+}
+
+.footer {
+  margin-top: 2.5rem;
+  font-size: 0.875rem;
+  color: var(--muted);
 }

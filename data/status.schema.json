@@ -25,7 +25,10 @@
           },
           "description": { "type": "string" },
           "polledAt": { "type": "string", "format": "date-time" },
-          "error": { "type": ["string", "null"] }
+          "error": { "type": ["string", "null"] },
+          "daysSinceLastIncident": { "type": ["integer", "null"] },
+          "incidentOngoing": { "type": "boolean" },
+          "trackingSince": { "type": ["string", "null"], "format": "date-time" }
         }
       }
     }

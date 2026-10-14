@@ -1,29 +1,38 @@
 {
-  "generatedAt": "2026-10-14T19:19:37.811Z",
+  "generatedAt": "2026-10-14T20:06:46.301Z",
   "tools": [
     {
       "id": "cloudflare",
       "name": "Cloudflare",
-      "polledAt": "2026-10-14T19:19:37.537Z",
+      "polledAt": "2026-10-14T20:06:45.482Z",
       "error": null,
       "state": "major",
-      "description": "Partial System Outage"
+      "description": "Partial System Outage",
+      "daysSinceLastIncident": null,
+      "incidentOngoing": false,
+      "trackingSince": "2026-10-14T20:06:46.301Z"
     },
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-14T19:19:37.077Z",
+      "polledAt": "2026-10-14T20:06:41.672Z",
       "error": null,
       "state": "operational",
-      "description": "All Systems Operational"
+      "description": "All Systems Operational",
+      "daysSinceLastIncident": null,
+      "incidentOngoing": false,
+      "trackingSince": "2026-10-14T20:06:46.301Z"
     },
     {
       "id": "google-cloud",
       "name": "Google Cloud",
-      "polledAt": "2026-10-14T19:19:37.679Z",
+      "polledAt": "2026-10-14T20:06:45.912Z",
       "error": null,
       "state": "operational",
-      "description": "No active incidents"
+      "description": "No active incidents",
+      "daysSinceLastIncident": null,
+      "incidentOngoing": false,
+      "trackingSince": "2026-10-14T20:06:46.301Z"
     }
   ]
 }

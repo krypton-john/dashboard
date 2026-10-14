@@ -11,30 +11,19 @@
       <header class="header">
         <p class="eyebrow">Internal</p>
         <h1>SaaS Status Dashboard</h1>
-        <p class="lede">
-          Traffic-light view of vendor status and days since last incident.
-          Live vendor data is loaded from <code>data/status.json</code> (refreshed by the poller).
-        </p>
+        <p class="lede">Vendor health and days since the last confirmed incident.</p>
       </header>
 
-      <section class="panel" aria-labelledby="health-heading">
-        <h2 id="health-heading">Site health</h2>
-        <dl class="meta">
-          <div>
-            <dt>GitHub Pages</dt>
-            <dd class="ok">Deployed (hello world)</dd>
-          </div>
-          <div>
-            <dt>Status data</dt>
-            <dd id="data-status">Checking…</dd>
-          </div>
-        </dl>
-      </section>
+      <div id="banner" class="banner banner--hidden" role="status" aria-live="polite"></div>
+
+      <p id="last-updated" class="last-updated">Loading…</p>
+
+      <section class="grid" id="tool-grid" aria-label="Tools"></section>
 
       <footer class="footer">
-        <p>See <code>Plan.md</code> in the repo for architecture and build phases.</p>
+        <p>Data refreshes automatically. Polled every ~10 minutes via GitHub Actions.</p>
       </footer>
     </main>
-    <script src="js/hello.js" type="module"></script>
+    <script src="js/dashboard.js" type="module"></script>
   </body>
 </html>
