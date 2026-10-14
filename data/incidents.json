@@ -1,10 +1,17 @@
 {
   "version": 1,
-  "incidents": [],
+  "incidents": [
+    {
+      "toolId": "cloudflare",
+      "start": "2026-10-14T20:06:46.301Z",
+      "end": null,
+      "worstSeverity": "major"
+    }
+  ],
   "tools": {
     "cloudflare": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 1,
+      "nonGreenPolls": 2,
       "pendingStart": "2026-10-14T20:06:46.301Z"
     },
     "github": {
