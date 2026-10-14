@@ -9,7 +9,7 @@ Internal traffic-light dashboard for vendor status pages, hosted on **GitHub Pag
 | `config/tools.json` | Tools to poll; edit this to add or remove vendors |
 | `config/tools.schema.json` | JSON Schema for `tools.json` |
 | `data/status.json` | Latest normalized status (written by the poller) |
-| `data/incidents.json` | Incident history for “days since last incident” |
+| `data/incidents.json` | Incident history and per-tool tracking metadata |
 | `public/` | Static dashboard (HTML, CSS, JS) |
 | `scripts/poll.mjs` | Fetches enabled tools and updates `data/status.json` |
 | `scripts/adapters/` | `statuspage` and `gcloud` normalizers |
@@ -34,6 +34,7 @@ Requires Node 18+ (for `fetch`):
 ```bash
 node scripts/poll.mjs
 node scripts/test-adapters.mjs
+node scripts/test-incidents.mjs
 ```
 
 The script writes `data/status.json` only when tool state, description, or errors change (timestamps alone do not trigger a write).
@@ -55,9 +56,9 @@ Enable **Actions** on the repo so **Poll status** can run on schedule (or trigge
 ## Build phases
 
 - **Phase 1:** layout, tool config schema, hello-world Pages site  
-- **Phase 2 (current):** fetch script + cron Action  
-- **Phase 3:** incident tracking  
-- **Phase 4:** full dashboard UI  
+- **Phase 2:** fetch script + cron Action  
+- **Phase 3:** incident tracking (two-poll confirmation, `incidents.json`)  
+- **Phase 4 (current):** dashboard UI (cards, stale warning, auto-refresh)  
 - **Phase 5+:** remaining vendors and hardening  
 
 Details: [Plan.md](./Plan.md).
