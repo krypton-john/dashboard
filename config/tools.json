@@ -2,27 +2,6 @@
   "version": 1,
   "tools": [
     {
-      "id": "github",
-      "name": "GitHub",
-      "adapter": "statuspage",
-      "url": "https://www.githubstatus.com/api/v2/summary.json",
-      "enabled": true
-    },
-    {
-      "id": "cloudflare",
-      "name": "Cloudflare",
-      "adapter": "statuspage",
-      "url": "https://www.cloudflarestatus.com/api/v2/summary.json",
-      "enabled": true
-    },
-    {
-      "id": "google-cloud",
-      "name": "Google Cloud",
-      "adapter": "gcloud",
-      "url": "https://status.cloud.google.com/incidents.json",
-      "enabled": true
-    },
-    {
       "id": "shopify",
       "name": "Shopify",
       "adapter": "statuspage",
@@ -37,13 +16,6 @@
       "enabled": true
     },
     {
-      "id": "snowflake",
-      "name": "Snowflake",
-      "adapter": "statuspage",
-      "url": "https://status.snowflake.com/api/v2/summary.json",
-      "enabled": true
-    },
-    {
       "id": "salesforce",
       "name": "Salesforce",
       "adapter": "custom",
@@ -51,6 +23,27 @@
       "url": "https://api.status.salesforce.com/v1",
       "enabled": true,
       "notes": "Uses Salesforce Trust API (active incidents + in-window maintenance)."
+    },
+    {
+      "id": "snowflake",
+      "name": "Snowflake",
+      "adapter": "statuspage",
+      "url": "https://status.snowflake.com/api/v2/summary.json",
+      "enabled": true
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "adapter": "statuspage",
+      "url": "https://www.githubstatus.com/api/v2/summary.json",
+      "enabled": true
+    },
+    {
+      "id": "google-cloud",
+      "name": "GCP",
+      "adapter": "gcloud",
+      "url": "https://status.cloud.google.com/incidents.json",
+      "enabled": true
     },
     {
       "id": "paypal",

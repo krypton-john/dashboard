@@ -80,7 +80,10 @@ async function main() {
 
   const results = await Promise.all(tools.map((tool) => pollTool(tool)));
 
-  results.sort((a, b) => a.id.localeCompare(b.id));
+  const order = new Map(tools.map((t, index) => [t.id, index]));
+  results.sort(
+    (a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0)
+  );
 
   const generatedAt = new Date().toISOString();
 

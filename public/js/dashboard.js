@@ -1,6 +1,24 @@
 const STALE_MS = 30 * 60 * 1000;
 const REFRESH_MS = 60 * 1000;
 
+/** Display order for tool cards (matches config/tools.json). */
+const CARD_ORDER = [
+  "shopify",
+  "vtex",
+  "salesforce",
+  "snowflake",
+  "github",
+  "google-cloud",
+  "paypal",
+];
+
+function sortToolsForDisplay(tools) {
+  const rank = new Map(CARD_ORDER.map((id, index) => [id, index]));
+  return [...tools].sort(
+    (a, b) => (rank.get(a.id) ?? 999) - (rank.get(b.id) ?? 999)
+  );
+}
+
 const STATE_LABEL = {
   operational: "Operational",
   degraded: "Degraded",
@@ -115,7 +133,9 @@ function renderToolCard(tool, incidentsFile) {
 }
 
 function render(status, incidentsFile) {
-  const tools = Array.isArray(status.tools) ? status.tools : [];
+  const tools = sortToolsForDisplay(
+    Array.isArray(status.tools) ? status.tools : []
+  );
   gridEl.replaceChildren(...tools.map((t) => renderToolCard(t, incidentsFile)));
 
   if (!status.generatedAt) {
