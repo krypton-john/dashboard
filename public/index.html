@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SaaS Status Dashboard</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <p class="eyebrow">Internal</p>
+        <h1>SaaS Status Dashboard</h1>
+        <p class="lede">
+          Traffic-light view of vendor status and days since last incident.
+          Data will appear here once the scheduled poller is wired up (phase 2).
+        </p>
+      </header>
+
+      <section class="panel" aria-labelledby="health-heading">
+        <h2 id="health-heading">Site health</h2>
+        <dl class="meta">
+          <div>
+            <dt>GitHub Pages</dt>
+            <dd class="ok">Deployed (hello world)</dd>
+          </div>
+          <div>
+            <dt>Status data</dt>
+            <dd id="data-status">Checking…</dd>
+          </div>
+        </dl>
+      </section>
+
+      <footer class="footer">
+        <p>See <code>Plan.md</code> in the repo for architecture and build phases.</p>
+      </footer>
+    </main>
+    <script src="js/hello.js" type="module"></script>
+  </body>
+</html>

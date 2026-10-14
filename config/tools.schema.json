@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/saas-status-dashboard/tools.schema.json",
+  "title": "Status dashboard tools",
+  "type": "object",
+  "required": ["version", "tools"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Schema version for future migrations"
+    },
+    "tools": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/tool" }
+    }
+  },
+  "$defs": {
+    "tool": {
+      "type": "object",
+      "required": ["id", "name", "adapter", "enabled"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "description": "Stable identifier used in status and incident records"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Display name on the dashboard"
+        },
+        "adapter": {
+          "type": "string",
+          "enum": ["statuspage", "gcloud", "http-ping", "custom"],
+          "description": "Fetcher implementation for this source"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Status API URL or site URL (required for most adapters)"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "When false, the poller skips this tool"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional operator notes (not shown on the dashboard)"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "adapter": { "const": "http-ping" } },
+            "required": ["adapter"]
+          },
+          "then": { "required": ["url"] }
+        },
+        {
+          "if": {
+            "properties": {
+              "adapter": { "enum": ["statuspage", "gcloud", "custom"] }
+            },
+            "required": ["adapter"]
+          },
+          "then": { "required": ["url"] }
+        }
+      ]
+    }
+  }
+}
