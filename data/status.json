@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-15T18:33:29.832Z",
+  "generatedAt": "2026-10-15T18:37:58.785Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-15T18:33:29.442Z",
+      "polledAt": "2026-10-15T18:37:57.243Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -15,7 +15,7 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-15T18:33:29.506Z",
+      "polledAt": "2026-10-15T18:37:57.577Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -26,7 +26,7 @@
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-15T18:33:29.508Z",
+      "polledAt": "2026-10-15T18:37:57.585Z",
       "error": null,
       "state": "degraded",
       "description": "Active incident (2)",
@@ -37,7 +37,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-15T18:33:29.510Z",
+      "polledAt": "2026-10-15T18:37:57.605Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -48,18 +48,18 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-15T18:33:29.511Z",
+      "polledAt": "2026-10-15T18:37:57.612Z",
       "error": null,
-      "state": "operational",
+      "state": "degraded",
       "description": "All Systems Operational",
-      "daysSinceLastIncident": null,
-      "incidentOngoing": false,
+      "daysSinceLastIncident": 0,
+      "incidentOngoing": true,
       "trackingSince": "2026-10-14T20:06:46.301Z"
     },
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-15T18:33:29.512Z",
+      "polledAt": "2026-10-15T18:37:57.614Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
@@ -70,12 +70,12 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-15T18:33:29.513Z",
+      "polledAt": "2026-10-15T18:37:57.616Z",
       "error": null,
-      "state": "degraded",
-      "description": "Initial Notification: PayPal Live Site Maintenance (PP-LIVE-110012)",
+      "state": "operational",
+      "description": "No active incidents in feed",
       "daysSinceLastIncident": 0,
-      "incidentOngoing": true,
+      "incidentOngoing": false,
       "trackingSince": "2026-10-14T20:14:24.969Z"
     }
   ]

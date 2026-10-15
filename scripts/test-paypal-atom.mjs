@@ -50,4 +50,20 @@ assert.equal(
   "degraded"
 );
 
+const singleDayMaintenance = `<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<title>Initial Notification: PayPal Live Site Maintenance (PP-LIVE-110012)</title>
+<updated>2026-09-28T21:25:00Z</updated>
+<content>On Thursday October 15th PayPal will performing routine maintenance activity.</content>
+</entry>
+</feed>`;
+assert.equal(
+  parsePaypalAtomFeed(
+    parseAtomEntries(singleDayMaintenance),
+    Date.parse("2026-10-15T18:00:00Z")
+  ).state,
+  "operational",
+  "single maintenance day without a window should not alert"
+);
+
 console.log("paypal-atom tests passed");

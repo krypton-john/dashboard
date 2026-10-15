@@ -22,6 +22,12 @@
     {
       "toolId": "paypal",
       "start": "2026-10-14T20:20:03.912Z",
+      "end": "2026-10-15T18:37:58.785Z",
+      "worstSeverity": "degraded"
+    },
+    {
+      "toolId": "github",
+      "start": "2026-10-15T18:37:10.963Z",
       "end": null,
       "worstSeverity": "degraded"
     }
@@ -34,8 +40,8 @@
     },
     "github": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 0,
-      "pendingStart": null
+      "nonGreenPolls": 3,
+      "pendingStart": "2026-10-15T18:37:10.963Z"
     },
     "google-cloud": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
@@ -44,8 +50,8 @@
     },
     "paypal": {
       "trackingSince": "2026-10-14T20:14:24.969Z",
-      "nonGreenPolls": 10,
-      "pendingStart": "2026-10-14T20:20:03.912Z"
+      "nonGreenPolls": 0,
+      "pendingStart": null
     },
     "shopify": {
       "trackingSince": "2026-10-14T20:14:24.969Z",
@@ -59,12 +65,12 @@
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 10,
+      "nonGreenPolls": 5,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 10,
+      "nonGreenPolls": 5,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     }
   }
