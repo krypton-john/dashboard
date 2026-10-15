@@ -44,7 +44,7 @@
     },
     "paypal": {
       "trackingSince": "2026-10-14T20:14:24.969Z",
-      "nonGreenPolls": 5,
+      "nonGreenPolls": 6,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "shopify": {
@@ -59,12 +59,12 @@
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 5,
+      "nonGreenPolls": 6,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 5,
+      "nonGreenPolls": 6,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     }
   }
