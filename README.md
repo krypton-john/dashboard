@@ -35,6 +35,7 @@ Requires Node 18+ (for `fetch`):
 node scripts/poll.mjs
 node scripts/test-adapters.mjs
 node scripts/test-incidents.mjs
+node scripts/test-paypal-atom.mjs
 ```
 
 The script writes `data/status.json` only when tool state, description, or errors change (timestamps alone do not trigger a write).
@@ -78,7 +79,7 @@ The script writes `data/status.json` only when tool state, description, or error
 
 ### PayPal (`custom` + `paypal-atom`)
 
-PayPal does not expose a public Statuspage JSON API. The poller reads their **Atom feed** and treats recent non-resolved “Initial Notification” / “Update” entries as active incidents. Titles mentioning **maintenance** or **rescheduled** count as **degraded**.
+PayPal does not expose a public Statuspage JSON API. The poller reads their **Atom feed**. **Planned maintenance** (including rescheduled windows) is ignored until the parsed impact window includes the current time; live “Initial Notification” / “Update” entries for real outages still alert.
 
 ### Salesforce (`custom` + `salesforce`)
 
