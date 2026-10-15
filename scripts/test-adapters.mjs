@@ -47,11 +47,12 @@ assert.equal(
 );
 
 const maintenanceAtom = `<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom">
-<entry><title>Rescheduled: PayPal Live Site Maintenance</title><updated>2026-10-14T12:00:00Z</updated></entry>
+<entry><title>Rescheduled: PayPal Live Site Maintenance</title><updated>2026-10-14T12:00:00Z</updated>
+<content>Impact Window: Thursday October 30th at 8:00 am to 8:30 am GMT.</content></entry>
 </feed>`;
 assert.equal(
   parsePaypalAtomFeed(parseAtomEntries(maintenanceAtom), Date.parse("2026-10-14T13:00:00Z")).state,
-  "degraded"
+  "operational"
 );
 
 const sf = parseSalesforceStatus(
