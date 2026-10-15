@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-15T06:43:32.253Z",
+  "generatedAt": "2026-10-15T18:33:29.832Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-15T06:43:31.667Z",
+      "polledAt": "2026-10-15T18:33:29.442Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -15,7 +15,7 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-15T06:43:31.727Z",
+      "polledAt": "2026-10-15T18:33:29.506Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -26,7 +26,7 @@
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-15T06:43:31.728Z",
+      "polledAt": "2026-10-15T18:33:29.508Z",
       "error": null,
       "state": "degraded",
       "description": "Active incident (2)",
@@ -37,7 +37,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-15T06:43:31.730Z",
+      "polledAt": "2026-10-15T18:33:29.510Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -48,7 +48,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-15T06:43:31.731Z",
+      "polledAt": "2026-10-15T18:33:29.511Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -59,7 +59,7 @@
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-15T06:43:31.732Z",
+      "polledAt": "2026-10-15T18:33:29.512Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
@@ -70,10 +70,10 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-15T06:43:31.733Z",
+      "polledAt": "2026-10-15T18:33:29.513Z",
       "error": null,
       "state": "degraded",
-      "description": "Initial Notification: Hyperwallet (PP-LIVE-110014)",
+      "description": "Initial Notification: PayPal Live Site Maintenance (PP-LIVE-110012)",
       "daysSinceLastIncident": 0,
       "incidentOngoing": true,
       "trackingSince": "2026-10-14T20:14:24.969Z"
