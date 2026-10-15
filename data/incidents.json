@@ -40,7 +40,7 @@
     },
     "github": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 3,
+      "nonGreenPolls": 4,
       "pendingStart": "2026-10-15T18:37:10.963Z"
     },
     "google-cloud": {
@@ -65,12 +65,12 @@
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 5,
+      "nonGreenPolls": 6,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 5,
+      "nonGreenPolls": 6,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     }
   }
