@@ -60,7 +60,10 @@ export function stripHtml(html) {
 export function isPlannedMaintenance(title, content) {
   const text = `${title} ${stripHtml(content)}`;
   if (PLANNED_RE.test(text)) return true;
-  if (/^initial notification:/i.test(title) && /maintenance|hyperwallet/i.test(text)) {
+  if (
+    /^initial notification:/i.test(title) &&
+    /maintenance|hyperwallet|live site/i.test(text)
+  ) {
     return true;
   }
   return false;
@@ -135,11 +138,7 @@ export function parseImpactWindow(text, updatedIso) {
     return { start, end };
   }
 
-  if (dates.length === 1) {
-    const start = dates[0];
-    return { start, end: start + 24 * 60 * 60 * 1000 };
-  }
-
+  // Single calendar day without a range is too ambiguous (e.g. "October 15th").
   return null;
 }
 
@@ -192,10 +191,16 @@ function evaluateEntry(entry, nowMs) {
   if (PLANNED_RE.test(text)) return null;
 
   if (/initial notification/i.test(title)) {
+    if (/maintenance|hyperwallet|live site|rescheduled|scheduled/i.test(text)) {
+      return null;
+    }
     return { title, severity: severityFromTitle(title) };
   }
 
   if (/^update:/i.test(title)) {
+    if (/maintenance|hyperwallet|live site|rescheduled|scheduled/i.test(text)) {
+      return null;
+    }
     return { title, severity: severityFromTitle(title) };
   }
 
