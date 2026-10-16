@@ -1,4 +1,5 @@
-const STALE_MS = 30 * 60 * 1000;
+// Warn if no poll in ~90 minutes (hourly schedule + GitHub cron delay).
+const STALE_MS = 90 * 60 * 1000;
 const REFRESH_MS = 60 * 1000;
 
 /** Display order for tool cards (matches config/tools.json). */
