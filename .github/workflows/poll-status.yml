@@ -6,8 +6,11 @@ on:
     - cron: "*/10 * * * *"
   workflow_dispatch:
 
+# Poll commits with GITHUB_TOKEN do not trigger other workflows (e.g. Pages deploy).
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: poll-status
@@ -16,6 +19,9 @@ concurrency:
 jobs:
   poll:
     runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -37,3 +43,21 @@ jobs:
           git add data/status.json data/incidents.json
           git commit -m "chore: update status and incident data"
           git push
+
+      - name: Assemble site
+        if: steps.fetch.outputs.changed == 'true'
+        run: |
+          mkdir -p _site
+          cp -r public/. _site/
+          cp -r data _site/data
+
+      - name: Upload Pages artifact
+        if: steps.fetch.outputs.changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        if: steps.fetch.outputs.changed == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4

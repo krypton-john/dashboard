@@ -110,7 +110,7 @@ Open http://localhost:8080 and confirm the new card appears.
 
 1. Commit and push to `main` (or merge your PR).
 2. In GitHub: **Actions → Poll status → Run workflow** (or wait for the schedule).
-3. Confirm **Deploy GitHub Pages** succeeds and the live dashboard shows the new card.
+3. Confirm the live dashboard shows the new card after **Poll status** runs (that workflow deploys Pages when data changes).
 
 ### 6. New custom vendor (only if needed)
 
