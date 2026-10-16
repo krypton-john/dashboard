@@ -1,11 +1,11 @@
 {
-  "lastPolledAt": "2026-10-16T19:22:38.699Z",
-  "generatedAt": "2026-10-16T19:22:38.699Z",
+  "lastPolledAt": "2026-10-16T20:55:06.173Z",
+  "generatedAt": "2026-10-16T20:55:06.173Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-16T19:22:37.679Z",
+      "polledAt": "2026-10-16T20:55:05.528Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -16,21 +16,21 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-16T19:22:37.719Z",
+      "polledAt": "2026-10-16T20:55:05.572Z",
       "error": null,
       "state": "degraded",
       "description": "All Systems Operational",
-      "daysSinceLastIncident": null,
-      "incidentOngoing": false,
+      "daysSinceLastIncident": 0,
+      "incidentOngoing": true,
       "trackingSince": "2026-10-14T20:14:24.969Z"
     },
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-16T19:22:37.720Z",
+      "polledAt": "2026-10-16T20:55:05.573Z",
       "error": null,
       "state": "degraded",
-      "description": "Active incident (2)",
+      "description": "Active incident (3)",
       "daysSinceLastIncident": 0,
       "incidentOngoing": true,
       "trackingSince": "2026-10-14T20:20:03.912Z"
@@ -38,7 +38,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-16T19:22:37.722Z",
+      "polledAt": "2026-10-16T20:55:05.575Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -49,7 +49,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-16T19:22:37.723Z",
+      "polledAt": "2026-10-16T20:55:05.576Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -60,7 +60,7 @@
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-16T19:22:37.723Z",
+      "polledAt": "2026-10-16T20:55:05.577Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
@@ -71,7 +71,7 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-16T19:22:37.724Z",
+      "polledAt": "2026-10-16T20:55:05.578Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents in feed",

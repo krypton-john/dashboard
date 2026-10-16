@@ -30,6 +30,12 @@
       "start": "2026-10-15T18:37:10.963Z",
       "end": "2026-10-16T14:06:06.335Z",
       "worstSeverity": "degraded"
+    },
+    {
+      "toolId": "vtex",
+      "start": "2026-10-16T19:22:38.699Z",
+      "end": null,
+      "worstSeverity": "degraded"
     }
   ],
   "tools": {
@@ -60,17 +66,17 @@
     },
     "vtex": {
       "trackingSince": "2026-10-14T20:14:24.969Z",
-      "nonGreenPolls": 1,
+      "nonGreenPolls": 2,
       "pendingStart": "2026-10-16T19:22:38.699Z"
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 16,
+      "nonGreenPolls": 17,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 16,
+      "nonGreenPolls": 17,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     }
   }
