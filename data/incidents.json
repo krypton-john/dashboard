@@ -28,7 +28,7 @@
     {
       "toolId": "github",
       "start": "2026-10-15T18:37:10.963Z",
-      "end": null,
+      "end": "2026-10-16T14:06:06.335Z",
       "worstSeverity": "degraded"
     }
   ],
@@ -40,8 +40,8 @@
     },
     "github": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 3,
-      "pendingStart": "2026-10-15T18:37:10.963Z"
+      "nonGreenPolls": 0,
+      "pendingStart": null
     },
     "google-cloud": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
@@ -65,12 +65,12 @@
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 5,
+      "nonGreenPolls": 7,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 5,
+      "nonGreenPolls": 7,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     }
   }

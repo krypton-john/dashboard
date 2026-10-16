@@ -138,15 +138,16 @@ function render(status, incidentsFile) {
   );
   gridEl.replaceChildren(...tools.map((t) => renderToolCard(t, incidentsFile)));
 
-  if (!status.generatedAt) {
+  const polledAt = status.lastPolledAt ?? status.generatedAt;
+  if (!polledAt) {
     lastUpdatedEl.textContent = "Waiting for first poll";
     setBanner("No status data yet. Run the poller or wait for the scheduled workflow.", "warn");
     return;
   }
 
-  const updated = new Date(status.generatedAt);
+  const updated = new Date(polledAt);
   const ageMs = Date.now() - updated.getTime();
-  lastUpdatedEl.textContent = `Last updated ${formatDate(status.generatedAt)}`;
+  lastUpdatedEl.textContent = `Last polled ${formatDate(polledAt)}`;
 
   if (Number.isNaN(updated.getTime())) {
     setBanner(null);
@@ -156,7 +157,7 @@ function render(status, incidentsFile) {
   if (ageMs > STALE_MS) {
     const mins = Math.floor(ageMs / 60000);
     setBanner(
-      `Data may be stale (last update ${mins} minutes ago). The poller runs about every 10 minutes.`,
+      `Data may be stale (last poll ${mins} minutes ago). Check that the Poll status workflow is running on schedule.`,
       "warn"
     );
   } else {

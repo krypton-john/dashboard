@@ -85,7 +85,7 @@ async function main() {
     (a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0)
   );
 
-  const generatedAt = new Date().toISOString();
+  const lastPolledAt = new Date().toISOString();
 
   let incidentsDb = parseIncidentsFile(null);
   try {
@@ -98,38 +98,44 @@ async function main() {
   const incidentsChanged = applyPollToIncidents(
     incidentsDb,
     results.map((r) => ({ id: r.id, state: r.state })),
-    generatedAt
+    lastPolledAt
   );
 
   const resultsWithMetrics = attachIncidentMetrics(
     results,
     incidentsDb,
-    generatedAt
+    lastPolledAt
   );
 
-  const next = {
-    generatedAt,
-    tools: resultsWithMetrics,
-  };
-
   let previousTools = [];
+  let previousGeneratedAt = null;
+  let previousLastPolledAt = null;
   try {
     const prevRaw = await readFile(STATUS_PATH, "utf8");
     const prev = JSON.parse(prevRaw);
     if (Array.isArray(prev.tools)) previousTools = prev.tools;
+    previousGeneratedAt = prev.generatedAt ?? null;
+    previousLastPolledAt = prev.lastPolledAt ?? null;
   } catch {
     /* first run */
   }
 
   const statusChanged = !toolsSemanticallyEqual(previousTools, resultsWithMetrics);
+  const pollTimestampChanged = previousLastPolledAt !== lastPolledAt;
 
-  if (statusChanged) {
+  const next = {
+    lastPolledAt,
+    generatedAt: statusChanged ? lastPolledAt : previousGeneratedAt ?? lastPolledAt,
+    tools: resultsWithMetrics,
+  };
+
+  if (statusChanged || pollTimestampChanged) {
     await writeFile(STATUS_PATH, stableStringify(next), "utf8");
     console.log(
       `Wrote ${path.relative(ROOT, STATUS_PATH)} (${results.length} tools)`
     );
   } else {
-    console.log("No semantic change; leaving status.json unchanged");
+    console.log("No change; leaving status.json unchanged");
   }
 
   let previousIncidents = parseIncidentsFile(null);
@@ -149,7 +155,8 @@ async function main() {
     console.log(`Wrote ${path.relative(ROOT, INCIDENTS_PATH)}`);
   }
 
-  const changed = statusChanged || incidentsFileChanged;
+  const changed =
+    statusChanged || pollTimestampChanged || incidentsFileChanged;
 
   for (const t of resultsWithMetrics) {
     const flag =
