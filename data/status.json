@@ -1,11 +1,11 @@
 {
-  "lastPolledAt": "2026-10-16T15:33:31.892Z",
-  "generatedAt": "2026-10-16T14:30:26.902Z",
+  "lastPolledAt": "2026-10-16T19:22:38.699Z",
+  "generatedAt": "2026-10-16T19:22:38.699Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-16T15:33:31.327Z",
+      "polledAt": "2026-10-16T19:22:37.679Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -16,9 +16,9 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-16T15:33:31.375Z",
+      "polledAt": "2026-10-16T19:22:37.719Z",
       "error": null,
-      "state": "operational",
+      "state": "degraded",
       "description": "All Systems Operational",
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
@@ -27,7 +27,7 @@
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-16T15:33:31.377Z",
+      "polledAt": "2026-10-16T19:22:37.720Z",
       "error": null,
       "state": "degraded",
       "description": "Active incident (2)",
@@ -38,7 +38,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-16T15:33:31.379Z",
+      "polledAt": "2026-10-16T19:22:37.722Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -49,7 +49,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-16T15:33:31.380Z",
+      "polledAt": "2026-10-16T19:22:37.723Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -60,7 +60,7 @@
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-16T15:33:31.381Z",
+      "polledAt": "2026-10-16T19:22:37.723Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
@@ -71,11 +71,11 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-16T15:33:31.382Z",
+      "polledAt": "2026-10-16T19:22:37.724Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents in feed",
-      "daysSinceLastIncident": 0,
+      "daysSinceLastIncident": 1,
       "incidentOngoing": false,
       "trackingSince": "2026-10-14T20:14:24.969Z"
     }
