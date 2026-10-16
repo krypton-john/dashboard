@@ -1,11 +1,11 @@
 {
-  "lastPolledAt": "2026-10-16T14:20:16.776Z",
+  "lastPolledAt": "2026-10-16T14:23:22.882Z",
   "generatedAt": "2026-10-16T14:16:22.426Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-16T14:20:16.144Z",
+      "polledAt": "2026-10-16T14:23:22.308Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -16,7 +16,7 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-16T14:20:16.196Z",
+      "polledAt": "2026-10-16T14:23:22.358Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -27,7 +27,7 @@
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-16T14:20:16.197Z",
+      "polledAt": "2026-10-16T14:23:22.359Z",
       "error": null,
       "state": "degraded",
       "description": "Active incident (3)",
@@ -38,7 +38,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-16T14:20:16.199Z",
+      "polledAt": "2026-10-16T14:23:22.361Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -49,7 +49,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-16T14:20:16.200Z",
+      "polledAt": "2026-10-16T14:23:22.362Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -60,7 +60,7 @@
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-16T14:20:16.201Z",
+      "polledAt": "2026-10-16T14:23:22.363Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
@@ -71,7 +71,7 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-16T14:20:16.202Z",
+      "polledAt": "2026-10-16T14:23:22.364Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents in feed",
