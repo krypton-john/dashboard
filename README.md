@@ -85,7 +85,8 @@ PayPal does not expose a public Statuspage JSON API. The poller reads their **At
 
 Uses the [Salesforce Trust API](https://api.status.salesforce.com/v1): active incidents plus any **maintenance whose planned window includes now** (degraded). Set `url` to `https://api.status.salesforce.com/v1`.
 
-Enable **Actions** on the repo so **Poll status** can run on schedule (or trigger it manually under Actions).
+Enable **Actions** on the repo so **Poll status** can run on schedule (or trigger it manually under Actions). Each successful poll that updates data also **deploys GitHub Pages** (poll commits do not trigger the separate Pages workflow).
+
 
 ### Scheduled Actions note
 
