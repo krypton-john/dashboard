@@ -28,7 +28,7 @@
     {
       "toolId": "github",
       "start": "2026-10-15T18:37:10.963Z",
-      "end": "2026-10-15T21:50:41.197Z",
+      "end": "2026-10-16T14:06:06.335Z",
       "worstSeverity": "degraded"
     }
   ],
@@ -65,12 +65,12 @@
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 11,
+      "nonGreenPolls": 8,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 11,
+      "nonGreenPolls": 8,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     }
   }

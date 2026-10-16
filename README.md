@@ -38,7 +38,7 @@ node scripts/test-incidents.mjs
 node scripts/test-paypal-atom.mjs
 ```
 
-The script writes `data/status.json` only when tool state, description, or errors change (timestamps alone do not trigger a write).
+The script writes `data/status.json` on every poll (`lastPolledAt`). `generatedAt` changes only when tool state, description, or errors change. The dashboard shows **Last polled** from `lastPolledAt`.
 
 ## GitHub Pages setup
 
