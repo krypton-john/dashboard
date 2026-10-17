@@ -42,6 +42,10 @@
             "format": "date-time",
             "description": "When upcoming scheduled maintenance is expected to start"
           },
+          "maintenanceStartsAtLabel": {
+            "type": ["string", "null"],
+            "description": "Pre-formatted maintenance start time for the dashboard"
+          },
           "daysSinceLastIncident": { "type": ["integer", "null"] },
           "incidentOngoing": { "type": "boolean" },
           "trackingSince": { "type": ["string", "null"], "format": "date-time" }

@@ -6,6 +6,7 @@ import {
 } from "./adapters/paypal-atom.mjs";
 import { parseSalesforceStatus } from "./adapters/salesforce.mjs";
 import { parseStatuspageSummary } from "./adapters/statuspage.mjs";
+import { formatMaintenanceStartsAtLabel } from "./lib/maintenance-label.mjs";
 import { parseMaintenanceStartFromUpdateBody } from "./lib/statuspage-maintenance.mjs";
 
 const statuspageOperational = {
@@ -69,6 +70,11 @@ assert.equal(
     "**Scheduled for Oct 27, 2026 at 01:00 UTC - 04:00 UTC**"
   )?.slice(0, 10),
   "2026-10-27"
+);
+
+assert.match(
+  formatMaintenanceStartsAtLabel("2026-10-27T01:00:00.000Z") ?? "",
+  /27 Oct 2026.*01:00 UTC/
 );
 
 const gcloudClear = [{ end: "2026-01-01T00:00:00+00:00", updates: [] }];

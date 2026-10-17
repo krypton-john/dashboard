@@ -1,90 +1,97 @@
 {
-  "lastPolledAt": "2026-10-17T10:31:54.267Z",
-  "generatedAt": "2026-10-17T10:31:54.267Z",
+  "lastPolledAt": "2026-10-17T10:36:36.294Z",
+  "generatedAt": "2026-10-17T10:36:36.294Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-17T10:31:51.369Z",
+      "polledAt": "2026-10-17T10:36:34.529Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-10-14T20:14:24.969Z"
+      "trackingSince": "2026-10-14T20:14:24.969Z",
+      "maintenanceStartsAtLabel": null
     },
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-17T10:31:52.250Z",
+      "polledAt": "2026-10-17T10:36:35.145Z",
       "error": null,
       "state": "future-maintenance",
       "description": "Pricing database maintenance",
       "maintenanceStartsAt": "2026-10-27T01:00:00.000Z",
       "daysSinceLastIncident": 0,
       "incidentOngoing": false,
-      "trackingSince": "2026-10-14T20:14:24.969Z"
+      "trackingSince": "2026-10-14T20:14:24.969Z",
+      "maintenanceStartsAtLabel": "Tue, 27 Oct 2026, 01:00 UTC"
     },
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-17T10:31:52.253Z",
+      "polledAt": "2026-10-17T10:36:35.149Z",
       "error": null,
       "state": "degraded",
       "description": "Advanced Analytics data is stale as of 09/14/26 1:40 PM UTC",
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": 0,
       "incidentOngoing": true,
-      "trackingSince": "2026-10-14T20:20:03.912Z"
+      "trackingSince": "2026-10-14T20:20:03.912Z",
+      "maintenanceStartsAtLabel": null
     },
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-17T10:31:52.266Z",
+      "polledAt": "2026-10-17T10:36:35.163Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": 0,
       "incidentOngoing": true,
-      "trackingSince": "2026-10-14T20:20:03.912Z"
+      "trackingSince": "2026-10-14T20:20:03.912Z",
+      "maintenanceStartsAtLabel": null
     },
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-17T10:31:52.269Z",
+      "polledAt": "2026-10-17T10:36:35.167Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": 0,
       "incidentOngoing": false,
-      "trackingSince": "2026-10-14T20:06:46.301Z"
+      "trackingSince": "2026-10-14T20:06:46.301Z",
+      "maintenanceStartsAtLabel": null
     },
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-17T10:31:52.271Z",
+      "polledAt": "2026-10-17T10:36:35.172Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-10-14T20:06:46.301Z"
+      "trackingSince": "2026-10-14T20:06:46.301Z",
+      "maintenanceStartsAtLabel": null
     },
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-17T10:31:52.277Z",
+      "polledAt": "2026-10-17T10:36:35.176Z",
       "error": null,
       "state": "future-maintenance",
       "description": "Rescheduled: PayPal Live Site Maintenance (PP-LIVE-109965)",
       "maintenanceStartsAt": "2026-10-07T23:00:00.000Z",
       "daysSinceLastIncident": 1,
       "incidentOngoing": false,
-      "trackingSince": "2026-10-14T20:14:24.969Z"
+      "trackingSince": "2026-10-14T20:14:24.969Z",
+      "maintenanceStartsAtLabel": "Wed, 7 Oct 2026, 23:00 UTC"
     }
   ]
 }

@@ -35,10 +35,24 @@ const gridEl = document.getElementById("tool-grid");
 function formatDate(iso) {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleString(undefined, {
-    dateStyle: "medium",
-    timeStyle: "short",
-  });
+  try {
+    const formatted = d.toLocaleString(undefined, {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
+    if (formatted) return formatted;
+  } catch {
+    /* older browsers */
+  }
+  return d.toLocaleString();
+}
+
+function maintenanceWhenLabel(tool) {
+  if (tool.maintenanceStartsAtLabel) return tool.maintenanceStartsAtLabel;
+  if (!tool.maintenanceStartsAt) return null;
+  const d = new Date(tool.maintenanceStartsAt);
+  if (Number.isNaN(d.getTime())) return null;
+  return formatDate(tool.maintenanceStartsAt);
 }
 
 function formatTrackingSince(iso) {
@@ -79,8 +93,9 @@ function incidentLine(tool, incidentsFile) {
     return "Incident in progress";
   }
   if (tool.state === "future-maintenance") {
-    if (tool.maintenanceStartsAt) {
-      return `Scheduled maintenance upcoming — ${formatDate(tool.maintenanceStartsAt)}`;
+    const when = maintenanceWhenLabel(tool);
+    if (when) {
+      return `Scheduled maintenance upcoming — ${when}`;
     }
     return "Scheduled maintenance upcoming";
   }

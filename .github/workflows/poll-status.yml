@@ -45,19 +45,16 @@ jobs:
           git push
 
       - name: Assemble site
-        if: steps.fetch.outputs.changed == 'true'
         run: |
           mkdir -p _site
           cp -r public/. _site/
           cp -r data _site/data
 
       - name: Upload Pages artifact
-        if: steps.fetch.outputs.changed == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
       - name: Deploy to GitHub Pages
-        if: steps.fetch.outputs.changed == 'true'
         id: deployment
         uses: actions/deploy-pages@v4

@@ -7,6 +7,7 @@ import {
   metricsForTool,
   parseIncidentsFile,
 } from "./lib/incidents.mjs";
+import { formatMaintenanceStartsAtLabel } from "./lib/maintenance-label.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -39,6 +40,7 @@ function toolsSemanticallyEqual(a, b) {
         incidentOngoing,
         trackingSince,
         maintenanceStartsAt,
+        maintenanceStartsAtLabel,
       }) => ({
         id,
         name,
@@ -49,6 +51,7 @@ function toolsSemanticallyEqual(a, b) {
         incidentOngoing,
         trackingSince,
         maintenanceStartsAt: maintenanceStartsAt ?? null,
+        maintenanceStartsAtLabel: maintenanceStartsAtLabel ?? null,
       })
     );
   return JSON.stringify(strip(a)) === JSON.stringify(strip(b));
@@ -62,7 +65,11 @@ function toolsSemanticallyEqual(a, b) {
 function attachIncidentMetrics(results, incidentsDb, generatedAt) {
   return results.map((tool) => {
     const metrics = metricsForTool(incidentsDb, tool.id, generatedAt);
-    return { ...tool, ...metrics };
+    const maintenanceStartsAtLabel =
+      tool.state === "future-maintenance"
+        ? formatMaintenanceStartsAtLabel(tool.maintenanceStartsAt)
+        : null;
+    return { ...tool, ...metrics, maintenanceStartsAtLabel };
   });
 }
 
