@@ -55,6 +55,37 @@ export function findActiveMaintenances(maintenances, nowMs = Date.now()) {
   });
 }
 
+const UPCOMING_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
+
+/**
+ * @param {object} maintenance
+ */
+function isSalesforceMaintenanceEvent(maintenance) {
+  const type = String(maintenance?.type ?? "").toLowerCase();
+  if (type === "release") return false;
+  const name = String(maintenance?.name ?? "").toLowerCase();
+  if (name.includes("major release") || name.includes("winter '")) return false;
+  return true;
+}
+
+/**
+ * @param {object[]} maintenances
+ * @param {number} [nowMs]
+ */
+export function findUpcomingMaintenances(maintenances, nowMs = Date.now()) {
+  if (!Array.isArray(maintenances)) return [];
+
+  return maintenances.filter((m) => {
+    if (!isSalesforceMaintenanceEvent(m)) return false;
+    const start = Date.parse(m.plannedStartTime);
+    const end = Date.parse(m.plannedEndTime);
+    if (Number.isNaN(start) || Number.isNaN(end)) return false;
+    if (start <= nowMs) return false;
+    if (start - nowMs > UPCOMING_WINDOW_MS) return false;
+    return true;
+  });
+}
+
 /**
  * @param {object[]} maintenances
  * @param {number} [nowMs]
@@ -77,12 +108,36 @@ export function parseSalesforceMaintenances(maintenances, nowMs = Date.now()) {
  * @param {object[]} maintenances
  * @param {number} [nowMs]
  */
+/**
+ * @param {object[]} maintenances
+ * @param {number} [nowMs]
+ */
+export function parseSalesforceUpcomingMaintenances(
+  maintenances,
+  nowMs = Date.now()
+) {
+  const upcoming = findUpcomingMaintenances(maintenances, nowMs);
+  if (upcoming.length === 0) return null;
+
+  const name =
+    typeof upcoming[0].name === "string"
+      ? upcoming[0].name
+      : "Scheduled maintenance";
+  return {
+    state: "future-maintenance",
+    description: `Upcoming maintenance: ${name}`.slice(0, 160),
+  };
+}
+
 export function parseSalesforceStatus(incidents, maintenances, nowMs = Date.now()) {
   const incident = parseSalesforceActiveIncidents(incidents);
   if (incident) return incident;
 
   const maintenance = parseSalesforceMaintenances(maintenances, nowMs);
   if (maintenance) return maintenance;
+
+  const upcoming = parseSalesforceUpcomingMaintenances(maintenances, nowMs);
+  if (upcoming) return upcoming;
 
   return { state: "operational", description: "No active incidents or maintenance" };
 }

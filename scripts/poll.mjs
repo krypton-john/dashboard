@@ -162,9 +162,11 @@ async function main() {
     const flag =
       t.state === "operational"
         ? "OK"
-        : t.state === "unknown"
-          ? "??"
-          : t.state.toUpperCase();
+        : t.state === "future-maintenance"
+          ? "FUTURE MAINT"
+          : t.state === "unknown"
+            ? "??"
+            : t.state.toUpperCase();
     const days =
       t.incidentOngoing
         ? "incident ongoing"

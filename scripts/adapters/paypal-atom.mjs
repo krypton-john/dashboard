@@ -175,13 +175,6 @@ function evaluateEntry(entry, nowMs) {
 
   if (RESOLVED_RE.test(title)) return null;
 
-  if (isPlannedMaintenance(title, entry.content)) {
-    if (isPlannedEntryActiveNow(entry, nowMs)) {
-      return { title, severity: "degraded" };
-    }
-    return null;
-  }
-
   if (!INCIDENT_TITLE_RE.test(title)) return null;
 
   if (ONGOING_INCIDENT_RE.test(text) && !PLANNED_RE.test(text)) {
@@ -215,21 +208,38 @@ function evaluateEntry(entry, nowMs) {
  */
 export function parsePaypalAtomFeed(entries, nowMs = Date.now()) {
   const active = [];
+  let futureMaintenanceTitle = null;
 
   for (const entry of entries) {
     const updatedMs = Date.parse(entry.updated);
     if (Number.isNaN(updatedMs)) continue;
 
+    const title = entry.title.replace(/\s+/g, " ").trim();
     const planned = isPlannedMaintenance(entry.title, entry.content);
     const stale = nowMs - updatedMs > FEED_LOOKBACK_MS;
     const inPlannedWindow = planned && isPlannedEntryActiveNow(entry, nowMs);
     if (stale && !inPlannedWindow) continue;
+
+    if (planned) {
+      if (inPlannedWindow) {
+        active.push({ title, severity: "degraded" });
+      } else {
+        futureMaintenanceTitle = futureMaintenanceTitle ?? title;
+      }
+      continue;
+    }
 
     const result = evaluateEntry(entry, nowMs);
     if (result) active.push(result);
   }
 
   if (active.length === 0) {
+    if (futureMaintenanceTitle) {
+      return {
+        state: "future-maintenance",
+        description: futureMaintenanceTitle.slice(0, 160),
+      };
+    }
     return { state: "operational", description: "No active incidents in feed" };
   }
 

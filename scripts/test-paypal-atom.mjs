@@ -18,8 +18,8 @@ const nowBefore = Date.parse("2026-10-15T17:00:00Z");
 const entries = parseAtomEntries(hyperwalletFuture);
 assert.equal(
   parsePaypalAtomFeed(entries, nowBefore).state,
-  "operational",
-  "future maintenance should not alert"
+  "future-maintenance",
+  "future maintenance should show Future Maintenance state"
 );
 
 assert.ok(

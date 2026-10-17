@@ -137,7 +137,8 @@ h1 {
   color: var(--ok);
 }
 
-.card--degraded .card-status {
+.card--degraded .card-status,
+.card--future-maintenance .card-status {
   color: var(--warn);
 }
 
@@ -180,7 +181,8 @@ h1 {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 28%, transparent);
 }
 
-.card--degraded .light {
+.card--degraded .light,
+.card--future-maintenance .light {
   background: var(--warn);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--warn) 28%, transparent);
 }

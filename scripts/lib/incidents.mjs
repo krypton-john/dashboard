@@ -30,7 +30,7 @@ const SEVERITY_RANK = { degraded: 1, major: 2 };
  * @returns {boolean}
  */
 export function isGreen(state) {
-  return state === "operational";
+  return state === "operational" || state === "future-maintenance";
 }
 
 /**

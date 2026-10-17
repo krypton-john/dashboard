@@ -1,3 +1,4 @@
+import { summarizeStatuspageMaintenances } from "../lib/statuspage-maintenance.mjs";
 import { worstState } from "../lib/states.mjs";
 
 /** @typedef {import('../lib/states.mjs').ToolState} ToolState */
@@ -11,6 +12,7 @@ export function indicatorToState(indicator) {
     case "none":
       return "operational";
     case "minor":
+      return "degraded";
     case "maintenance":
       return "degraded";
     case "major":
@@ -23,9 +25,10 @@ export function indicatorToState(indicator) {
 
 /**
  * @param {object} summary Parsed Statuspage summary.json
+ * @param {number} [nowMs]
  * @returns {{ state: ToolState, description: string }}
  */
-export function parseStatuspageSummary(summary) {
+export function parseStatuspageSummary(summary, nowMs = Date.now()) {
   const indicator = summary?.status?.indicator;
   const description =
     typeof summary?.status?.description === "string"
@@ -45,8 +48,9 @@ export function parseStatuspageSummary(summary) {
           case "major":
             return "major";
           case "minor":
-          case "maintenance":
             return "degraded";
+          case "maintenance":
+            return i.status === "scheduled" ? "future-maintenance" : "degraded";
           default:
             return "degraded";
         }
@@ -55,14 +59,20 @@ export function parseStatuspageSummary(summary) {
     }
   }
 
-  if (
-    state === "operational" &&
-    Array.isArray(summary?.scheduled_maintenances)
-  ) {
-    const activeMaint = summary.scheduled_maintenances.filter(
-      (m) => m && m.status !== "completed"
-    );
-    if (activeMaint.length > 0) state = "degraded";
+  const maintenance = summarizeStatuspageMaintenances(
+    summary?.scheduled_maintenances,
+    nowMs
+  );
+
+  if (maintenance) {
+    if (state === "operational" || state === "future-maintenance") {
+      state = maintenance.state;
+    } else if (maintenance.state === "degraded") {
+      state = worstState([state, "degraded"]);
+    }
+    if (maintenance.description && state !== "operational") {
+      return { state, description: maintenance.description };
+    }
   }
 
   return { state, description };

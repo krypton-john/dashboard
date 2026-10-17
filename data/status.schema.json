@@ -26,7 +26,13 @@
           "name": { "type": "string" },
           "state": {
             "type": "string",
-            "enum": ["operational", "degraded", "major", "unknown"]
+            "enum": [
+              "operational",
+              "future-maintenance",
+              "degraded",
+              "major",
+              "unknown"
+            ]
           },
           "description": { "type": "string" },
           "polledAt": { "type": "string", "format": "date-time" },
