@@ -66,17 +66,17 @@
     },
     "vtex": {
       "trackingSince": "2026-10-14T20:14:24.969Z",
-      "nonGreenPolls": 3,
+      "nonGreenPolls": 4,
       "pendingStart": "2026-10-16T19:22:38.699Z"
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 18,
+      "nonGreenPolls": 19,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 18,
+      "nonGreenPolls": 19,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     }
   }

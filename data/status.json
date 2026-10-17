@@ -1,11 +1,11 @@
 {
-  "lastPolledAt": "2026-10-16T22:36:13.187Z",
-  "generatedAt": "2026-10-16T20:55:06.173Z",
+  "lastPolledAt": "2026-10-17T01:06:47.766Z",
+  "generatedAt": "2026-10-17T01:06:47.766Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-16T22:36:12.406Z",
+      "polledAt": "2026-10-17T01:06:47.153Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -16,7 +16,7 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-16T22:36:12.456Z",
+      "polledAt": "2026-10-17T01:06:47.196Z",
       "error": null,
       "state": "degraded",
       "description": "All Systems Operational",
@@ -27,10 +27,10 @@
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-16T22:36:12.457Z",
+      "polledAt": "2026-10-17T01:06:47.197Z",
       "error": null,
       "state": "degraded",
-      "description": "Active incident (3)",
+      "description": "Active incident (2)",
       "daysSinceLastIncident": 0,
       "incidentOngoing": true,
       "trackingSince": "2026-10-14T20:20:03.912Z"
@@ -38,7 +38,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-16T22:36:12.459Z",
+      "polledAt": "2026-10-17T01:06:47.199Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -49,7 +49,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-16T22:36:12.460Z",
+      "polledAt": "2026-10-17T01:06:47.200Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -60,7 +60,7 @@
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-16T22:36:12.461Z",
+      "polledAt": "2026-10-17T01:06:47.201Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
@@ -71,7 +71,7 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-16T22:36:12.462Z",
+      "polledAt": "2026-10-17T01:06:47.201Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents in feed",
