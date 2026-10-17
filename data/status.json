@@ -1,11 +1,11 @@
 {
-  "lastPolledAt": "2026-10-17T10:17:31.607Z",
+  "lastPolledAt": "2026-10-17T10:19:06.547Z",
   "generatedAt": "2026-10-17T10:17:31.607Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-17T10:17:29.759Z",
+      "polledAt": "2026-10-17T10:19:05.944Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -16,7 +16,7 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-17T10:17:30.687Z",
+      "polledAt": "2026-10-17T10:19:05.994Z",
       "error": null,
       "state": "future-maintenance",
       "description": "Pricing database maintenance",
@@ -27,7 +27,7 @@
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-17T10:17:30.693Z",
+      "polledAt": "2026-10-17T10:19:05.995Z",
       "error": null,
       "state": "degraded",
       "description": "Advanced Analytics data is stale as of 09/14/26 1:40 PM UTC",
@@ -38,7 +38,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-17T10:17:30.700Z",
+      "polledAt": "2026-10-17T10:19:05.998Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -49,7 +49,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-17T10:17:30.704Z",
+      "polledAt": "2026-10-17T10:19:05.999Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -60,7 +60,7 @@
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-17T10:17:30.709Z",
+      "polledAt": "2026-10-17T10:19:06.000Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
@@ -71,7 +71,7 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-17T10:17:30.711Z",
+      "polledAt": "2026-10-17T10:19:06.001Z",
       "error": null,
       "state": "future-maintenance",
       "description": "Initial Notification: PayPal Live Site Maintenance (PP-LIVE-110012)",

@@ -71,12 +71,12 @@
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 21,
+      "nonGreenPolls": 22,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 21,
+      "nonGreenPolls": 22,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     }
   }
