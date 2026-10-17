@@ -52,7 +52,13 @@
         },
         "customAdapter": {
           "type": "string",
-          "enum": ["paypal-atom", "salesforce"],
+          "enum": [
+            "paypal-atom",
+            "salesforce",
+            "zendesk",
+            "betterstack",
+            "adobe-aem"
+          ],
           "description": "Required for adapter custom; selects implementation"
         },
         "options": {
@@ -68,6 +74,11 @@
               "type": "array",
               "items": { "type": "integer", "minimum": 100, "maximum": 599 },
               "description": "http-ping: allowed HTTP status codes (default 2xx–3xx)"
+            },
+            "productIds": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "adobe-aem: Snow product IDs to monitor (default AEM + AEMaaCS)"
             }
           }
         }

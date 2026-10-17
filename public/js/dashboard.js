@@ -7,10 +7,13 @@ const CARD_ORDER = [
   "shopify",
   "vtex",
   "salesforce",
+  "adobe-experience-manager",
+  "zendesk",
   "snowflake",
   "github",
   "google-cloud",
   "paypal",
+  "true-loyal",
 ];
 
 function sortToolsForDisplay(tools) {
