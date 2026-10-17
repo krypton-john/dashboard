@@ -22,6 +22,7 @@ function sortToolsForDisplay(tools) {
 
 const STATE_LABEL = {
   operational: "Operational",
+  "future-maintenance": "Future Maintenance",
   degraded: "Degraded",
   major: "Major outage",
   unknown: "Unknown",
@@ -76,6 +77,9 @@ function incidentLine(tool, incidentsFile) {
   const m = metricsForTool(incidentsFile, tool.id);
   if (m.incidentOngoing) {
     return "Incident in progress";
+  }
+  if (tool.state === "future-maintenance") {
+    return "Scheduled maintenance upcoming";
   }
   if (tool.state === "degraded" || tool.state === "major") {
     return "Issue detected — confirming on next poll";

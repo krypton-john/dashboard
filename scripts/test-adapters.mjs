@@ -23,6 +23,24 @@ const statuspageMajor = {
 
 assert.equal(parseStatuspageSummary(statuspageMajor).state, "major");
 
+const statuspageFutureMaintenance = {
+  status: { indicator: "none", description: "All Systems Operational" },
+  incidents: [],
+  scheduled_maintenances: [
+    {
+      name: "Platform maintenance",
+      status: "scheduled",
+      impact: "maintenance",
+      scheduled_for: null,
+      scheduled_until: null,
+    },
+  ],
+};
+assert.equal(
+  parseStatuspageSummary(statuspageFutureMaintenance).state,
+  "future-maintenance"
+);
+
 const gcloudClear = [{ end: "2026-01-01T00:00:00+00:00", updates: [] }];
 assert.equal(parseGcloudIncidents(gcloudClear).state, "operational");
 
@@ -52,7 +70,7 @@ const maintenanceAtom = `<?xml version="1.0"?><feed xmlns="http://www.w3.org/200
 </feed>`;
 assert.equal(
   parsePaypalAtomFeed(parseAtomEntries(maintenanceAtom), Date.parse("2026-10-14T13:00:00Z")).state,
-  "operational"
+  "future-maintenance"
 );
 
 const sf = parseSalesforceStatus(
