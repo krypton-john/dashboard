@@ -1,11 +1,11 @@
 {
-  "lastPolledAt": "2026-10-17T10:11:52.972Z",
-  "generatedAt": "2026-10-17T10:11:52.972Z",
+  "lastPolledAt": "2026-10-17T10:17:31.607Z",
+  "generatedAt": "2026-10-17T10:17:31.607Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-17T10:11:51.245Z",
+      "polledAt": "2026-10-17T10:17:29.759Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -16,18 +16,18 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-17T10:11:51.836Z",
+      "polledAt": "2026-10-17T10:17:30.687Z",
       "error": null,
       "state": "future-maintenance",
       "description": "Pricing database maintenance",
-      "daysSinceLastIncident": null,
+      "daysSinceLastIncident": 0,
       "incidentOngoing": false,
       "trackingSince": "2026-10-14T20:14:24.969Z"
     },
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-17T10:11:51.847Z",
+      "polledAt": "2026-10-17T10:17:30.693Z",
       "error": null,
       "state": "degraded",
       "description": "Advanced Analytics data is stale as of 09/14/26 1:40 PM UTC",
@@ -38,7 +38,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-17T10:11:51.854Z",
+      "polledAt": "2026-10-17T10:17:30.700Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -49,7 +49,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-17T10:11:51.858Z",
+      "polledAt": "2026-10-17T10:17:30.704Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -60,7 +60,7 @@
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-17T10:11:51.863Z",
+      "polledAt": "2026-10-17T10:17:30.709Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
@@ -71,7 +71,7 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-17T10:11:51.868Z",
+      "polledAt": "2026-10-17T10:17:30.711Z",
       "error": null,
       "state": "future-maintenance",
       "description": "Initial Notification: PayPal Live Site Maintenance (PP-LIVE-110012)",
