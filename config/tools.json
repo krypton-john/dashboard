@@ -25,6 +25,27 @@
       "notes": "Uses Salesforce Trust API (active incidents + in-window maintenance)."
     },
     {
+      "id": "adobe-experience-manager",
+      "name": "Adobe Experience Manager",
+      "adapter": "custom",
+      "customAdapter": "adobe-aem",
+      "url": "https://data.status.adobe.com/adobestatus/StatusEvents",
+      "enabled": true,
+      "options": {
+        "productIds": ["503489", "503470"]
+      },
+      "notes": "Monitors AEM and AEM as a Cloud Service via Adobe Status Events feed."
+    },
+    {
+      "id": "zendesk",
+      "name": "Zendesk",
+      "adapter": "custom",
+      "customAdapter": "zendesk",
+      "url": "https://status.zendesk.com",
+      "enabled": true,
+      "notes": "Zendesk public Status API (active incidents + maintenance windows)."
+    },
+    {
       "id": "snowflake",
       "name": "Snowflake",
       "adapter": "statuspage",
@@ -53,6 +74,15 @@
       "url": "https://www.paypal-status.com/feed/atom",
       "enabled": true,
       "notes": "PayPal has no public Statuspage JSON; Atom feed is parsed for active incidents."
+    },
+    {
+      "id": "true-loyal",
+      "name": "True Loyal (formerly Zinrelo)",
+      "adapter": "custom",
+      "customAdapter": "betterstack",
+      "url": "https://status.trueloyal.com/index.json",
+      "enabled": true,
+      "notes": "TrueLoyal public status (Better Stack)."
     },
     {
       "id": "hawthorne-mckenzie",

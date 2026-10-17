@@ -1,5 +1,8 @@
 import assert from "node:assert/strict";
+import { parseAdobeAemStatus } from "./adapters/adobe-aem.mjs";
+import { parseBetterstackIndex } from "./adapters/betterstack.mjs";
 import { parseGcloudIncidents } from "./adapters/gcloud.mjs";
+import { parseZendeskStatus } from "./adapters/zendesk.mjs";
 import {
   parseAtomEntries,
   parsePaypalAtomFeed,
@@ -115,5 +118,53 @@ const sf = parseSalesforceStatus(
   Date.parse("2026-10-14T13:00:00Z")
 );
 assert.equal(sf.state, "degraded");
+
+const zendeskMaint = parseZendeskStatus(
+  [],
+  [
+    {
+      attributes: {
+        title: "Pod maintenance",
+        maintenance_start_time: "2026-10-05T00:00:00.000Z",
+        maintenance_end_time: "2026-10-20T00:00:00.000Z",
+        degradation: true,
+        outage: false,
+      },
+    },
+  ],
+  Date.parse("2026-10-17T12:00:00Z")
+);
+assert.equal(zendeskMaint.state, "degraded");
+
+const zendeskFuture = parseZendeskStatus(
+  [],
+  [
+    {
+      attributes: {
+        title: "Future window",
+        maintenance_start_time: "2026-11-01T00:00:00.000Z",
+        maintenance_end_time: "2026-11-02T00:00:00.000Z",
+        degradation: true,
+        outage: false,
+      },
+    },
+  ],
+  Date.parse("2026-10-17T12:00:00Z")
+);
+assert.equal(zendeskFuture.state, "future-maintenance");
+assert.ok(zendeskFuture.maintenanceStartsAt);
+
+assert.equal(
+  parseAdobeAemStatus({ incidentEvent: { incidents: {}, messages: {} } }).state,
+  "operational"
+);
+
+assert.equal(
+  parseBetterstackIndex({
+    data: { attributes: { aggregate_state: "operational" } },
+    included: [],
+  }).state,
+  "operational"
+);
 
 console.log("adapter tests passed");
