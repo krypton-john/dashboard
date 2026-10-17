@@ -208,7 +208,8 @@ function evaluateEntry(entry, nowMs) {
  */
 export function parsePaypalAtomFeed(entries, nowMs = Date.now()) {
   const active = [];
-  let futureMaintenanceTitle = null;
+  /** @type {{ title: string; maintenanceStartsAt: string | null } | null} */
+  let futureMaintenance = null;
 
   for (const entry of entries) {
     const updatedMs = Date.parse(entry.updated);
@@ -224,7 +225,19 @@ export function parsePaypalAtomFeed(entries, nowMs = Date.now()) {
       if (inPlannedWindow) {
         active.push({ title, severity: "degraded" });
       } else {
-        futureMaintenanceTitle = futureMaintenanceTitle ?? title;
+        const text = stripHtml(entry.content);
+        const window = parseImpactWindow(`${title} ${text}`, entry.updated);
+        const maintenanceStartsAt = window
+          ? new Date(window.start).toISOString()
+          : null;
+        if (
+          !futureMaintenance ||
+          (maintenanceStartsAt &&
+            (!futureMaintenance.maintenanceStartsAt ||
+              maintenanceStartsAt < futureMaintenance.maintenanceStartsAt))
+        ) {
+          futureMaintenance = { title, maintenanceStartsAt };
+        }
       }
       continue;
     }
@@ -234,20 +247,25 @@ export function parsePaypalAtomFeed(entries, nowMs = Date.now()) {
   }
 
   if (active.length === 0) {
-    if (futureMaintenanceTitle) {
+    if (futureMaintenance) {
       return {
         state: "future-maintenance",
-        description: futureMaintenanceTitle.slice(0, 160),
+        description: futureMaintenance.title.slice(0, 160),
+        maintenanceStartsAt: futureMaintenance.maintenanceStartsAt,
       };
     }
-    return { state: "operational", description: "No active incidents in feed" };
+    return {
+      state: "operational",
+      description: "No active incidents in feed",
+      maintenanceStartsAt: null,
+    };
   }
 
   const hasMajor = active.some((a) => a.severity === "major");
   const state = /** @type {ToolState} */ (hasMajor ? "major" : "degraded");
   const description = active[0].title.slice(0, 160);
 
-  return { state, description };
+  return { state, description, maintenanceStartsAt: null };
 }
 
 /**

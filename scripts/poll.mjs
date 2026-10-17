@@ -38,6 +38,7 @@ function toolsSemanticallyEqual(a, b) {
         daysSinceLastIncident,
         incidentOngoing,
         trackingSince,
+        maintenanceStartsAt,
       }) => ({
         id,
         name,
@@ -47,6 +48,7 @@ function toolsSemanticallyEqual(a, b) {
         daysSinceLastIncident,
         incidentOngoing,
         trackingSince,
+        maintenanceStartsAt: maintenanceStartsAt ?? null,
       })
     );
   return JSON.stringify(strip(a)) === JSON.stringify(strip(b));

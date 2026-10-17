@@ -123,9 +123,15 @@ export function parseSalesforceUpcomingMaintenances(
     typeof upcoming[0].name === "string"
       ? upcoming[0].name
       : "Scheduled maintenance";
+  const startMs = Date.parse(upcoming[0].plannedStartTime);
+  const maintenanceStartsAt = Number.isNaN(startMs)
+    ? null
+    : new Date(startMs).toISOString();
+
   return {
     state: "future-maintenance",
     description: `Upcoming maintenance: ${name}`.slice(0, 160),
+    maintenanceStartsAt,
   };
 }
 

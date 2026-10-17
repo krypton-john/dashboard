@@ -24,6 +24,7 @@ import { fetchStatuspage } from "./statuspage.mjs";
  * @property {string} description
  * @property {string} polledAt
  * @property {string | null} error
+ * @property {string | null} [maintenanceStartsAt]
  */
 
 const POLL_TIMEOUT_MS = 25_000;
@@ -81,6 +82,7 @@ export async function pollTool(tool) {
       ...base,
       state: parsed.state,
       description: parsed.description,
+      maintenanceStartsAt: parsed.maintenanceStartsAt ?? null,
     };
   } catch (err) {
     const message =
