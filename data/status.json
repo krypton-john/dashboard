@@ -1,11 +1,11 @@
 {
-  "lastPolledAt": "2026-10-17T15:06:01.873Z",
+  "lastPolledAt": "2026-10-17T18:12:51.064Z",
   "generatedAt": "2026-10-17T15:06:01.873Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-17T15:06:00.871Z",
+      "polledAt": "2026-10-17T18:12:50.161Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -18,7 +18,7 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-17T15:06:01.029Z",
+      "polledAt": "2026-10-17T18:12:50.212Z",
       "error": null,
       "state": "future-maintenance",
       "description": "Pricing database maintenance",
@@ -31,7 +31,7 @@
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-17T15:06:01.030Z",
+      "polledAt": "2026-10-17T18:12:50.213Z",
       "error": null,
       "state": "degraded",
       "description": "Advanced Analytics data is stale as of 09/14/26 1:40 PM UTC",
@@ -44,7 +44,7 @@
     {
       "id": "adobe-experience-manager",
       "name": "Adobe Experience Manager",
-      "polledAt": "2026-10-17T15:06:01.033Z",
+      "polledAt": "2026-10-17T18:12:50.215Z",
       "error": null,
       "state": "operational",
       "description": "All services available",
@@ -57,7 +57,7 @@
     {
       "id": "zendesk",
       "name": "Zendesk",
-      "polledAt": "2026-10-17T15:06:01.034Z",
+      "polledAt": "2026-10-17T18:12:50.216Z",
       "error": null,
       "state": "degraded",
       "description": "Scheduled Maintenance - October 5-20, 2026 - Pod 15 - Analytics Data Migration",
@@ -70,7 +70,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-17T15:06:01.036Z",
+      "polledAt": "2026-10-17T18:12:50.218Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -83,7 +83,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-17T15:06:01.036Z",
+      "polledAt": "2026-10-17T18:12:50.219Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -96,7 +96,7 @@
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-17T15:06:01.038Z",
+      "polledAt": "2026-10-17T18:12:50.220Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
@@ -109,7 +109,7 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-17T15:06:01.039Z",
+      "polledAt": "2026-10-17T18:12:50.221Z",
       "error": null,
       "state": "future-maintenance",
       "description": "Rescheduled: PayPal Live Site Maintenance (PP-LIVE-109965)",
@@ -122,7 +122,7 @@
     {
       "id": "true-loyal",
       "name": "True Loyal (formerly Zinrelo)",
-      "polledAt": "2026-10-17T15:06:01.040Z",
+      "polledAt": "2026-10-17T18:12:50.223Z",
       "error": null,
       "state": "operational",
       "description": "All systems operational",
