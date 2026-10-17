@@ -38,9 +38,53 @@ export function classifyStatuspageMaintenance(maintenance, nowMs = Date.now()) {
 }
 
 /**
+ * @param {string} body Statuspage incident update body (may include markdown)
+ * @returns {string | null} ISO-8601 start time
+ */
+export function parseMaintenanceStartFromUpdateBody(body) {
+  if (typeof body !== "string" || !body.trim()) return null;
+
+  const text = body.replace(/\*\*/g, "").replace(/\s+/g, " ").trim();
+
+  const atUtc = text.match(
+    /scheduled for\s+(.+?)\s+at\s+(\d{1,2}:\d{2})\s*UTC\b/i
+  );
+  if (atUtc) {
+    const ms = Date.parse(`${atUtc[1]} ${atUtc[2]} UTC`);
+    if (!Number.isNaN(ms)) return new Date(ms).toISOString();
+  }
+
+  const dayOnly = text.match(/scheduled for\s+([A-Za-z]+\s+\d{1,2},?\s+\d{4})/i);
+  if (dayOnly) {
+    const ms = Date.parse(dayOnly[1]);
+    if (!Number.isNaN(ms)) return new Date(ms).toISOString();
+  }
+
+  return null;
+}
+
+/**
+ * @param {object} maintenance
+ * @returns {string | null}
+ */
+export function parseStatuspageMaintenanceStart(maintenance) {
+  const start = Date.parse(maintenance?.scheduled_for);
+  if (!Number.isNaN(start)) return new Date(start).toISOString();
+
+  if (Array.isArray(maintenance?.incident_updates)) {
+    for (const update of maintenance.incident_updates) {
+      const fromBody = parseMaintenanceStartFromUpdateBody(update?.body ?? "");
+      if (fromBody) return fromBody;
+    }
+  }
+
+  return null;
+}
+
+/**
  * @param {object[]} scheduledMaintenances
  * @param {number} [nowMs]
- * @returns {{ state: ToolState; description: string } | null}
+ * @returns {{ state: ToolState; description: string; maintenanceStartsAt: string | null } | null}
  */
 export function summarizeStatuspageMaintenances(
   scheduledMaintenances,
@@ -50,6 +94,7 @@ export function summarizeStatuspageMaintenances(
 
   const states = [];
   let description = "";
+  let maintenanceStartsAt = null;
 
   for (const m of scheduledMaintenances) {
     const state = classifyStatuspageMaintenance(m, nowMs);
@@ -57,6 +102,12 @@ export function summarizeStatuspageMaintenances(
     states.push(state);
     if (!description && typeof m.name === "string") {
       description = m.name;
+    }
+    if (state === "future-maintenance") {
+      const start = parseStatuspageMaintenanceStart(m);
+      if (start && (!maintenanceStartsAt || start < maintenanceStartsAt)) {
+        maintenanceStartsAt = start;
+      }
     }
   }
 
@@ -71,5 +122,6 @@ export function summarizeStatuspageMaintenances(
   return {
     state,
     description: description || "Scheduled maintenance",
+    maintenanceStartsAt,
   };
 }

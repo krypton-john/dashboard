@@ -6,6 +6,7 @@ import {
 } from "./adapters/paypal-atom.mjs";
 import { parseSalesforceStatus } from "./adapters/salesforce.mjs";
 import { parseStatuspageSummary } from "./adapters/statuspage.mjs";
+import { parseMaintenanceStartFromUpdateBody } from "./lib/statuspage-maintenance.mjs";
 
 const statuspageOperational = {
   status: { indicator: "none", description: "All Systems Operational" },
@@ -36,9 +37,38 @@ const statuspageFutureMaintenance = {
     },
   ],
 };
+const vtexLike = parseStatuspageSummary({
+  status: { indicator: "none", description: "All Systems Operational" },
+  incidents: [],
+  scheduled_maintenances: [
+    {
+      name: "Pricing database maintenance",
+      status: "scheduled",
+      impact: "maintenance",
+      scheduled_for: null,
+      scheduled_until: null,
+      incident_updates: [
+        {
+          body:
+            "**Scheduled for Oct 27, 2026 at 01:00 UTC - 04:00 UTC**\n\nPlatform work.",
+        },
+      ],
+    },
+  ],
+});
+assert.equal(vtexLike.state, "future-maintenance");
+assert.ok(vtexLike.maintenanceStartsAt?.startsWith("2026-10-27"));
+
 assert.equal(
   parseStatuspageSummary(statuspageFutureMaintenance).state,
   "future-maintenance"
+);
+
+assert.equal(
+  parseMaintenanceStartFromUpdateBody(
+    "**Scheduled for Oct 27, 2026 at 01:00 UTC - 04:00 UTC**"
+  )?.slice(0, 10),
+  "2026-10-27"
 );
 
 const gcloudClear = [{ end: "2026-01-01T00:00:00+00:00", updates: [] }];

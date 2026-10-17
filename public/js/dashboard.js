@@ -79,6 +79,9 @@ function incidentLine(tool, incidentsFile) {
     return "Incident in progress";
   }
   if (tool.state === "future-maintenance") {
+    if (tool.maintenanceStartsAt) {
+      return `Scheduled maintenance upcoming — ${formatDate(tool.maintenanceStartsAt)}`;
+    }
     return "Scheduled maintenance upcoming";
   }
   if (tool.state === "degraded" || tool.state === "major") {

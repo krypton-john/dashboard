@@ -26,7 +26,7 @@ export function indicatorToState(indicator) {
 /**
  * @param {object} summary Parsed Statuspage summary.json
  * @param {number} [nowMs]
- * @returns {{ state: ToolState, description: string }}
+ * @returns {{ state: ToolState, description: string, maintenanceStartsAt: string | null }}
  */
 export function parseStatuspageSummary(summary, nowMs = Date.now()) {
   const indicator = summary?.status?.indicator;
@@ -36,6 +36,7 @@ export function parseStatuspageSummary(summary, nowMs = Date.now()) {
       : "No status description";
 
   let state = indicatorToState(indicator);
+  let maintenanceStartsAt = null;
 
   if (state === "operational" && Array.isArray(summary?.incidents)) {
     const active = summary.incidents.filter(
@@ -70,12 +71,13 @@ export function parseStatuspageSummary(summary, nowMs = Date.now()) {
     } else if (maintenance.state === "degraded") {
       state = worstState([state, "degraded"]);
     }
+    maintenanceStartsAt = maintenance.maintenanceStartsAt;
     if (maintenance.description && state !== "operational") {
-      return { state, description: maintenance.description };
+      return { state, description: maintenance.description, maintenanceStartsAt };
     }
   }
 
-  return { state, description };
+  return { state, description, maintenanceStartsAt };
 }
 
 /**
