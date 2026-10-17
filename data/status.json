@@ -1,11 +1,11 @@
 {
-  "lastPolledAt": "2026-10-17T10:28:02.325Z",
-  "generatedAt": "2026-10-17T10:28:02.325Z",
+  "lastPolledAt": "2026-10-17T10:31:54.267Z",
+  "generatedAt": "2026-10-17T10:31:54.267Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-17T10:28:00.600Z",
+      "polledAt": "2026-10-17T10:31:51.369Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -17,7 +17,7 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-17T10:28:01.300Z",
+      "polledAt": "2026-10-17T10:31:52.250Z",
       "error": null,
       "state": "future-maintenance",
       "description": "Pricing database maintenance",
@@ -29,7 +29,7 @@
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-17T10:28:01.310Z",
+      "polledAt": "2026-10-17T10:31:52.253Z",
       "error": null,
       "state": "degraded",
       "description": "Advanced Analytics data is stale as of 09/14/26 1:40 PM UTC",
@@ -41,7 +41,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-17T10:28:01.327Z",
+      "polledAt": "2026-10-17T10:31:52.266Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -53,7 +53,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-17T10:28:01.333Z",
+      "polledAt": "2026-10-17T10:31:52.269Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -65,7 +65,7 @@
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-17T10:28:01.343Z",
+      "polledAt": "2026-10-17T10:31:52.271Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
@@ -77,7 +77,7 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-17T10:28:01.348Z",
+      "polledAt": "2026-10-17T10:31:52.277Z",
       "error": null,
       "state": "future-maintenance",
       "description": "Rescheduled: PayPal Live Site Maintenance (PP-LIVE-109965)",
