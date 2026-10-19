@@ -77,12 +77,12 @@
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 38,
+      "nonGreenPolls": 39,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 38,
+      "nonGreenPolls": 39,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "adobe-experience-manager": {
@@ -92,7 +92,7 @@
     },
     "zendesk": {
       "trackingSince": "2026-10-17T10:49:33.163Z",
-      "nonGreenPolls": 13,
+      "nonGreenPolls": 14,
       "pendingStart": "2026-10-17T10:49:33.163Z"
     },
     "true-loyal": {
