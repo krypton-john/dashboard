@@ -17,7 +17,7 @@
       "toolId": "snowflake",
       "start": "2026-10-14T20:20:03.912Z",
       "end": null,
-      "worstSeverity": "degraded"
+      "worstSeverity": "major"
     },
     {
       "toolId": "paypal",
@@ -57,8 +57,8 @@
     },
     "google-cloud": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 0,
-      "pendingStart": null
+      "nonGreenPolls": 1,
+      "pendingStart": "2026-10-20T09:12:16.272Z"
     },
     "paypal": {
       "trackingSince": "2026-10-14T20:14:24.969Z",
@@ -82,7 +82,7 @@
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 44,
+      "nonGreenPolls": 45,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "adobe-experience-manager": {
@@ -92,7 +92,7 @@
     },
     "zendesk": {
       "trackingSince": "2026-10-17T10:49:33.163Z",
-      "nonGreenPolls": 19,
+      "nonGreenPolls": 20,
       "pendingStart": "2026-10-17T10:49:33.163Z"
     },
     "true-loyal": {
