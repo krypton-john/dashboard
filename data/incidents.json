@@ -88,7 +88,7 @@
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 48,
+      "nonGreenPolls": 49,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "adobe-experience-manager": {
@@ -98,7 +98,7 @@
     },
     "zendesk": {
       "trackingSince": "2026-10-17T10:49:33.163Z",
-      "nonGreenPolls": 23,
+      "nonGreenPolls": 24,
       "pendingStart": "2026-10-17T10:49:33.163Z"
     },
     "true-loyal": {
