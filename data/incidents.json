@@ -40,7 +40,7 @@
     {
       "toolId": "zendesk",
       "start": "2026-10-17T10:49:33.163Z",
-      "end": null,
+      "end": "2026-10-21T18:25:45.872Z",
       "worstSeverity": "degraded"
     },
     {
@@ -58,8 +58,8 @@
     },
     "github": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 0,
-      "pendingStart": null
+      "nonGreenPolls": 1,
+      "pendingStart": "2026-10-21T18:25:45.872Z"
     },
     "google-cloud": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
@@ -88,7 +88,7 @@
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 52,
+      "nonGreenPolls": 53,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "adobe-experience-manager": {
@@ -98,8 +98,8 @@
     },
     "zendesk": {
       "trackingSince": "2026-10-17T10:49:33.163Z",
-      "nonGreenPolls": 27,
-      "pendingStart": "2026-10-17T10:49:33.163Z"
+      "nonGreenPolls": 0,
+      "pendingStart": null
     },
     "true-loyal": {
       "trackingSince": "2026-10-17T10:49:33.163Z",
