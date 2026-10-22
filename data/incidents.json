@@ -48,6 +48,12 @@
       "start": "2026-10-20T09:12:16.272Z",
       "end": "2026-10-20T14:44:08.015Z",
       "worstSeverity": "degraded"
+    },
+    {
+      "toolId": "github",
+      "start": "2026-10-22T18:21:12.424Z",
+      "end": null,
+      "worstSeverity": "degraded"
     }
   ],
   "tools": {
@@ -58,7 +64,7 @@
     },
     "github": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 1,
+      "nonGreenPolls": 2,
       "pendingStart": "2026-10-22T18:21:12.424Z"
     },
     "google-cloud": {
@@ -88,7 +94,7 @@
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 58,
+      "nonGreenPolls": 59,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "adobe-experience-manager": {
