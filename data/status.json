@@ -1,11 +1,11 @@
 {
-  "lastPolledAt": "2026-10-27T14:04:37.103Z",
-  "generatedAt": "2026-10-27T14:04:37.103Z",
+  "lastPolledAt": "2026-10-27T19:51:43.676Z",
+  "generatedAt": "2026-10-27T19:51:43.676Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-10-27T14:04:36.157Z",
+      "polledAt": "2026-10-27T19:51:42.777Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -18,20 +18,20 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-10-27T14:04:36.196Z",
+      "polledAt": "2026-10-27T19:51:42.828Z",
       "error": null,
-      "state": "future-maintenance",
+      "state": "degraded",
       "description": "Marketplace Integrations maintenance",
       "maintenanceStartsAt": "2026-10-27T01:00:00.000Z",
       "daysSinceLastIncident": 10,
       "incidentOngoing": false,
       "trackingSince": "2026-10-14T20:14:24.969Z",
-      "maintenanceStartsAtLabel": "Tue, 27 Oct 2026, 01:00 UTC"
+      "maintenanceStartsAtLabel": null
     },
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-10-27T14:04:36.197Z",
+      "polledAt": "2026-10-27T19:51:42.830Z",
       "error": null,
       "state": "degraded",
       "description": "Active incident (1)",
@@ -44,7 +44,7 @@
     {
       "id": "adobe-experience-manager",
       "name": "Adobe Experience Manager",
-      "polledAt": "2026-10-27T14:04:36.199Z",
+      "polledAt": "2026-10-27T19:51:42.832Z",
       "error": null,
       "state": "operational",
       "description": "All services available",
@@ -57,12 +57,12 @@
     {
       "id": "zendesk",
       "name": "Zendesk",
-      "polledAt": "2026-10-27T14:04:36.199Z",
+      "polledAt": "2026-10-27T19:51:42.833Z",
       "error": null,
       "state": "operational",
       "description": "All systems operational",
       "maintenanceStartsAt": null,
-      "daysSinceLastIncident": 5,
+      "daysSinceLastIncident": 6,
       "incidentOngoing": false,
       "trackingSince": "2026-10-17T10:49:33.163Z",
       "maintenanceStartsAtLabel": null
@@ -70,7 +70,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-10-27T14:04:36.200Z",
+      "polledAt": "2026-10-27T19:51:42.834Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -83,7 +83,7 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-10-27T14:04:36.201Z",
+      "polledAt": "2026-10-27T19:51:42.835Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -96,12 +96,12 @@
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-10-27T14:04:36.202Z",
+      "polledAt": "2026-10-27T19:51:42.836Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
       "maintenanceStartsAt": null,
-      "daysSinceLastIncident": 6,
+      "daysSinceLastIncident": 7,
       "incidentOngoing": false,
       "trackingSince": "2026-10-14T20:06:46.301Z",
       "maintenanceStartsAtLabel": null
@@ -109,7 +109,7 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-10-27T14:04:36.202Z",
+      "polledAt": "2026-10-27T19:51:42.838Z",
       "error": null,
       "state": "future-maintenance",
       "description": "Completed: Hyperwallet (PP-LIVE-110014)",
@@ -122,7 +122,7 @@
     {
       "id": "true-loyal",
       "name": "True Loyal (formerly Zinrelo)",
-      "polledAt": "2026-10-27T14:04:36.204Z",
+      "polledAt": "2026-10-27T19:51:42.839Z",
       "error": null,
       "state": "operational",
       "description": "All systems operational",
