@@ -64,13 +64,13 @@
     {
       "toolId": "salesforce",
       "start": "2026-10-26T21:24:45.809Z",
-      "end": null,
+      "end": "2026-10-28T04:23:28.770Z",
       "worstSeverity": "major"
     },
     {
       "toolId": "vtex",
       "start": "2026-10-27T19:51:43.676Z",
-      "end": null,
+      "end": "2026-10-28T04:23:28.770Z",
       "worstSeverity": "degraded"
     }
   ],
@@ -102,17 +102,17 @@
     },
     "vtex": {
       "trackingSince": "2026-10-14T20:14:24.969Z",
-      "nonGreenPolls": 2,
-      "pendingStart": "2026-10-27T19:51:43.676Z"
+      "nonGreenPolls": 0,
+      "pendingStart": null
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 6,
-      "pendingStart": "2026-10-26T21:24:45.809Z"
+      "nonGreenPolls": 0,
+      "pendingStart": null
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 87,
+      "nonGreenPolls": 88,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "adobe-experience-manager": {
