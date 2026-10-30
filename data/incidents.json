@@ -76,7 +76,7 @@
     {
       "toolId": "salesforce",
       "start": "2026-10-29T21:34:49.799Z",
-      "end": null,
+      "end": "2026-10-30T20:27:53.132Z",
       "worstSeverity": "degraded"
     }
   ],
@@ -113,12 +113,12 @@
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 4,
-      "pendingStart": "2026-10-29T21:34:49.799Z"
+      "nonGreenPolls": 0,
+      "pendingStart": null
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 99,
+      "nonGreenPolls": 100,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "adobe-experience-manager": {
