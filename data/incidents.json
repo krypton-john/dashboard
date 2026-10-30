@@ -72,6 +72,12 @@
       "start": "2026-10-27T19:51:43.676Z",
       "end": "2026-10-28T04:23:28.770Z",
       "worstSeverity": "degraded"
+    },
+    {
+      "toolId": "salesforce",
+      "start": "2026-10-29T21:34:49.799Z",
+      "end": null,
+      "worstSeverity": "degraded"
     }
   ],
   "tools": {
@@ -107,12 +113,12 @@
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 1,
+      "nonGreenPolls": 2,
       "pendingStart": "2026-10-29T21:34:49.799Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 96,
+      "nonGreenPolls": 97,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "adobe-experience-manager": {
