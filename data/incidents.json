@@ -78,6 +78,12 @@
       "start": "2026-10-29T21:34:49.799Z",
       "end": "2026-10-30T20:27:53.132Z",
       "worstSeverity": "degraded"
+    },
+    {
+      "toolId": "salesforce",
+      "start": "2026-11-02T17:54:04.988Z",
+      "end": null,
+      "worstSeverity": "degraded"
     }
   ],
   "tools": {
@@ -88,8 +94,8 @@
     },
     "github": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 1,
-      "pendingStart": "2026-11-02T17:54:04.988Z"
+      "nonGreenPolls": 0,
+      "pendingStart": null
     },
     "google-cloud": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
@@ -113,12 +119,12 @@
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 1,
+      "nonGreenPolls": 2,
       "pendingStart": "2026-11-02T17:54:04.988Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 112,
+      "nonGreenPolls": 113,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "adobe-experience-manager": {
