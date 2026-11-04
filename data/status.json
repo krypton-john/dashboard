@@ -1,11 +1,11 @@
 {
-  "lastPolledAt": "2026-11-04T01:56:10.260Z",
-  "generatedAt": "2026-11-04T01:56:10.260Z",
+  "lastPolledAt": "2026-11-04T08:47:05.585Z",
+  "generatedAt": "2026-11-04T08:47:05.585Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
-      "polledAt": "2026-11-04T01:56:09.314Z",
+      "polledAt": "2026-11-04T08:47:04.708Z",
       "error": null,
       "state": "operational",
       "description": "All Systems Operational",
@@ -18,12 +18,12 @@
     {
       "id": "vtex",
       "name": "VTEX",
-      "polledAt": "2026-11-04T01:56:09.350Z",
+      "polledAt": "2026-11-04T08:47:04.767Z",
       "error": null,
       "state": "future-maintenance",
       "description": "Pricing database maintenance",
       "maintenanceStartsAt": "2026-10-27T01:00:00.000Z",
-      "daysSinceLastIncident": 6,
+      "daysSinceLastIncident": 7,
       "incidentOngoing": false,
       "trackingSince": "2026-10-14T20:14:24.969Z",
       "maintenanceStartsAtLabel": "Tue, 27 Oct 2026, 01:00 UTC"
@@ -31,20 +31,20 @@
     {
       "id": "salesforce",
       "name": "Salesforce",
-      "polledAt": "2026-11-04T01:56:09.351Z",
+      "polledAt": "2026-11-04T08:47:04.768Z",
       "error": null,
       "state": "degraded",
-      "description": "Active incident (1)",
+      "description": "Additional information is available in our Known Issue: https://sfdc.co/kq6uu2",
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": 0,
-      "incidentOngoing": false,
+      "incidentOngoing": true,
       "trackingSince": "2026-10-14T20:20:03.912Z",
       "maintenanceStartsAtLabel": null
     },
     {
       "id": "adobe-experience-manager",
       "name": "Adobe Experience Manager",
-      "polledAt": "2026-11-04T01:56:09.352Z",
+      "polledAt": "2026-11-04T08:47:04.770Z",
       "error": null,
       "state": "operational",
       "description": "All services available",
@@ -57,7 +57,7 @@
     {
       "id": "zendesk",
       "name": "Zendesk",
-      "polledAt": "2026-11-04T01:56:09.353Z",
+      "polledAt": "2026-11-04T08:47:04.771Z",
       "error": null,
       "state": "operational",
       "description": "All systems operational",
@@ -70,7 +70,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "polledAt": "2026-11-04T01:56:09.354Z",
+      "polledAt": "2026-11-04T08:47:04.773Z",
       "error": null,
       "state": "degraded",
       "description": "Partially Degraded Service",
@@ -83,12 +83,12 @@
     {
       "id": "github",
       "name": "GitHub",
-      "polledAt": "2026-11-04T01:56:09.354Z",
+      "polledAt": "2026-11-04T08:47:04.774Z",
       "error": null,
-      "state": "operational",
+      "state": "degraded",
       "description": "All Systems Operational",
       "maintenanceStartsAt": null,
-      "daysSinceLastIncident": 11,
+      "daysSinceLastIncident": 12,
       "incidentOngoing": false,
       "trackingSince": "2026-10-14T20:06:46.301Z",
       "maintenanceStartsAtLabel": null
@@ -96,7 +96,7 @@
     {
       "id": "google-cloud",
       "name": "GCP",
-      "polledAt": "2026-11-04T01:56:09.355Z",
+      "polledAt": "2026-11-04T08:47:04.775Z",
       "error": null,
       "state": "operational",
       "description": "No active incidents",
@@ -109,20 +109,20 @@
     {
       "id": "paypal",
       "name": "PayPal",
-      "polledAt": "2026-11-04T01:56:09.356Z",
+      "polledAt": "2026-11-04T08:47:04.777Z",
       "error": null,
       "state": "degraded",
       "description": "Initial Notification: PayPal Live Site Maintenance (PP-LIVE-110458)",
       "maintenanceStartsAt": null,
-      "daysSinceLastIncident": 8,
-      "incidentOngoing": false,
+      "daysSinceLastIncident": 0,
+      "incidentOngoing": true,
       "trackingSince": "2026-10-14T20:14:24.969Z",
       "maintenanceStartsAtLabel": null
     },
     {
       "id": "true-loyal",
       "name": "True Loyal (formerly Zinrelo)",
-      "polledAt": "2026-11-04T01:56:09.356Z",
+      "polledAt": "2026-11-04T08:47:04.778Z",
       "error": null,
       "state": "operational",
       "description": "All systems operational",
