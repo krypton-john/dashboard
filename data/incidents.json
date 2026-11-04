@@ -96,6 +96,12 @@
       "start": "2026-11-04T01:56:10.260Z",
       "end": null,
       "worstSeverity": "degraded"
+    },
+    {
+      "toolId": "github",
+      "start": "2026-11-04T08:47:05.585Z",
+      "end": null,
+      "worstSeverity": "degraded"
     }
   ],
   "tools": {
@@ -106,7 +112,7 @@
     },
     "github": {
       "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 1,
+      "nonGreenPolls": 2,
       "pendingStart": "2026-11-04T08:47:05.585Z"
     },
     "google-cloud": {
@@ -116,7 +122,7 @@
     },
     "paypal": {
       "trackingSince": "2026-10-14T20:14:24.969Z",
-      "nonGreenPolls": 2,
+      "nonGreenPolls": 3,
       "pendingStart": "2026-11-04T01:56:10.260Z"
     },
     "shopify": {
@@ -131,12 +137,12 @@
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 2,
+      "nonGreenPolls": 3,
       "pendingStart": "2026-11-04T01:56:10.260Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 118,
+      "nonGreenPolls": 119,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "adobe-experience-manager": {
