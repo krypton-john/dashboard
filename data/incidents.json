@@ -94,7 +94,7 @@
     {
       "toolId": "paypal",
       "start": "2026-11-04T01:56:10.260Z",
-      "end": null,
+      "end": "2026-11-06T00:49:45.401Z",
       "worstSeverity": "degraded"
     },
     {
@@ -122,8 +122,8 @@
     },
     "paypal": {
       "trackingSince": "2026-10-14T20:14:24.969Z",
-      "nonGreenPolls": 8,
-      "pendingStart": "2026-11-04T01:56:10.260Z"
+      "nonGreenPolls": 0,
+      "pendingStart": null
     },
     "shopify": {
       "trackingSince": "2026-10-14T20:14:24.969Z",
@@ -142,7 +142,7 @@
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 124,
+      "nonGreenPolls": 125,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "adobe-experience-manager": {
