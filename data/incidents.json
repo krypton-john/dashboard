@@ -143,12 +143,12 @@
     },
     "salesforce": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 7,
+      "nonGreenPolls": 8,
       "pendingStart": "2026-11-06T07:43:35.786Z"
     },
     "snowflake": {
       "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 132,
+      "nonGreenPolls": 133,
       "pendingStart": "2026-10-14T20:20:03.912Z"
     },
     "adobe-experience-manager": {
