@@ -92,6 +92,25 @@ Enable **Actions** on the repo so **Poll status** can run on schedule (or trigge
 
 GitHub disables scheduled workflows after **60 days of repository inactivity**. Merging PRs or running **Poll status** manually counts as activity; keep the repo active or re-enable workflows if polling stops.
 
+### Google Chat alerts (agentic notify pipeline)
+
+After each poll, the notify pipeline can detect transitions (confirmed incidents, escalations, resolutions, etc.), run **investigators** (stub by default), compose a rich message, and post to **Google Chat** spaces configured in `config/notifications.json`.
+
+1. Create a Google Chat **incoming webhook** per team space.
+2. Add repository **secrets** whose names match `googleChatWebhookSecret` (e.g. `CHAT_WEBHOOK_SALESFORCE`).
+3. Set repository variable **`ALERTS_ENABLED`** to `true` (or `ALERTS_DRY_RUN=true` to log messages without sending).
+4. Tune per-tool routes in `config/notifications.json` and investigators in `config/investigators.json`.
+
+**GCP scoping:** On the `google-cloud` tool, optional `alerting.scope.products` / `regions` filter which open vendor incidents affect the dashboard and alerts (see `config/tools.json`).
+
+**Cursor / Google Chat MCP:** Use the same composed message text when posting manually from an agent session (production scheduled runs use webhooks in GitHub Actions, not MCP).
+
+Dry-run locally:
+
+```bash
+ALERTS_DRY_RUN=true node scripts/notify.mjs
+```
+
 ## Build phases
 
 - **Phase 1:** layout, tool config schema, hello-world Pages site  

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "defaultInvestigators": ["stub"],
+  "tools": {
+    "salesforce": ["stub"],
+    "google-cloud": ["stub"],
+    "shopify": ["stub"],
+    "vtex": ["stub"],
+    "paypal": ["stub"],
+    "zendesk": ["stub"],
+    "snowflake": ["stub"],
+    "github": ["stub"],
+    "adobe-experience-manager": ["stub"],
+    "true-loyal": ["stub"]
+  }
+}

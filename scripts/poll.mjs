@@ -7,6 +7,8 @@ import {
   metricsForTool,
   parseIncidentsFile,
 } from "./lib/incidents.mjs";
+import { runNotifyPipeline } from "./agent/notify-pipeline.mjs";
+import { detectAlertEvents } from "./lib/alert-events.mjs";
 import { formatMaintenanceStartsAtLabel } from "./lib/maintenance-label.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -14,6 +16,7 @@ const ROOT = path.resolve(__dirname, "..");
 const TOOLS_PATH = path.join(ROOT, "config", "tools.json");
 const STATUS_PATH = path.join(ROOT, "data", "status.json");
 const INCIDENTS_PATH = path.join(ROOT, "data", "incidents.json");
+const ALERTS_PATH = path.join(ROOT, "data", "alerts.json");
 
 /**
  * @param {object} payload
@@ -96,26 +99,6 @@ async function main() {
 
   const lastPolledAt = new Date().toISOString();
 
-  let incidentsDb = parseIncidentsFile(null);
-  try {
-    const incRaw = await readFile(INCIDENTS_PATH, "utf8");
-    incidentsDb = parseIncidentsFile(JSON.parse(incRaw));
-  } catch {
-    /* first run */
-  }
-
-  const incidentsChanged = applyPollToIncidents(
-    incidentsDb,
-    results.map((r) => ({ id: r.id, state: r.state })),
-    lastPolledAt
-  );
-
-  const resultsWithMetrics = attachIncidentMetrics(
-    results,
-    incidentsDb,
-    lastPolledAt
-  );
-
   let previousTools = [];
   let previousGeneratedAt = null;
   let previousLastPolledAt = null;
@@ -128,6 +111,31 @@ async function main() {
   } catch {
     /* first run */
   }
+
+  let previousIncidents = parseIncidentsFile(null);
+  try {
+    const incRaw = await readFile(INCIDENTS_PATH, "utf8");
+    previousIncidents = parseIncidentsFile(JSON.parse(incRaw));
+  } catch {
+    /* first run */
+  }
+
+  let incidentsDb = parseIncidentsFile(JSON.stringify(previousIncidents));
+  const incidentsSnapshotBefore = parseIncidentsFile(
+    JSON.stringify(previousIncidents)
+  );
+
+  const incidentsChanged = applyPollToIncidents(
+    incidentsDb,
+    results.map((r) => ({ id: r.id, state: r.state })),
+    lastPolledAt
+  );
+
+  const resultsWithMetrics = attachIncidentMetrics(
+    results,
+    incidentsDb,
+    lastPolledAt
+  );
 
   const statusChanged = !toolsSemanticallyEqual(previousTools, resultsWithMetrics);
   const pollTimestampChanged = previousLastPolledAt !== lastPolledAt;
@@ -147,17 +155,9 @@ async function main() {
     console.log("No change; leaving status.json unchanged");
   }
 
-  let previousIncidents = parseIncidentsFile(null);
-  try {
-    const prevRaw = await readFile(INCIDENTS_PATH, "utf8");
-    previousIncidents = parseIncidentsFile(JSON.parse(prevRaw));
-  } catch {
-    /* first run */
-  }
-
   const incidentsFileChanged =
     incidentsChanged ||
-    !incidentsSemanticallyEqual(previousIncidents, incidentsDb);
+    !incidentsSemanticallyEqual(incidentsSnapshotBefore, incidentsDb);
 
   if (incidentsFileChanged) {
     await writeFile(INCIDENTS_PATH, stableStringify(incidentsDb), "utf8");
@@ -166,6 +166,20 @@ async function main() {
 
   const changed =
     statusChanged || pollTimestampChanged || incidentsFileChanged;
+
+  const alertEvents = detectAlertEvents(
+    previousTools,
+    resultsWithMetrics,
+    incidentsSnapshotBefore,
+    incidentsDb,
+    lastPolledAt
+  );
+  if (alertEvents.length > 0) {
+    const notifyResult = await runNotifyPipeline(alertEvents, tools, ALERTS_PATH);
+    console.log(
+      `Alerts: ${alertEvents.length} event(s); sent ${notifyResult.sent}, skipped ${notifyResult.skipped}`
+    );
+  }
 
   for (const t of resultsWithMetrics) {
     const flag =
