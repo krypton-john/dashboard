@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Google Chat notification routing",
+  "title": "Slack notification routing",
   "type": "object",
   "required": ["version", "defaults", "tools"],
   "additionalProperties": false,
@@ -11,13 +11,13 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["toolId", "googleChatWebhookSecret"],
+        "required": ["toolId", "slackWebhookSecret"],
         "additionalProperties": false,
         "properties": {
           "toolId": { "type": "string" },
-          "googleChatWebhookSecret": {
+          "slackWebhookSecret": {
             "type": "string",
-            "description": "GitHub Actions secret name holding the Chat incoming webhook URL"
+            "description": "GitHub Actions secret name holding the Slack incoming webhook URL (https://hooks.slack.com/...)"
           },
           "events": {
             "type": "array",

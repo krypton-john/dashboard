@@ -8,7 +8,7 @@
 /**
  * @typedef {object} ToolNotifyConfig
  * @property {string} toolId
- * @property {string} googleChatWebhookSecret
+ * @property {string} slackWebhookSecret
  * @property {string[]} [events]
  * @property {"degraded" | "major"} [minSeverity]
  * @property {number} [cooldownMinutes]
@@ -51,7 +51,10 @@ export function policyForTool(config, toolId) {
     minSeverity: row?.minSeverity ?? config.defaults.minSeverity ?? "degraded",
     cooldownMinutes:
       row?.cooldownMinutes ?? config.defaults.cooldownMinutes ?? 60,
-    googleChatWebhookSecret: row?.googleChatWebhookSecret ?? null,
+    slackWebhookSecret:
+      row?.slackWebhookSecret ??
+      /** @type {string | undefined} */ (row?.googleChatWebhookSecret) ??
+      null,
     dashboardUrl: config.defaults.dashboardUrl ?? null,
   };
 }
@@ -63,7 +66,7 @@ const SEVERITY_RANK = { degraded: 1, major: 2 };
  * @param {ReturnType<typeof policyForTool>} policy
  */
 export function eventAllowed(event, policy) {
-  if (!policy.googleChatWebhookSecret) return false;
+  if (!policy.slackWebhookSecret) return false;
   if (!policy.events.includes(event.type)) return false;
 
   if (event.severity) {

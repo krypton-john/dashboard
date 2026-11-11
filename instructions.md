@@ -161,25 +161,25 @@ For architecture and adapters overview, see [README.md](./README.md) and [Plan.m
 
 ---
 
-## Google Chat notifications
+## Slack notifications
 
 ### 1. Configure routing
 
 Edit `config/notifications.json`:
 
 - Each `toolId` maps to a **secret name** (not the webhook URL), e.g. `CHAT_WEBHOOK_SALESFORCE`.
-- `events` controls when Chat messages fire (`incident_open`, `severity_escalation`, `incident_resolved`, `future_maintenance`, etc.).
+- `events` controls when Slack messages fire (`incident_open`, `severity_escalation`, `incident_resolved`, `future_maintenance`, etc.).
 - `defaults.cooldownMinutes` reduces duplicate posts for the same incident fingerprint.
 
 ### 2. Add GitHub secrets
 
-For each `googleChatWebhookSecret` value, create a matching **Actions secret** containing the full incoming webhook URL from Google Chat.
+For each `slackWebhookSecret` value, create a matching **Actions secret** whose value is the full Slack incoming webhook URL (`https://hooks.slack.com/services/...`).
 
 Optional repository **variables**:
 
 | Variable | Purpose |
 |----------|---------|
-| `ALERTS_ENABLED` | Set to `true` to send Chat messages from Poll status |
+| `ALERTS_ENABLED` | Set to `true` to send Slack messages from Poll status |
 | `ALERTS_DRY_RUN` | Set to `true` to print messages in the workflow log only |
 
 ### 3. Investigators
@@ -198,6 +198,4 @@ ALERTS_DRY_RUN=true node scripts/notify.mjs
 node scripts/poll.mjs   # logs “Alerts: …” when events occur
 ```
 
-### 6. Google Chat MCP (Cursor)
-
-For interactive drills, compose a message with `scripts/agent/compose-message.mjs` logic (or run the notify pipeline with `ALERTS_DRY_RUN`) and post via your **Google Chat MCP** integration to the target space. Scheduled polling continues to use webhooks in CI.
+**Fake alert in Slack:** Actions → Poll status → Run workflow → enable *Post a fake Salesforce test alert to Slack* (requires `ALERTS_ENABLED` or that step forces send; webhooks must be set).

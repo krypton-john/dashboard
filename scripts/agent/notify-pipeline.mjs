@@ -15,8 +15,8 @@ import {
 import { composeChatMessage } from "./compose-message.mjs";
 import {
   resolveWebhookFromEnv,
-  sendGoogleChatWebhook,
-} from "./google-chat.mjs";
+  sendSlackWebhook,
+} from "./slack-webhook.mjs";
 import { runInvestigation } from "./investigate.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -116,20 +116,20 @@ export async function runNotifyPipeline(
       vendorUrl: toolConfig.url ?? null,
     });
 
-    const webhook = resolveWebhookFromEnv(policy.googleChatWebhookSecret);
+    const webhook = resolveWebhookFromEnv(policy.slackWebhookSecret);
     if (!webhook && !dryRun) {
       console.warn(
-        `No webhook env ${policy.googleChatWebhookSecret} for ${event.toolId}; skipping`
+        `No webhook env ${policy.slackWebhookSecret} for ${event.toolId}; skipping`
       );
       skipped += 1;
       continue;
     }
 
     if (dryRun) {
-      console.log(`[DRY RUN] Chat → ${event.toolId} (${event.type}):\n${text}\n`);
+      console.log(`[DRY RUN] Slack → ${event.toolId} (${event.type}):\n${text}\n`);
     } else {
-      await sendGoogleChatWebhook(webhook, text);
-      console.log(`Sent Chat alert for ${event.toolId} (${event.type})`);
+      await sendSlackWebhook(webhook, text);
+      console.log(`Sent Slack alert for ${event.toolId} (${event.type})`);
     }
 
     recordSent(alertsDb, {

@@ -51,7 +51,7 @@ const notifyCfg = parseNotificationsConfig({
   tools: [
     {
       toolId: "github",
-      googleChatWebhookSecret: "CHAT_WEBHOOK_PLATFORM",
+      slackWebhookSecret: "CHAT_WEBHOOK_PLATFORM",
     },
   ],
 });
