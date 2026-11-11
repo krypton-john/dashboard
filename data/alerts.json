@@ -1,4 +1,11 @@
 {
   "version": 1,
-  "sent": []
+  "sent": [
+    {
+      "fingerprint": "salesforce|incident_open|test-2026-11-11T20:06:40.827Z",
+      "sentAt": "2026-11-11T20:06:41.016Z",
+      "toolId": "salesforce",
+      "eventType": "incident_open"
+    }
+  ]
 }
