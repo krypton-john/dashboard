@@ -1,102 +1,54 @@
 {
   "version": 1,
-  "incidents": [
-    {
-      "toolId": "cloudflare",
-      "start": "2026-10-14T20:06:46.301Z",
-      "end": null,
-      "worstSeverity": "major"
-    },
-    {
-      "toolId": "salesforce",
-      "start": "2026-10-14T20:20:03.912Z",
-      "end": null,
-      "worstSeverity": "major"
-    },
-    {
-      "toolId": "snowflake",
-      "start": "2026-10-14T20:20:03.912Z",
-      "end": null,
-      "worstSeverity": "degraded"
-    },
-    {
-      "toolId": "paypal",
-      "start": "2026-10-14T20:20:03.912Z",
-      "end": "2026-10-15T18:37:58.785Z",
-      "worstSeverity": "degraded"
-    },
-    {
-      "toolId": "github",
-      "start": "2026-10-15T18:37:10.963Z",
-      "end": "2026-10-16T14:06:06.335Z",
-      "worstSeverity": "degraded"
-    },
-    {
-      "toolId": "vtex",
-      "start": "2026-10-16T19:22:38.699Z",
-      "end": "2026-10-17T10:17:31.607Z",
-      "worstSeverity": "degraded"
-    },
-    {
-      "toolId": "zendesk",
-      "start": "2026-10-17T10:49:33.163Z",
-      "end": "2026-11-11T18:30:17.944Z",
-      "worstSeverity": "degraded"
-    }
-  ],
+  "incidents": [],
   "tools": {
-    "cloudflare": {
-      "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 5,
-      "pendingStart": "2026-10-14T20:06:46.301Z"
-    },
-    "github": {
-      "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 0,
-      "pendingStart": null
-    },
-    "google-cloud": {
-      "trackingSince": "2026-10-14T20:06:46.301Z",
-      "nonGreenPolls": 0,
-      "pendingStart": null
-    },
-    "paypal": {
-      "trackingSince": "2026-10-14T20:14:24.969Z",
-      "nonGreenPolls": 0,
-      "pendingStart": null
-    },
     "shopify": {
-      "trackingSince": "2026-10-14T20:14:24.969Z",
+      "trackingSince": "2026-11-11T18:31:58.653Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "vtex": {
-      "trackingSince": "2026-10-14T20:14:24.969Z",
+      "trackingSince": "2026-11-11T18:31:58.653Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "salesforce": {
-      "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 28,
-      "pendingStart": "2026-10-14T20:20:03.912Z"
-    },
-    "snowflake": {
-      "trackingSince": "2026-10-14T20:20:03.912Z",
-      "nonGreenPolls": 28,
-      "pendingStart": "2026-10-14T20:20:03.912Z"
+      "trackingSince": "2026-11-11T18:31:58.653Z",
+      "nonGreenPolls": 1,
+      "pendingStart": "2026-11-11T18:31:58.653Z"
     },
     "adobe-experience-manager": {
-      "trackingSince": "2026-10-17T10:49:33.163Z",
+      "trackingSince": "2026-11-11T18:31:58.653Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "zendesk": {
-      "trackingSince": "2026-10-17T10:49:33.163Z",
+      "trackingSince": "2026-11-11T18:31:58.653Z",
+      "nonGreenPolls": 0,
+      "pendingStart": null
+    },
+    "snowflake": {
+      "trackingSince": "2026-11-11T18:31:58.653Z",
+      "nonGreenPolls": 1,
+      "pendingStart": "2026-11-11T18:31:58.653Z"
+    },
+    "github": {
+      "trackingSince": "2026-11-11T18:31:58.653Z",
+      "nonGreenPolls": 0,
+      "pendingStart": null
+    },
+    "google-cloud": {
+      "trackingSince": "2026-11-11T18:31:58.653Z",
+      "nonGreenPolls": 0,
+      "pendingStart": null
+    },
+    "paypal": {
+      "trackingSince": "2026-11-11T18:31:58.653Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "true-loyal": {
-      "trackingSince": "2026-10-17T10:49:33.163Z",
+      "trackingSince": "2026-11-11T18:31:58.653Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     }
