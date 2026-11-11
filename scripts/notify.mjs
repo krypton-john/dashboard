@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /**
- * Dry-run notification pipeline without polling vendors.
- * Usage: ALERTS_DRY_RUN=true node scripts/notify.mjs
+ * Exercise the notify pipeline without polling vendors (fake incident_open).
+ *
+ * Dry-run (log only): ALERTS_DRY_RUN=true node scripts/notify.mjs
+ * Send to Slack:      ALERTS_ENABLED=true CHAT_WEBHOOK_SALESFORCE=https://hooks.slack.com/… node scripts/notify.mjs
  */
 import { readFile } from "node:fs/promises";
 import path from "node:path";
@@ -15,15 +17,18 @@ async function main() {
   const tools = JSON.parse(
     await readFile(path.join(ROOT, "config", "tools.json"), "utf8")
   );
+  const toolId = process.env.NOTIFY_TEST_TOOL ?? "salesforce";
+  const now = new Date().toISOString();
   const sample = [
     {
       type: "incident_open",
-      toolId: "salesforce",
-      toolName: "Salesforce",
-      pollTime: new Date().toISOString(),
-      fingerprint: "sample",
+      toolId,
+      toolName: toolId,
+      pollTime: now,
+      fingerprint: `test-${now}`,
       severity: "degraded",
-      description: "Advanced Analytics data is stale",
+      description:
+        "[TEST] Synthetic alert — safe to ignore. Advanced Analytics data is stale",
     },
   ];
 

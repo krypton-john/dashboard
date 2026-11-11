@@ -5,6 +5,11 @@ on:
     # Top of every hour (UTC). Scheduled workflows can be delayed on busy runners.
     - cron: "0 * * * *"
   workflow_dispatch:
+    inputs:
+      send_test_chat_alert:
+        description: Post a fake Salesforce test alert to Slack (needs webhook secrets)
+        type: boolean
+        default: false
 
 # Poll commits with GITHUB_TOKEN do not trigger other workflows (e.g. Pages deploy).
 permissions:
@@ -41,6 +46,19 @@ jobs:
           CHAT_WEBHOOK_PLATFORM: ${{ secrets.CHAT_WEBHOOK_PLATFORM }}
           CHAT_WEBHOOK_PAYMENTS: ${{ secrets.CHAT_WEBHOOK_PAYMENTS }}
         run: node scripts/poll.mjs
+
+      - name: Send test Slack alert
+        if: >-
+          github.event_name == 'workflow_dispatch' &&
+          inputs.send_test_chat_alert == true
+        env:
+          ALERTS_ENABLED: "true"
+          ALERTS_DRY_RUN: "false"
+          CHAT_WEBHOOK_SALESFORCE: ${{ secrets.CHAT_WEBHOOK_SALESFORCE }}
+          CHAT_WEBHOOK_GCP: ${{ secrets.CHAT_WEBHOOK_GCP }}
+          CHAT_WEBHOOK_PLATFORM: ${{ secrets.CHAT_WEBHOOK_PLATFORM }}
+          CHAT_WEBHOOK_PAYMENTS: ${{ secrets.CHAT_WEBHOOK_PAYMENTS }}
+        run: node scripts/notify.mjs
 
       - name: Commit status data
         if: steps.fetch.outputs.changed == 'true'
