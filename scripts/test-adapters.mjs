@@ -10,7 +10,10 @@ import {
 import { parseSalesforceStatus } from "./adapters/salesforce.mjs";
 import { parseStatuspageSummary } from "./adapters/statuspage.mjs";
 import { formatMaintenanceStartsAtLabel } from "./lib/maintenance-label.mjs";
-import { parseMaintenanceStartFromUpdateBody } from "./lib/statuspage-maintenance.mjs";
+import {
+  classifyStatuspageMaintenance,
+  parseMaintenanceStartFromUpdateBody,
+} from "./lib/statuspage-maintenance.mjs";
 
 const statuspageOperational = {
   status: { indicator: "none", description: "All Systems Operational" },
@@ -41,25 +44,29 @@ const statuspageFutureMaintenance = {
     },
   ],
 };
-const vtexLike = parseStatuspageSummary({
-  status: { indicator: "none", description: "All Systems Operational" },
-  incidents: [],
-  scheduled_maintenances: [
-    {
-      name: "Pricing database maintenance",
-      status: "scheduled",
-      impact: "maintenance",
-      scheduled_for: null,
-      scheduled_until: null,
-      incident_updates: [
-        {
-          body:
-            "**Scheduled for Oct 27, 2026 at 01:00 UTC - 04:00 UTC**\n\nPlatform work.",
-        },
-      ],
-    },
-  ],
-});
+const beforeVtexMaint = Date.parse("2026-10-20T12:00:00Z");
+const vtexLike = parseStatuspageSummary(
+  {
+    status: { indicator: "none", description: "All Systems Operational" },
+    incidents: [],
+    scheduled_maintenances: [
+      {
+        name: "Pricing database maintenance",
+        status: "scheduled",
+        impact: "maintenance",
+        scheduled_for: null,
+        scheduled_until: null,
+        incident_updates: [
+          {
+            body:
+              "**Scheduled for Oct 27, 2026 at 01:00 UTC - 04:00 UTC**\n\nPlatform work.",
+          },
+        ],
+      },
+    ],
+  },
+  beforeVtexMaint
+);
 assert.equal(vtexLike.state, "future-maintenance");
 assert.ok(vtexLike.maintenanceStartsAt?.startsWith("2026-10-27"));
 
@@ -79,6 +86,22 @@ assert.match(
   formatMaintenanceStartsAtLabel("2026-10-27T01:00:00.000Z") ?? "",
   /27 Oct 2026.*01:00 UTC/
 );
+
+const vtexPastWindow = classifyStatuspageMaintenance(
+  {
+    name: "Pricing database maintenance",
+    status: "scheduled",
+    scheduled_for: null,
+    scheduled_until: null,
+    incident_updates: [
+      {
+        body: "**Scheduled for Oct 27, 2026 at 01:00 UTC - 04:00 UTC**\n\nWork.",
+      },
+    ],
+  },
+  Date.parse("2026-11-11T12:00:00Z")
+);
+assert.equal(vtexPastWindow, null, "past maintenance window should be ignored");
 
 const gcloudClear = [{ end: "2026-01-01T00:00:00+00:00", updates: [] }];
 assert.equal(parseGcloudIncidents(gcloudClear).state, "operational");

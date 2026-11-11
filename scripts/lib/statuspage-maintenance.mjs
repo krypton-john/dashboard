@@ -6,17 +6,81 @@
  * @param {number} [nowMs]
  * @returns {ToolState | null} null if completed / irrelevant
  */
+/**
+ * @param {string} body
+ * @returns {{ start: number; end: number } | null}
+ */
+export function parseMaintenanceWindowFromUpdateBody(body) {
+  if (typeof body !== "string" || !body.trim()) return null;
+
+  const text = body.replace(/\*\*/g, "").replace(/\s+/g, " ").trim();
+
+  const rangeUtc = text.match(
+    /scheduled for\s+(.+?)\s+at\s+(\d{1,2}:\d{2})\s*UTC\s*-\s*(\d{1,2}:\d{2})\s*UTC/i
+  );
+  if (rangeUtc) {
+    const start = Date.parse(`${rangeUtc[1]} ${rangeUtc[2]} UTC`);
+    const end = Date.parse(`${rangeUtc[1]} ${rangeUtc[3]} UTC`);
+    if (!Number.isNaN(start) && !Number.isNaN(end)) {
+      return { start, end };
+    }
+  }
+
+  const startOnly = parseMaintenanceStartFromUpdateBody(body);
+  if (startOnly) {
+    const start = Date.parse(startOnly);
+    if (!Number.isNaN(start)) return { start, end: start + 4 * 60 * 60 * 1000 };
+  }
+
+  return null;
+}
+
+/**
+ * @param {object} maintenance
+ * @returns {{ start: number; end: number | null } | null}
+ */
+export function maintenanceTimeWindow(maintenance) {
+  const start = Date.parse(maintenance?.scheduled_for);
+  const end = Date.parse(maintenance?.scheduled_until);
+  if (!Number.isNaN(start)) {
+    return {
+      start,
+      end: Number.isNaN(end) ? null : end,
+    };
+  }
+
+  if (!Array.isArray(maintenance?.incident_updates)) return null;
+
+  let best = null;
+  for (const update of maintenance.incident_updates) {
+    const window = parseMaintenanceWindowFromUpdateBody(update?.body ?? "");
+    if (!window) continue;
+    if (!best || window.start > best.start) best = window;
+  }
+
+  return best;
+}
+
 export function classifyStatuspageMaintenance(maintenance, nowMs = Date.now()) {
   if (!maintenance || maintenance.status === "completed") return null;
+
+  if (maintenance.status === "in_progress") {
+    return "degraded";
+  }
+
+  const window = maintenanceTimeWindow(maintenance);
+  if (window) {
+    const end = window.end;
+    if (end != null && nowMs > end) return null;
+    if (nowMs < window.start) return "future-maintenance";
+    if (end == null || nowMs <= end) return "degraded";
+    return null;
+  }
 
   const start = Date.parse(maintenance.scheduled_for);
   const end = Date.parse(maintenance.scheduled_until);
   const hasStart = !Number.isNaN(start);
   const hasEnd = !Number.isNaN(end);
-
-  if (maintenance.status === "in_progress") {
-    return "degraded";
-  }
 
   if (hasStart && hasEnd && nowMs >= start && nowMs <= end) {
     return "degraded";
@@ -26,12 +90,12 @@ export function classifyStatuspageMaintenance(maintenance, nowMs = Date.now()) {
     return "future-maintenance";
   }
 
-  if (maintenance.status === "scheduled" || maintenance.status === "verifying") {
-    return "future-maintenance";
-  }
-
   if (hasEnd && nowMs > end) {
     return null;
+  }
+
+  if (maintenance.status === "scheduled" || maintenance.status === "verifying") {
+    return "future-maintenance";
   }
 
   return "degraded";
@@ -104,9 +168,20 @@ export function summarizeStatuspageMaintenances(
       description = m.name;
     }
     if (state === "future-maintenance") {
-      const start = parseStatuspageMaintenanceStart(m);
-      if (start && (!maintenanceStartsAt || start < maintenanceStartsAt)) {
-        maintenanceStartsAt = start;
+      const window = maintenanceTimeWindow(m);
+      const start =
+        window != null
+          ? new Date(window.start).toISOString()
+          : parseStatuspageMaintenanceStart(m);
+      if (start) {
+        const startMs = Date.parse(start);
+        if (
+          !Number.isNaN(startMs) &&
+          startMs > nowMs &&
+          (!maintenanceStartsAt || start < maintenanceStartsAt)
+        ) {
+          maintenanceStartsAt = start;
+        }
       }
     }
   }
