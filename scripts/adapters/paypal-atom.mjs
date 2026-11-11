@@ -2,6 +2,7 @@
 
 const FEED_LOOKBACK_MS = 7 * 24 * 60 * 60 * 1000;
 const RESOLVED_RE = /^resolved:/i;
+const COMPLETED_RE = /^completed:/i;
 const PLANNED_RE =
   /maintenance|rescheduled|scheduled|routine maintenance|live site maintenance|impact window|planned/i;
 const INCIDENT_TITLE_RE = /initial notification|update:/i;
@@ -104,14 +105,116 @@ function parseMonthDayFragment(fragment, referenceYear) {
 }
 
 /**
+ * @param {number} hour12
+ * @param {string} ampm
+ */
+function hour12To24(hour12, ampm) {
+  let hour = Number(hour12);
+  if (ampm.toLowerCase() === "pm" && hour < 12) hour += 12;
+  if (ampm.toLowerCase() === "am" && hour === 12) hour = 0;
+  return hour;
+}
+
+/**
+ * Prefer the last Impact Window block when feed entries include history.
+ * @param {string} text
+ */
+function impactWindowText(text) {
+  const segments = text.split(/impact window:/i);
+  if (segments.length > 1) {
+    return segments[segments.length - 1].trim().slice(0, 240);
+  }
+  return text;
+}
+
+/**
+ * @param {string} fragment
+ * @param {number} referenceYear
+ * @returns {{ start: number; end: number } | null}
+ */
+function parseTimedGmtWindow(fragment, referenceYear) {
+  const dayFirst = new RegExp(
+    `(?:\\w+day\\s+)?(\\d{1,2})(?:st|nd|rd|th)?\\s+(${MONTHS})(?:\\s+(\\d{4}))?\\s+at\\s+(\\d{1,2}):(\\d{2})\\s*(am|pm)\\s+to\\s+(\\d{1,2}):(\\d{2})\\s*(am|pm)\\s+GMT`,
+    "i"
+  );
+  let m = dayFirst.exec(fragment);
+  if (m) {
+    const year = m[3] ? Number(m[3]) : referenceYear;
+    return gmtWindowFromParts(
+      year,
+      m[2],
+      Number(m[1]),
+      m[4],
+      m[5],
+      m[6],
+      m[7],
+      m[8],
+      m[9]
+    );
+  }
+
+  const monthFirst = new RegExp(
+    `(?:\\w+day\\s+)?(${MONTHS})\\s+(\\d{1,2})(?:st|nd|rd|th)?(?:\\s+(\\d{4}))?\\s+at\\s+(\\d{1,2}):(\\d{2})\\s*(am|pm)\\s+to\\s+(\\d{1,2}):(\\d{2})\\s*(am|pm)\\s+GMT`,
+    "i"
+  );
+  m = monthFirst.exec(fragment);
+  if (m) {
+    const year = m[3] ? Number(m[3]) : referenceYear;
+    return gmtWindowFromParts(
+      year,
+      m[1],
+      Number(m[2]),
+      m[4],
+      m[5],
+      m[6],
+      m[7],
+      m[8],
+      m[9]
+    );
+  }
+
+  return null;
+}
+
+/**
+ * @param {string} sh
+ * @param {string} sm
+ * @param {string} sampm
+ * @param {string} eh
+ * @param {string} em
+ * @param {string} eampm
+ */
+function gmtWindowFromParts(year, month, day, sh, sm, sampm, eh, em, eampm) {
+  const startHour = hour12To24(sh, sampm);
+  const endHour = hour12To24(eh, eampm);
+  const start = Date.UTC(year, monthIndex(month), day, startHour, Number(sm));
+  const end = Date.UTC(year, monthIndex(month), day, endHour, Number(em));
+  if (Number.isNaN(start) || Number.isNaN(end) || end < start) return null;
+  return { start, end };
+}
+
+/**
+ * @param {string} monthName
+ */
+function monthIndex(monthName) {
+  const names = MONTHS.split("|").map((m) => m.toLowerCase());
+  const idx = names.indexOf(monthName.toLowerCase());
+  return idx >= 0 ? idx : 0;
+}
+
+/**
  * @param {string} text
  * @param {string} updatedIso
  * @returns {{ start: number; end: number } | null}
  */
 export function parseImpactWindow(text, updatedIso) {
   const referenceYear = new Date(updatedIso).getUTCFullYear();
+  const focus = impactWindowText(text);
 
-  const isoMatches = [...text.matchAll(/\d{4}-\d{2}-\d{2}T[\d:.+-]+Z?/gi)].map(
+  const timed = parseTimedGmtWindow(focus, referenceYear);
+  if (timed) return timed;
+
+  const isoMatches = [...focus.matchAll(/\d{4}-\d{2}-\d{2}T[\d:.+-]+Z?/gi)].map(
     (m) => Date.parse(m[0])
   ).filter((ms) => !Number.isNaN(ms));
 
@@ -126,7 +229,7 @@ export function parseImpactWindow(text, updatedIso) {
     "gi"
   );
   let match;
-  while ((match = dayMonthGlobal.exec(text)) !== null) {
+  while ((match = dayMonthGlobal.exec(focus)) !== null) {
     const parsed = parseMonthDayFragment(match[0], referenceYear);
     if (parsed != null) dates.push(parsed);
   }
@@ -216,6 +319,8 @@ export function parsePaypalAtomFeed(entries, nowMs = Date.now()) {
     if (Number.isNaN(updatedMs)) continue;
 
     const title = entry.title.replace(/\s+/g, " ").trim();
+    if (COMPLETED_RE.test(title) || RESOLVED_RE.test(title)) continue;
+
     const planned = isPlannedMaintenance(entry.title, entry.content);
     const stale = nowMs - updatedMs > FEED_LOOKBACK_MS;
     const inPlannedWindow = planned && isPlannedEntryActiveNow(entry, nowMs);
@@ -227,14 +332,14 @@ export function parsePaypalAtomFeed(entries, nowMs = Date.now()) {
       } else {
         const text = stripHtml(entry.content);
         const window = parseImpactWindow(`${title} ${text}`, entry.updated);
-        const maintenanceStartsAt = window
-          ? new Date(window.start).toISOString()
-          : null;
+        if (!window || nowMs > window.end || nowMs >= window.start) {
+          continue;
+        }
+        const maintenanceStartsAt = new Date(window.start).toISOString();
         if (
           !futureMaintenance ||
-          (maintenanceStartsAt &&
-            (!futureMaintenance.maintenanceStartsAt ||
-              maintenanceStartsAt < futureMaintenance.maintenanceStartsAt))
+          !futureMaintenance.maintenanceStartsAt ||
+          maintenanceStartsAt < futureMaintenance.maintenanceStartsAt
         ) {
           futureMaintenance = { title, maintenanceStartsAt };
         }

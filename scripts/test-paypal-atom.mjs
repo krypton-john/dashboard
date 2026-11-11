@@ -66,4 +66,27 @@ assert.equal(
   "single maintenance day without a window should not alert"
 );
 
+const rescheduledPast = `<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<title type="html"><![CDATA[Rescheduled: PayPal Live Site Maintenance (PP-LIVE-109965)]]></title>
+<updated>2026-10-08T01:34:00Z</updated>
+<content type="html"><![CDATA[<p>rescheduled for October 13th.</p><p><strong>Impact Window:</strong> Thursday October 13th at 8:00 am to 8:30 am GMT.</p>]]></content>
+</entry>
+</feed>`;
+assert.equal(
+  parsePaypalAtomFeed(
+    parseAtomEntries(rescheduledPast),
+    Date.parse("2026-11-11T12:00:00Z")
+  ).state,
+  "operational",
+  "past impact windows must not show future maintenance"
+);
+
+const timed = parseImpactWindow(
+  "Impact Window: Thursday October 13th at 8:00 am to 8:30 am GMT.",
+  "2026-10-08T01:34:00Z"
+);
+assert.ok(timed);
+assert.equal(timed.end - timed.start, 30 * 60 * 1000);
+
 console.log("paypal-atom tests passed");
