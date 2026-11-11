@@ -64,7 +64,15 @@
       "name": "GCP",
       "adapter": "gcloud",
       "url": "https://status.cloud.google.com/incidents.json",
-      "enabled": true
+      "enabled": true,
+      "alerting": {
+        "scope": {
+          "products": ["Cloud Run", "Cloud Storage", "BigQuery"],
+          "regions": ["europe-west1", "europe-west2", "europe-west4"],
+          "behavior": "ignore_unscoped"
+        }
+      },
+      "notes": "Optional alerting.scope filters open incidents to products/regions in use."
     },
     {
       "id": "paypal",

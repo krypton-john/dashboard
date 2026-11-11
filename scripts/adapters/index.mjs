@@ -13,7 +13,8 @@ import { fetchStatuspage } from "./statuspage.mjs";
  * @property {string} [url]
  * @property {boolean} enabled
  * @property {string} [customAdapter]
- * @property {{ maxLatencyMs?: number; acceptableStatuses?: number[] }} [options]
+ * @property {{ maxLatencyMs?: number; acceptableStatuses?: number[]; productIds?: string[] }} [options]
+ * @property {{ scope?: import('../lib/gcloud-scope.mjs').GcloudScope }} [alerting]
  */
 
 /**
@@ -25,6 +26,8 @@ import { fetchStatuspage } from "./statuspage.mjs";
  * @property {string} polledAt
  * @property {string | null} error
  * @property {string | null} [maintenanceStartsAt]
+ * @property {string} [adapter]
+ * @property {object | null} [scopeMatch]
  */
 
 const POLL_TIMEOUT_MS = 25_000;
@@ -38,8 +41,10 @@ export async function pollTool(tool) {
   const base = {
     id: tool.id,
     name: tool.name,
+    adapter: tool.adapter,
     polledAt,
     error: null,
+    scopeMatch: null,
   };
 
   if (!tool.url) {
@@ -61,7 +66,11 @@ export async function pollTool(tool) {
         parsed = await fetchStatuspage(tool.url, controller.signal);
         break;
       case "gcloud":
-        parsed = await fetchGcloud(tool.url, controller.signal);
+        parsed = await fetchGcloud(
+          tool.url,
+          controller.signal,
+          tool.alerting?.scope
+        );
         break;
       case "http-ping":
         parsed = await fetchHttpPing(tool.url, controller.signal, tool.options);
@@ -83,6 +92,7 @@ export async function pollTool(tool) {
       state: parsed.state,
       description: parsed.description,
       maintenanceStartsAt: parsed.maintenanceStartsAt ?? null,
+      scopeMatch: parsed.scopeMatch ?? null,
     };
   } catch (err) {
     const message =

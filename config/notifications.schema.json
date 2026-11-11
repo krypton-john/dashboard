@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Google Chat notification routing",
+  "type": "object",
+  "required": ["version", "defaults", "tools"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "defaults": { "$ref": "#/$defs/policy" },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["toolId", "googleChatWebhookSecret"],
+        "additionalProperties": false,
+        "properties": {
+          "toolId": { "type": "string" },
+          "googleChatWebhookSecret": {
+            "type": "string",
+            "description": "GitHub Actions secret name holding the Chat incoming webhook URL"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "incident_open",
+                "severity_escalation",
+                "incident_resolved",
+                "future_maintenance",
+                "state_change",
+                "poll_unknown",
+                "http_ping_fail"
+              ]
+            }
+          },
+          "minSeverity": {
+            "type": "string",
+            "enum": ["degraded", "major"]
+          },
+          "cooldownMinutes": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "minSeverity": {
+          "type": "string",
+          "enum": ["degraded", "major"]
+        },
+        "cooldownMinutes": { "type": "integer", "minimum": 0 },
+        "dashboardUrl": { "type": "string", "format": "uri" }
+      }
+    }
+  }
+}

@@ -158,3 +158,46 @@ Old incidents for that `toolId` stay in `data/incidents.json`; they do not affec
 | GitHub Actions | Poll + Pages on `main` | Poll + Pages on `main` |
 
 For architecture and adapters overview, see [README.md](./README.md) and [Plan.md](./Plan.md).
+
+---
+
+## Google Chat notifications
+
+### 1. Configure routing
+
+Edit `config/notifications.json`:
+
+- Each `toolId` maps to a **secret name** (not the webhook URL), e.g. `CHAT_WEBHOOK_SALESFORCE`.
+- `events` controls when Chat messages fire (`incident_open`, `severity_escalation`, `incident_resolved`, `future_maintenance`, etc.).
+- `defaults.cooldownMinutes` reduces duplicate posts for the same incident fingerprint.
+
+### 2. Add GitHub secrets
+
+For each `googleChatWebhookSecret` value, create a matching **Actions secret** containing the full incoming webhook URL from Google Chat.
+
+Optional repository **variables**:
+
+| Variable | Purpose |
+|----------|---------|
+| `ALERTS_ENABLED` | Set to `true` to send Chat messages from Poll status |
+| `ALERTS_DRY_RUN` | Set to `true` to print messages in the workflow log only |
+
+### 3. Investigators
+
+`config/investigators.json` lists investigator ids per tool (default `stub`). Replace with real investigators as you add them under `scripts/agent/investigators/`.
+
+### 4. GCP product / region focus
+
+On the GCP tool in `config/tools.json`, set `alerting.scope.products` and `alerting.scope.regions` to match what EMEA actually uses. Unscoped vendor incidents are ignored when `behavior` is `ignore_unscoped` (default).
+
+### 5. Test
+
+```bash
+node scripts/test-alert-events.mjs
+ALERTS_DRY_RUN=true node scripts/notify.mjs
+node scripts/poll.mjs   # logs “Alerts: …” when events occur
+```
+
+### 6. Google Chat MCP (Cursor)
+
+For interactive drills, compose a message with `scripts/agent/compose-message.mjs` logic (or run the notify pipeline with `ALERTS_DRY_RUN`) and post via your **Google Chat MCP** integration to the target space. Scheduled polling continues to use webhooks in CI.

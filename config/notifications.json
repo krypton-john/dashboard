@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "defaults": {
+    "events": [
+      "incident_open",
+      "severity_escalation",
+      "incident_resolved"
+    ],
+    "minSeverity": "degraded",
+    "cooldownMinutes": 60,
+    "dashboardUrl": "https://krypton-john.github.io/dashboard/"
+  },
+  "tools": [
+    {
+      "toolId": "salesforce",
+      "googleChatWebhookSecret": "CHAT_WEBHOOK_SALESFORCE",
+      "events": [
+        "incident_open",
+        "severity_escalation",
+        "incident_resolved",
+        "future_maintenance"
+      ]
+    },
+    {
+      "toolId": "google-cloud",
+      "googleChatWebhookSecret": "CHAT_WEBHOOK_GCP",
+      "events": ["incident_open", "severity_escalation", "incident_resolved"]
+    },
+    {
+      "toolId": "shopify",
+      "googleChatWebhookSecret": "CHAT_WEBHOOK_PLATFORM",
+      "cooldownMinutes": 120
+    },
+    {
+      "toolId": "vtex",
+      "googleChatWebhookSecret": "CHAT_WEBHOOK_PLATFORM"
+    },
+    {
+      "toolId": "paypal",
+      "googleChatWebhookSecret": "CHAT_WEBHOOK_PAYMENTS"
+    }
+  ]
+}

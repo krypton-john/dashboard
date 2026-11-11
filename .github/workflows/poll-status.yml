@@ -33,6 +33,13 @@ jobs:
 
       - name: Fetch vendor status
         id: fetch
+        env:
+          ALERTS_ENABLED: ${{ vars.ALERTS_ENABLED }}
+          ALERTS_DRY_RUN: ${{ vars.ALERTS_DRY_RUN }}
+          CHAT_WEBHOOK_SALESFORCE: ${{ secrets.CHAT_WEBHOOK_SALESFORCE }}
+          CHAT_WEBHOOK_GCP: ${{ secrets.CHAT_WEBHOOK_GCP }}
+          CHAT_WEBHOOK_PLATFORM: ${{ secrets.CHAT_WEBHOOK_PLATFORM }}
+          CHAT_WEBHOOK_PAYMENTS: ${{ secrets.CHAT_WEBHOOK_PAYMENTS }}
         run: node scripts/poll.mjs
 
       - name: Commit status data
@@ -40,7 +47,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/status.json data/incidents.json
+          git add data/status.json data/incidents.json data/alerts.json
           git commit -m "chore: update status and incident data"
           git push
 

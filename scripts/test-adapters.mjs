@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { parseAdobeAemStatus } from "./adapters/adobe-aem.mjs";
 import { parseBetterstackIndex } from "./adapters/betterstack.mjs";
 import { parseGcloudIncidents } from "./adapters/gcloud.mjs";
+import { filterGcloudIncidentsByScope } from "./lib/gcloud-scope.mjs";
 import { parseZendeskStatus } from "./adapters/zendesk.mjs";
 import {
   parseAtomEntries,
@@ -105,6 +106,14 @@ assert.equal(vtexPastWindow, null, "past maintenance window should be ignored");
 
 const gcloudClear = [{ end: "2026-01-01T00:00:00+00:00", updates: [] }];
 assert.equal(parseGcloudIncidents(gcloudClear).state, "operational");
+
+assert.equal(
+  filterGcloudIncidentsByScope(
+    [{ external_desc: "europe-west2 Cloud Run", updates: [] }],
+    { products: ["Cloud Run"], regions: ["europe-west2"] }
+  ).incidents.length,
+  1
+);
 
 const gcloudOutage = [
   {

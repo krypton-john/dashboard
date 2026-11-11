@@ -81,6 +81,30 @@
               "description": "adobe-aem: Snow product IDs to monitor (default AEM + AEMaaCS)"
             }
           }
+        },
+        "alerting": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "scope": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "products": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "regions": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "behavior": {
+                  "type": "string",
+                  "enum": ["ignore_unscoped", "alert_unscoped_minor"]
+                }
+              }
+            }
+          }
         }
       },
       "allOf": [
