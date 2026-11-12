@@ -3,52 +3,52 @@
   "incidents": [],
   "tools": {
     "shopify": {
-      "trackingSince": "2026-11-11T23:23:25.449Z",
+      "trackingSince": "2026-11-12T06:01:38.407Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "vtex": {
-      "trackingSince": "2026-11-11T23:23:25.449Z",
+      "trackingSince": "2026-11-12T06:01:38.407Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "salesforce": {
-      "trackingSince": "2026-11-11T23:23:25.449Z",
+      "trackingSince": "2026-11-12T06:01:38.407Z",
       "nonGreenPolls": 1,
-      "pendingStart": "2026-11-11T23:23:25.449Z"
+      "pendingStart": "2026-11-12T06:01:38.407Z"
     },
     "adobe-experience-manager": {
-      "trackingSince": "2026-11-11T23:23:25.449Z",
+      "trackingSince": "2026-11-12T06:01:38.407Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "zendesk": {
-      "trackingSince": "2026-11-11T23:23:25.449Z",
+      "trackingSince": "2026-11-12T06:01:38.407Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "snowflake": {
-      "trackingSince": "2026-11-11T23:23:25.449Z",
+      "trackingSince": "2026-11-12T06:01:38.407Z",
       "nonGreenPolls": 1,
-      "pendingStart": "2026-11-11T23:23:25.449Z"
+      "pendingStart": "2026-11-12T06:01:38.407Z"
     },
     "github": {
-      "trackingSince": "2026-11-11T23:23:25.449Z",
+      "trackingSince": "2026-11-12T06:01:38.407Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "google-cloud": {
-      "trackingSince": "2026-11-11T23:23:25.449Z",
+      "trackingSince": "2026-11-12T06:01:38.407Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "paypal": {
-      "trackingSince": "2026-11-11T23:23:25.449Z",
+      "trackingSince": "2026-11-12T06:01:38.407Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "true-loyal": {
-      "trackingSince": "2026-11-11T23:23:25.449Z",
+      "trackingSince": "2026-11-12T06:01:38.407Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     }
