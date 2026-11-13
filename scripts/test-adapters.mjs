@@ -9,7 +9,10 @@ import {
   parsePaypalAtomFeed,
 } from "./adapters/paypal-atom.mjs";
 import { parseSalesforceStatus } from "./adapters/salesforce.mjs";
+import { parsePingdomPublicChecks } from "./adapters/pingdom-public.mjs";
+import { parseStatusHub } from "./adapters/statushub.mjs";
 import { parseStatuspageSummary } from "./adapters/statuspage.mjs";
+import { parseTikTokApiStatus } from "./adapters/tiktok-api.mjs";
 import { formatMaintenanceStartsAtLabel } from "./lib/maintenance-label.mjs";
 import {
   classifyStatuspageMaintenance,
@@ -195,6 +198,40 @@ assert.equal(
   parseBetterstackIndex({
     data: { attributes: { aggregate_state: "operational" } },
     included: [],
+  }).state,
+  "operational"
+);
+
+assert.equal(
+  parseStatusHub(
+    { groups: [{ group_name: "EU", services: [{ service_name: "API", status: 1 }] }] },
+    []
+  ).state,
+  "operational"
+);
+
+assert.equal(
+  parsePingdomPublicChecks({
+    aaData: [
+      ['<span class="status up"></span>', '<a>API</a>'],
+      ['<span class="status down"></span>', '<a>Legacy</a>'],
+    ],
+  }).state,
+  "major"
+);
+
+assert.equal(
+  parseTikTokApiStatus({
+    code: 0,
+    data: {
+      api_module_list: [
+        {
+          api_module_name: "Marketing",
+          api_level: "NO_KNOWN_ISSUE",
+          sub_modules: [],
+        },
+      ],
+    },
   }).state,
   "operational"
 );

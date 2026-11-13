@@ -14,6 +14,11 @@ const CARD_ORDER = [
   "google-cloud",
   "paypal",
   "true-loyal",
+  "stibo",
+  "tiktok-business-api",
+  "bazaarvoice",
+  "powerreviews",
+  "ariba",
 ];
 
 function sortToolsForDisplay(tools) {

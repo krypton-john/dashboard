@@ -1,7 +1,11 @@
 import { fetchAdobeAem } from "./adobe-aem.mjs";
+import { fetchAribaPortal } from "./ariba-portal.mjs";
 import { fetchBetterstack } from "./betterstack.mjs";
 import { fetchPaypalAtom } from "./paypal-atom.mjs";
+import { fetchPingdomPublic } from "./pingdom-public.mjs";
 import { fetchSalesforce } from "./salesforce.mjs";
+import { fetchStatusHub } from "./statushub.mjs";
+import { fetchTikTokApi } from "./tiktok-api.mjs";
 import { fetchZendesk } from "./zendesk.mjs";
 
 /**
@@ -23,6 +27,18 @@ export async function fetchCustom(tool, signal) {
       return fetchBetterstack(tool.url, signal);
     case "adobe-aem":
       return fetchAdobeAem(tool.url, signal, tool.options);
+    case "statushub":
+    case "stibo":
+      return fetchStatusHub(tool.url, signal);
+    case "pingdom-public":
+    case "powerreviews":
+      return fetchPingdomPublic(tool.url, signal);
+    case "tiktok-api":
+    case "tiktok":
+      return fetchTikTokApi(tool.url, signal, tool.options);
+    case "ariba-portal":
+    case "ariba":
+      return fetchAribaPortal(tool.url, signal);
     default:
       throw new Error(`Unknown custom adapter "${kind}"`);
   }
