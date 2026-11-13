@@ -136,6 +136,31 @@
       "notes": "Guided Buying portal reachability (login redirects treated as up)."
     },
     {
+      "id": "mediafly",
+      "name": "Mediafly",
+      "adapter": "statuspage",
+      "url": "https://mediafly.statuspage.io/api/v2/summary.json",
+      "enabled": true
+    },
+    {
+      "id": "domo",
+      "name": "Domo",
+      "adapter": "custom",
+      "customAdapter": "domo-status",
+      "url": "https://status.domo.com/",
+      "enabled": true,
+      "notes": "Domo service health JSON at /status."
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "adapter": "custom",
+      "customAdapter": "stripe-status",
+      "url": "https://status.stripe.com/",
+      "enabled": true,
+      "notes": "Stripe legacy status JSON at /current."
+    },
+    {
       "id": "hawthorne-mckenzie",
       "name": "Hawthorne McKenzie Digital",
       "adapter": "http-ping",

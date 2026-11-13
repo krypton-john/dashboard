@@ -61,7 +61,9 @@
             "statushub",
             "pingdom-public",
             "tiktok-api",
-            "ariba-portal"
+            "ariba-portal",
+            "domo-status",
+            "stripe-status"
           ],
           "description": "Required for adapter custom; selects implementation"
         },

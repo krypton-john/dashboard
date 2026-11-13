@@ -19,6 +19,9 @@ const CARD_ORDER = [
   "bazaarvoice",
   "powerreviews",
   "ariba",
+  "mediafly",
+  "domo",
+  "stripe",
 ];
 
 function sortToolsForDisplay(tools) {
