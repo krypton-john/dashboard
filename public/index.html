@@ -5,14 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SaaS Status Dashboard</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="css/main.css?v=5" />
+    <link rel="stylesheet" href="css/main.css?v=6" />
   </head>
   <body>
     <main class="page">
       <div class="page-header-sticky" id="page-header-sticky">
         <header class="header">
           <p class="eyebrow">EMEA</p>
-          <h1>SaaS Status Dashboard</h1>
+          <div class="header__top">
+            <h1>SaaS Status Dashboard</h1>
+            <div class="tool-search" role="search">
+              <label class="sr-only" for="tool-search-input">Find a vendor</label>
+              <input
+                id="tool-search-input"
+                class="tool-search__input"
+                type="search"
+                name="q"
+                maxlength="25"
+                placeholder="Find…"
+                autocomplete="off"
+                spellcheck="false"
+                aria-controls="tool-search-results"
+                aria-expanded="false"
+                aria-autocomplete="list"
+                title="Fuzzy search — up to 25 characters"
+              />
+              <ul
+                id="tool-search-results"
+                class="tool-search__results tool-search__results--hidden"
+                role="listbox"
+                aria-label="Matching vendors"
+              ></ul>
+            </div>
+          </div>
           <p class="lede">Vendor health and days since the last confirmed incident.</p>
         </header>
 
@@ -25,30 +50,6 @@
         <div id="banner" class="banner banner--hidden" role="status" aria-live="polite"></div>
 
         <p id="last-updated" class="last-updated">Loading…</p>
-
-        <div class="tool-search" role="search">
-          <label class="tool-search__label" for="tool-search-input">Find a vendor</label>
-          <div class="tool-search__row">
-            <input
-              id="tool-search-input"
-              class="tool-search__input"
-              type="search"
-              name="q"
-              placeholder="Type to search (fuzzy)…"
-              autocomplete="off"
-              spellcheck="false"
-              aria-controls="tool-search-results"
-              aria-expanded="false"
-              aria-autocomplete="list"
-            />
-          </div>
-          <ul
-            id="tool-search-results"
-            class="tool-search__results tool-search__results--hidden"
-            role="listbox"
-            aria-label="Matching vendors"
-          ></ul>
-        </div>
       </div>
 
       <section class="grid" id="tool-grid" aria-label="Tools"></section>
@@ -57,6 +58,6 @@
         <p>Data refreshes automatically. Polled every 6 hours via GitHub Actions.</p>
       </footer>
     </main>
-    <script src="js/dashboard.js?v=5" type="module"></script>
+    <script src="js/dashboard.js?v=6" type="module"></script>
   </body>
 </html>
