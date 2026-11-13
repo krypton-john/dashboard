@@ -286,6 +286,14 @@ assert.equal(
 );
 
 assert.equal(
+  parseDomoStatus({
+    overall: { active: [] },
+    incidents: [{ title: "Old issue", resolved: true }],
+  }).state,
+  "operational"
+);
+
+assert.equal(
   parseStripeCurrent({ largestatus: "up", message: "All services are online." }).state,
   "operational"
 );

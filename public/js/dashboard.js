@@ -20,6 +20,7 @@ const CARD_ORDER = [
   "powerreviews",
   "ariba",
   "mediafly",
+  "sigma",
   "domo",
   "stripe",
 ];

@@ -146,12 +146,22 @@
       "enabled": true
     },
     {
+      "id": "sigma",
+      "name": "Sigma",
+      "adapter": "statuspage",
+      "url": "https://status.sigmacomputing.com/api/v2/summary.json",
+      "enabled": true,
+      "statusPageUrl": "https://status.sigmacomputing.com",
+      "notes": "Sigma Computing public Statuspage."
+    },
+    {
       "id": "domo",
       "name": "Domo",
       "adapter": "custom",
       "customAdapter": "domo-status",
       "url": "https://status.domo.com/",
       "enabled": true,
+      "statusPageUrl": "https://status.domo.com/",
       "notes": "Domo service health JSON at /status."
     },
     {
