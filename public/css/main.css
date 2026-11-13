@@ -46,25 +46,50 @@ body {
 }
 
 .page {
-  max-width: 56rem;
+  max-width: min(92rem, 100%);
   margin: 0 auto;
-  padding: 2.5rem 1.25rem 3rem;
+  padding: 1.25rem clamp(1rem, 3vw, 2rem) 2.5rem;
 }
 
 .page-header-sticky {
   position: sticky;
   top: 0;
   z-index: 20;
-  margin: 0 -1.25rem;
-  padding: 0 1.25rem 1rem;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  margin: 0 calc(-1 * clamp(1rem, 3vw, 2rem));
+  padding: 0.35rem clamp(1rem, 3vw, 2rem) 0.5rem;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid color-mix(in srgb, var(--muted) 18%, transparent);
 }
 
-.page-header-sticky .last-updated {
-  margin-bottom: 0;
+.page-intro {
+  margin-top: 0.65rem;
+}
+
+.page-intro .lede {
+  margin-bottom: 0.65rem;
+}
+
+.header--bar .header__top {
+  margin-bottom: 0.2rem;
+}
+
+.eyebrow--compact {
+  margin-bottom: 0.1rem;
+  font-size: 0.65rem;
+}
+
+.header--bar h1 {
+  font-size: clamp(1.15rem, 3.5vw, 1.65rem);
+  letter-spacing: -0.02em;
+}
+
+.last-updated--bar {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--muted);
 }
 
 .sr-only {
@@ -190,8 +215,8 @@ h1 {
 .lede {
   margin: 0;
   color: var(--muted);
-  font-size: 1.05rem;
-  max-width: 36rem;
+  font-size: clamp(0.875rem, 2.5vw, 1.05rem);
+  max-width: 52rem;
 }
 
 .last-updated {
@@ -201,14 +226,45 @@ h1 {
 }
 
 .advisory-banner {
-  margin-top: 1.25rem;
-  padding: 0.85rem 1rem;
   border-radius: 10px;
-  font-size: 0.9rem;
-  line-height: 1.45;
+  font-size: 0.875rem;
+  line-height: 1.4;
   border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
   background: color-mix(in srgb, var(--accent) 10%, var(--surface));
   color: var(--text);
+}
+
+.advisory-banner--details {
+  margin: 0;
+  padding: 0;
+}
+
+.advisory-banner__summary {
+  padding: 0.55rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  color: var(--text);
+}
+
+.advisory-banner__summary::-webkit-details-marker {
+  display: none;
+}
+
+.advisory-banner__summary::before {
+  content: "▸ ";
+  color: var(--accent);
+  font-size: 0.75rem;
+}
+
+.advisory-banner--details[open] .advisory-banner__summary::before {
+  content: "▾ ";
+}
+
+.advisory-banner__body {
+  padding: 0 0.75rem 0.65rem;
+  font-size: 0.85rem;
 }
 
 .advisory-banner strong {
@@ -217,11 +273,12 @@ h1 {
 }
 
 .banner {
-  margin-top: 1.25rem;
-  padding: 0.75rem 1rem;
+  margin-top: 0.65rem;
+  padding: 0.55rem 0.75rem;
   border-radius: 10px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
+  line-height: 1.4;
   border: 1px solid color-mix(in srgb, var(--warn) 45%, transparent);
   background: color-mix(in srgb, var(--warn) 12%, var(--surface));
   color: var(--text);
@@ -243,14 +300,14 @@ h1 {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  gap: 1rem;
-  margin-top: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14.5rem), 1fr));
+  gap: clamp(0.65rem, 2vw, 1rem);
+  margin-top: 0.85rem;
 }
 
 .card {
   position: relative;
-  scroll-margin-top: calc(var(--sticky-offset, 14rem) + 0.5rem);
+  scroll-margin-top: calc(var(--sticky-offset, 6.5rem) + 0.35rem);
   padding: 1.15rem 1.15rem 1.15rem 3rem;
   background: var(--surface);
   border-radius: 12px;
@@ -373,4 +430,51 @@ a.card:focus-visible {
   margin-top: 2.5rem;
   font-size: 0.875rem;
   color: var(--muted);
+}
+
+@media (min-width: 768px) {
+  .page-intro .lede {
+    margin-bottom: 0.85rem;
+  }
+
+  .advisory-banner--details[open] .advisory-banner__summary {
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+
+  .advisory-banner__body {
+    padding: 0.65rem 1rem 0.85rem;
+    font-size: 0.9rem;
+  }
+
+  .banner {
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding-top: 0.75rem;
+  }
+
+  .page-intro {
+    margin-top: 0.45rem;
+  }
+
+  .page-intro .lede {
+    display: none;
+  }
+
+  .eyebrow--compact {
+    display: none;
+  }
+
+  .header__top {
+    gap: 0.5rem;
+  }
+
+  .grid {
+    margin-top: 0.65rem;
+  }
 }

@@ -419,7 +419,19 @@ async function load() {
   }
 }
 
+function initAdvisoryDetails() {
+  const details = document.getElementById("advisory-details");
+  if (!details) return;
+  const mq = window.matchMedia("(min-width: 768px)");
+  const sync = () => {
+    details.open = mq.matches;
+  };
+  sync();
+  mq.addEventListener("change", sync);
+}
+
 initToolSearch();
+initAdvisoryDetails();
 window.addEventListener("resize", syncStickyScrollMargin);
 load();
 setInterval(load, REFRESH_MS);

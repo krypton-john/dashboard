@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SaaS Status Dashboard</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="css/main.css?v=6" />
+    <link rel="stylesheet" href="css/main.css?v=7" />
   </head>
   <body>
     <main class="page">
       <div class="page-header-sticky" id="page-header-sticky">
-        <header class="header">
-          <p class="eyebrow">EMEA</p>
+        <header class="header header--bar">
+          <p class="eyebrow eyebrow--compact">EMEA</p>
           <div class="header__top">
-            <h1>SaaS Status Dashboard</h1>
+            <h1>SaaS Status</h1>
             <div class="tool-search" role="search">
               <label class="sr-only" for="tool-search-input">Find a vendor</label>
               <input
@@ -38,18 +38,25 @@
               ></ul>
             </div>
           </div>
-          <p class="lede">Vendor health and days since the last confirmed incident.</p>
+          <p id="last-updated" class="last-updated last-updated--bar">Loading…</p>
         </header>
+      </div>
 
-        <aside id="advisory-banner" class="advisory-banner" role="note">
-          If any card shows <strong>degraded</strong> or <strong>major</strong>, confirm impact in the
-          applications your team actually uses before treating it as an EMEA incident. Vendor status
-          feeds can include known issues, retired endpoints, or services you do not rely on.
-        </aside>
+      <div class="page-intro" id="page-intro">
+        <p class="lede">Vendor health and days since the last confirmed incident.</p>
+
+        <details class="advisory-banner advisory-banner--details" id="advisory-details">
+          <summary class="advisory-banner__summary">
+            Verify impact in your apps before escalating
+          </summary>
+          <div class="advisory-banner__body" role="note">
+            If any card shows <strong>degraded</strong> or <strong>major</strong>, confirm impact in the
+            applications your team actually uses before treating it as an EMEA incident. Vendor status
+            feeds can include known issues, retired endpoints, or services you do not rely on.
+          </div>
+        </details>
 
         <div id="banner" class="banner banner--hidden" role="status" aria-live="polite"></div>
-
-        <p id="last-updated" class="last-updated">Loading…</p>
       </div>
 
       <section class="grid" id="tool-grid" aria-label="Tools"></section>
@@ -58,6 +65,6 @@
         <p>Data refreshes automatically. Polled every 6 hours via GitHub Actions.</p>
       </footer>
     </main>
-    <script src="js/dashboard.js?v=6" type="module"></script>
+    <script src="js/dashboard.js?v=7" type="module"></script>
   </body>
 </html>
