@@ -57,7 +57,11 @@
             "salesforce",
             "zendesk",
             "betterstack",
-            "adobe-aem"
+            "adobe-aem",
+            "statushub",
+            "pingdom-public",
+            "tiktok-api",
+            "ariba-portal"
           ],
           "description": "Required for adapter custom; selects implementation"
         },
@@ -74,6 +78,11 @@
               "type": "array",
               "items": { "type": "integer", "minimum": 100, "maximum": 599 },
               "description": "http-ping: allowed HTTP status codes (default 2xx–3xx)"
+            },
+            "statusListUrl": {
+              "type": "string",
+              "format": "uri",
+              "description": "tiktok-api: optional override for incident/list API URL"
             },
             "productIds": {
               "type": "array",

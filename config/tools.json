@@ -93,6 +93,49 @@
       "notes": "TrueLoyal public status (Better Stack)."
     },
     {
+      "id": "stibo",
+      "name": "Stibo",
+      "adapter": "custom",
+      "customAdapter": "statushub",
+      "url": "https://statushub.mdm.stibosystems.com/",
+      "enabled": true,
+      "notes": "Stibo StatusHub public API (/api/statuses)."
+    },
+    {
+      "id": "tiktok-business-api",
+      "name": "TikTok",
+      "adapter": "custom",
+      "customAdapter": "tiktok-api",
+      "url": "https://business-api.tiktok.com/portal/api-service-status",
+      "enabled": true,
+      "notes": "TikTok Marketing API status_page incident list (Referer required)."
+    },
+    {
+      "id": "bazaarvoice",
+      "name": "Bazaarvoice",
+      "adapter": "statuspage",
+      "url": "https://status.bazaarvoice.com/api/v2/summary.json",
+      "enabled": true
+    },
+    {
+      "id": "powerreviews",
+      "name": "PowerReviews",
+      "adapter": "custom",
+      "customAdapter": "pingdom-public",
+      "url": "https://status.powerreviews.com/",
+      "enabled": true,
+      "notes": "Pingdom public checks JSON (/checks)."
+    },
+    {
+      "id": "ariba",
+      "name": "Ariba",
+      "adapter": "custom",
+      "customAdapter": "ariba-portal",
+      "url": "https://s1.ariba.com/gb/?realm=colpalc2&locale=en_US",
+      "enabled": true,
+      "notes": "Guided Buying portal reachability (login redirects treated as up)."
+    },
+    {
       "id": "hawthorne-mckenzie",
       "name": "Hawthorne McKenzie Digital",
       "adapter": "http-ping",
