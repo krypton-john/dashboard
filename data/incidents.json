@@ -3,92 +3,92 @@
   "incidents": [],
   "tools": {
     "shopify": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "vtex": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "salesforce": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 1,
-      "pendingStart": "2026-11-13T12:05:05.173Z"
+      "pendingStart": "2026-11-13T12:25:38.417Z"
     },
     "adobe-experience-manager": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "zendesk": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 1,
-      "pendingStart": "2026-11-13T12:05:05.173Z"
+      "pendingStart": "2026-11-13T12:25:38.417Z"
     },
     "snowflake": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "github": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "google-cloud": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "paypal": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "true-loyal": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "stibo": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 1,
-      "pendingStart": "2026-11-13T12:05:05.173Z"
+      "pendingStart": "2026-11-13T12:25:38.417Z"
     },
     "tiktok-business-api": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "bazaarvoice": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "powerreviews": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 1,
-      "pendingStart": "2026-11-13T12:05:05.173Z"
+      "pendingStart": "2026-11-13T12:25:38.417Z"
     },
     "ariba": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "mediafly": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "domo": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "stripe": {
-      "trackingSince": "2026-11-13T12:05:05.173Z",
+      "trackingSince": "2026-11-13T12:25:38.417Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     }
