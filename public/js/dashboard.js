@@ -23,6 +23,8 @@ const CARD_ORDER = [
   "sigma",
   "domo",
   "stripe",
+  "tungsten-europe",
+  "taulia",
 ];
 
 function sortToolsForDisplay(tools) {

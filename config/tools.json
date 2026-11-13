@@ -174,6 +174,24 @@
       "notes": "Stripe legacy status JSON at /current."
     },
     {
+      "id": "tungsten-europe",
+      "name": "Tungsten Europe",
+      "adapter": "statuspage",
+      "url": "https://status.tungstencloud.com/api/v2/summary.json",
+      "enabled": true,
+      "statusPageUrl": "https://status.tungstencloud.com/europe",
+      "notes": "Tungsten Automation Statuspage; dashboard links to the Europe status view."
+    },
+    {
+      "id": "taulia",
+      "name": "Taulia",
+      "adapter": "statuspage",
+      "url": "https://status.taulia.com/api/v2/summary.json",
+      "enabled": true,
+      "statusPageUrl": "https://status.taulia.com",
+      "notes": "Taulia public Statuspage."
+    },
+    {
       "id": "hawthorne-mckenzie",
       "name": "Hawthorne McKenzie Digital",
       "adapter": "http-ping",
