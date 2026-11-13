@@ -138,9 +138,22 @@ function setBanner(message, kind) {
 }
 
 function renderToolCard(tool, incidentsFile) {
-  const article = document.createElement("article");
-  article.className = `card card--${tool.state}`;
-  article.setAttribute("aria-label", `${tool.name} status`);
+  const hasLink =
+    typeof tool.statusPageUrl === "string" && tool.statusPageUrl.startsWith("https://");
+  const shell = document.createElement(hasLink ? "a" : "article");
+  shell.className = `card card--${tool.state}`;
+  if (hasLink) {
+    shell.href = tool.statusPageUrl;
+    shell.target = "_blank";
+    shell.rel = "noopener noreferrer";
+    shell.classList.add("card--link");
+    shell.setAttribute(
+      "aria-label",
+      `${tool.name} — ${STATE_LABEL[tool.state] ?? tool.state}. Open vendor status page in a new tab.`
+    );
+  } else {
+    shell.setAttribute("aria-label", `${tool.name} status`);
+  }
 
   const light = document.createElement("span");
   light.className = "light";
@@ -162,8 +175,16 @@ function renderToolCard(tool, incidentsFile) {
   incident.className = "card-incident";
   incident.textContent = incidentLine(tool, incidentsFile);
 
-  article.append(light, title, status, desc, incident);
-  return article;
+  if (hasLink) {
+    const linkHint = document.createElement("p");
+    linkHint.className = "card-link-hint";
+    linkHint.textContent = "View status page ↗";
+    shell.append(light, title, status, desc, incident, linkHint);
+  } else {
+    shell.append(light, title, status, desc, incident);
+  }
+
+  return shell;
 }
 
 function render(status, incidentsFile) {

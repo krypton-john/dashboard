@@ -48,7 +48,14 @@
           },
           "daysSinceLastIncident": { "type": ["integer", "null"] },
           "incidentOngoing": { "type": "boolean" },
-          "trackingSince": { "type": ["string", "null"], "format": "date-time" }
+          "trackingSince": { "type": ["string", "null"], "format": "date-time" },
+          "adapter": { "type": "string" },
+          "scopeMatch": { "type": ["object", "null"] },
+          "statusPageUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "Vendor status page opened when the card is clicked"
+          }
         }
       }
     }

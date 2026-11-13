@@ -42,6 +42,11 @@
           "format": "uri",
           "description": "Status API URL or site URL (required for most adapters)"
         },
+        "statusPageUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional public status page for dashboard card link (overrides auto-detected URL)"
+        },
         "enabled": {
           "type": "boolean",
           "description": "When false, the poller skips this tool"
