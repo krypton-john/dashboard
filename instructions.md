@@ -72,20 +72,9 @@ Insert a new object in the `tools` array **where you want the card to appear** (
 
 Set `enabled: false` while you are testing, then flip to `true` when ready.
 
-### 3. Update card order in the UI
+### 3. Card order in the UI
 
-Edit `public/js/dashboard.js` and add the same `id` to the `CARD_ORDER` array in the position you want:
-
-```javascript
-const CARD_ORDER = [
-  "shopify",
-  // …
-  "datadog", // new
-  "paypal",
-];
-```
-
-Keep this list aligned with `config/tools.json` so cards always appear in the intended order.
+Cards are sorted **alphabetically by vendor name** in `public/js/dashboard.js` (`sortToolsForDisplay`). No manual ordering step is required when you add a tool.
 
 ### 4. Test locally
 
@@ -134,8 +123,7 @@ The poller skips it; it disappears from the dashboard on the next data update. H
 ### Option B — Remove completely
 
 1. **Delete** the tool object from `config/tools.json` (or remove it from the `tools` array).
-2. **Remove** its `id` from `CARD_ORDER` in `public/js/dashboard.js`.
-3. Commit, push, and run **Poll status** so `data/status.json` no longer lists that tool.
+2. Commit, push, and run **Poll status** so `data/status.json` no longer lists that tool.
 
 Old incidents for that `toolId` stay in `data/incidents.json`; they do not affect other cards. You can leave them for history or edit the file manually if you want a clean slate (not required).
 
@@ -152,7 +140,7 @@ Old incidents for that `toolId` stay in `data/incidents.json`; they do not affec
 | Step | Add | Remove |
 |------|-----|--------|
 | `config/tools.json` | New entry, `enabled: true` | Delete entry or `enabled: false` |
-| `public/js/dashboard.js` `CARD_ORDER` | Add `id` | Remove `id` |
+| `public/js/dashboard.js` | No change (alpha sort) | No change |
 | Custom adapter code | Only if needed | Remove only if deleting bespoke integration |
 | `node scripts/poll.mjs` | Test locally | Test locally |
 | GitHub Actions | Poll + Pages on `main` | Poll + Pages on `main` |

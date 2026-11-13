@@ -51,6 +51,106 @@ body {
   padding: 2.5rem 1.25rem 3rem;
 }
 
+.page-header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin: 0 -1.25rem;
+  padding: 0 1.25rem 1rem;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid color-mix(in srgb, var(--muted) 18%, transparent);
+}
+
+.page-header-sticky .last-updated {
+  margin-bottom: 0.75rem;
+}
+
+.tool-search {
+  margin-top: 0.25rem;
+}
+
+.tool-search__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.tool-search__row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tool-search__input {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--muted) 28%, transparent);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.tool-search__input::placeholder {
+  color: color-mix(in srgb, var(--muted) 85%, transparent);
+}
+
+.tool-search__input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.tool-search__results {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0.35rem;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--muted) 22%, transparent);
+  background: var(--surface);
+  box-shadow: 0 8px 24px color-mix(in srgb, #000 14%, transparent);
+  max-height: 14rem;
+  overflow-y: auto;
+}
+
+.tool-search__results--hidden {
+  display: none;
+}
+
+.tool-search__result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.45rem 0.55rem;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.tool-search__result:hover,
+.tool-search__result--active {
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+}
+
+.tool-search__result-state {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
 .eyebrow {
   margin: 0 0 0.25rem;
   font-size: 0.75rem;
@@ -125,11 +225,12 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
 }
 
 .card {
   position: relative;
+  scroll-margin-top: calc(var(--sticky-offset, 14rem) + 0.5rem);
   padding: 1.15rem 1.15rem 1.15rem 3rem;
   background: var(--surface);
   border-radius: 12px;
@@ -230,6 +331,22 @@ a.card:focus-visible {
 .card--major .light {
   background: var(--danger);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 28%, transparent);
+}
+
+.card--found {
+  animation: card-found 1.4s ease-out;
+}
+
+@keyframes card-found {
+  0%,
+  40% {
+    border-color: color-mix(in srgb, var(--accent) 65%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  100% {
+    border-color: color-mix(in srgb, var(--muted) 22%, transparent);
+    box-shadow: 0 6px 20px color-mix(in srgb, #000 12%, transparent);
+  }
 }
 
 .footer {
