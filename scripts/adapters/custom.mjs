@@ -1,10 +1,12 @@
 import { fetchAdobeAem } from "./adobe-aem.mjs";
 import { fetchAribaPortal } from "./ariba-portal.mjs";
 import { fetchBetterstack } from "./betterstack.mjs";
+import { fetchDomoStatus } from "./domo-status.mjs";
 import { fetchPaypalAtom } from "./paypal-atom.mjs";
 import { fetchPingdomPublic } from "./pingdom-public.mjs";
 import { fetchSalesforce } from "./salesforce.mjs";
 import { fetchStatusHub } from "./statushub.mjs";
+import { fetchStripeStatus } from "./stripe-status.mjs";
 import { fetchTikTokApi } from "./tiktok-api.mjs";
 import { fetchZendesk } from "./zendesk.mjs";
 
@@ -39,6 +41,12 @@ export async function fetchCustom(tool, signal) {
     case "ariba-portal":
     case "ariba":
       return fetchAribaPortal(tool.url, signal);
+    case "domo-status":
+    case "domo":
+      return fetchDomoStatus(tool.url, signal);
+    case "stripe-status":
+    case "stripe":
+      return fetchStripeStatus(tool.url, signal);
     default:
       throw new Error(`Unknown custom adapter "${kind}"`);
   }

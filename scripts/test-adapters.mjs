@@ -12,6 +12,8 @@ import { parseSalesforceStatus } from "./adapters/salesforce.mjs";
 import { parsePingdomPublicChecks } from "./adapters/pingdom-public.mjs";
 import { parseStatusHub } from "./adapters/statushub.mjs";
 import { parseStatuspageSummary } from "./adapters/statuspage.mjs";
+import { parseDomoStatus } from "./adapters/domo-status.mjs";
+import { parseStripeCurrent } from "./adapters/stripe-status.mjs";
 import { parseTikTokApiStatus } from "./adapters/tiktok-api.mjs";
 import { formatMaintenanceStartsAtLabel } from "./lib/maintenance-label.mjs";
 import {
@@ -233,6 +235,16 @@ assert.equal(
       ],
     },
   }).state,
+  "operational"
+);
+
+assert.equal(
+  parseDomoStatus({ overall: { active: [] }, incidents: [] }).state,
+  "operational"
+);
+
+assert.equal(
+  parseStripeCurrent({ largestatus: "up", message: "All services are online." }).state,
   "operational"
 );
 
