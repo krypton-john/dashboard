@@ -1,12 +1,12 @@
 {
-  "lastPolledAt": "2026-11-13T13:39:17.523Z",
-  "generatedAt": "2026-11-13T13:39:17.523Z",
+  "lastPolledAt": "2026-11-13T13:46:40.653Z",
+  "generatedAt": "2026-11-13T13:46:40.653Z",
   "tools": [
     {
       "id": "shopify",
       "name": "Shopify",
       "adapter": "statuspage",
-      "polledAt": "2026-11-13T13:39:16.212Z",
+      "polledAt": "2026-11-13T13:46:39.236Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -14,14 +14,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://www.shopifystatus.com"
     },
     {
       "id": "vtex",
       "name": "VTEX",
       "adapter": "statuspage",
-      "polledAt": "2026-11-13T13:39:16.255Z",
+      "polledAt": "2026-11-13T13:46:39.457Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -29,14 +30,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://status.vtex.com"
     },
     {
       "id": "salesforce",
       "name": "Salesforce",
       "adapter": "custom",
-      "polledAt": "2026-11-13T13:39:16.257Z",
+      "polledAt": "2026-11-13T13:46:39.459Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -44,14 +46,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://status.salesforce.com/"
     },
     {
       "id": "adobe-experience-manager",
       "name": "Adobe Experience Manager",
       "adapter": "custom",
-      "polledAt": "2026-11-13T13:39:16.259Z",
+      "polledAt": "2026-11-13T13:46:39.462Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -59,14 +62,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://status.adobe.com/"
     },
     {
       "id": "zendesk",
       "name": "Zendesk",
       "adapter": "custom",
-      "polledAt": "2026-11-13T13:39:16.260Z",
+      "polledAt": "2026-11-13T13:46:39.463Z",
       "error": null,
       "scopeMatch": null,
       "state": "major",
@@ -74,14 +78,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://status.zendesk.com/"
     },
     {
       "id": "snowflake",
       "name": "Snowflake",
       "adapter": "statuspage",
-      "polledAt": "2026-11-13T13:39:16.262Z",
+      "polledAt": "2026-11-13T13:46:39.465Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -89,14 +94,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://status.snowflake.com"
     },
     {
       "id": "github",
       "name": "GitHub",
       "adapter": "statuspage",
-      "polledAt": "2026-11-13T13:39:16.262Z",
+      "polledAt": "2026-11-13T13:46:39.466Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -104,14 +110,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://www.githubstatus.com"
     },
     {
       "id": "google-cloud",
       "name": "GCP",
       "adapter": "gcloud",
-      "polledAt": "2026-11-13T13:39:16.263Z",
+      "polledAt": "2026-11-13T13:46:39.467Z",
       "error": null,
       "scopeMatch": {
         "matchedProducts": [],
@@ -122,14 +129,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://status.cloud.google.com/"
     },
     {
       "id": "paypal",
       "name": "PayPal",
       "adapter": "custom",
-      "polledAt": "2026-11-13T13:39:16.264Z",
+      "polledAt": "2026-11-13T13:46:39.468Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -137,14 +145,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://www.paypal-status.com/"
     },
     {
       "id": "true-loyal",
       "name": "True Loyal (formerly Zinrelo)",
       "adapter": "custom",
-      "polledAt": "2026-11-13T13:39:16.264Z",
+      "polledAt": "2026-11-13T13:46:39.469Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -152,14 +161,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://status.trueloyal.com"
     },
     {
       "id": "stibo",
       "name": "Stibo",
       "adapter": "custom",
-      "polledAt": "2026-11-13T13:39:16.265Z",
+      "polledAt": "2026-11-13T13:46:39.470Z",
       "error": null,
       "scopeMatch": null,
       "state": "degraded",
@@ -167,14 +177,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://statushub.mdm.stibosystems.com"
     },
     {
       "id": "tiktok-business-api",
       "name": "TikTok",
       "adapter": "custom",
-      "polledAt": "2026-11-13T13:39:16.266Z",
+      "polledAt": "2026-11-13T13:46:39.471Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -182,14 +193,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://business-api.tiktok.com/portal/api-service-status"
     },
     {
       "id": "bazaarvoice",
       "name": "Bazaarvoice",
       "adapter": "statuspage",
-      "polledAt": "2026-11-13T13:39:16.266Z",
+      "polledAt": "2026-11-13T13:46:39.472Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -197,14 +209,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://status.bazaarvoice.com"
     },
     {
       "id": "powerreviews",
       "name": "PowerReviews",
       "adapter": "custom",
-      "polledAt": "2026-11-13T13:39:16.267Z",
+      "polledAt": "2026-11-13T13:46:39.473Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -212,14 +225,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://status.powerreviews.com"
     },
     {
       "id": "ariba",
       "name": "Ariba",
       "adapter": "custom",
-      "polledAt": "2026-11-13T13:39:16.267Z",
+      "polledAt": "2026-11-13T13:46:39.474Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -227,14 +241,14 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
+      "trackingSince": "2026-11-13T13:46:40.653Z",
       "maintenanceStartsAtLabel": null
     },
     {
       "id": "mediafly",
       "name": "Mediafly",
       "adapter": "statuspage",
-      "polledAt": "2026-11-13T13:39:16.268Z",
+      "polledAt": "2026-11-13T13:46:39.474Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -242,14 +256,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://mediafly.statuspage.io"
     },
     {
       "id": "domo",
       "name": "Domo",
       "adapter": "custom",
-      "polledAt": "2026-11-13T13:39:16.269Z",
+      "polledAt": "2026-11-13T13:46:39.475Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -257,14 +272,15 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://status.domo.com"
     },
     {
       "id": "stripe",
       "name": "Stripe",
       "adapter": "custom",
-      "polledAt": "2026-11-13T13:39:16.269Z",
+      "polledAt": "2026-11-13T13:46:39.476Z",
       "error": null,
       "scopeMatch": null,
       "state": "operational",
@@ -272,8 +288,9 @@
       "maintenanceStartsAt": null,
       "daysSinceLastIncident": null,
       "incidentOngoing": false,
-      "trackingSince": "2026-11-13T13:39:17.523Z",
-      "maintenanceStartsAtLabel": null
+      "trackingSince": "2026-11-13T13:46:40.653Z",
+      "maintenanceStartsAtLabel": null,
+      "statusPageUrl": "https://status.stripe.com"
     }
   ]
 }
