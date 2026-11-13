@@ -10,6 +10,7 @@ import {
 import { runNotifyPipeline } from "./agent/notify-pipeline.mjs";
 import { detectAlertEvents } from "./lib/alert-events.mjs";
 import { formatMaintenanceStartsAtLabel } from "./lib/maintenance-label.mjs";
+import { resolveStatusPageUrl } from "./lib/status-page-url.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -77,6 +78,18 @@ function attachIncidentMetrics(results, incidentsDb, generatedAt) {
 }
 
 /**
+ * @param {object[]} results
+ * @param {object[]} toolConfigs
+ */
+function attachStatusPageUrls(results, toolConfigs) {
+  const cfgById = new Map(toolConfigs.map((t) => [t.id, t]));
+  return results.map((tool) => {
+    const pageUrl = resolveStatusPageUrl(cfgById.get(tool.id) ?? {});
+    return pageUrl ? { ...tool, statusPageUrl: pageUrl } : tool;
+  });
+}
+
+/**
  * @param {ReturnType<typeof parseIncidentsFile>} db
  */
 function incidentsSemanticallyEqual(a, b) {
@@ -131,10 +144,9 @@ async function main() {
     lastPolledAt
   );
 
-  const resultsWithMetrics = attachIncidentMetrics(
-    results,
-    incidentsDb,
-    lastPolledAt
+  const resultsWithMetrics = attachStatusPageUrls(
+    attachIncidentMetrics(results, incidentsDb, lastPolledAt),
+    tools
   );
 
   const statusChanged = !toolsSemanticallyEqual(previousTools, resultsWithMetrics);
