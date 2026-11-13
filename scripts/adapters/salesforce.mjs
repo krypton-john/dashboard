@@ -13,15 +13,53 @@ export function salesforceApiBase(url) {
 }
 
 /**
+ * Trust API keeps known-issue / feature disruptions (often minor, non-core) in
+ * `incidents/active`. Only surface platform-impacting incidents on the dashboard.
+ * @param {object} inc
+ */
+export function salesforceIncidentAffectsDashboard(inc) {
+  if (!inc || typeof inc !== "object") return false;
+  if (String(inc.type) === "Outage") return true;
+
+  const impacts = Array.isArray(inc.IncidentImpacts) ? inc.IncidentImpacts : [];
+  if (impacts.length === 0) return String(inc.type) === "Degradation";
+
+  const material = new Set(["critical", "major", "significant", "moderate"]);
+  let hasMaterial = false;
+  let onlyMinorNonCore = true;
+
+  for (const impact of impacts) {
+    const sev = String(impact.severity ?? "").toLowerCase();
+    if (material.has(sev)) {
+      hasMaterial = true;
+      onlyMinorNonCore = false;
+    } else if (sev !== "minor") {
+      onlyMinorNonCore = false;
+    }
+  }
+
+  if (hasMaterial) return true;
+  if (onlyMinorNonCore && inc.isCore === false) return false;
+
+  return impacts.some((impact) => {
+    const sev = String(impact.severity ?? "").toLowerCase();
+    return sev === "minor" && inc.isCore !== false;
+  });
+}
+
+/**
  * @param {object[]} incidents
  * @returns {{ state: ToolState; description: string } | null}
  */
 export function parseSalesforceActiveIncidents(incidents) {
   if (!Array.isArray(incidents) || incidents.length === 0) return null;
 
+  const relevant = incidents.filter(salesforceIncidentAffectsDashboard);
+  if (relevant.length === 0) return null;
+
   let state = /** @type {ToolState} */ ("degraded");
 
-  for (const inc of incidents) {
+  for (const inc of relevant) {
     if (inc.type === "Outage") state = "major";
     for (const impact of inc.IncidentImpacts ?? []) {
       const sev = String(impact.severity ?? "").toLowerCase();
@@ -29,13 +67,16 @@ export function parseSalesforceActiveIncidents(incidents) {
     }
   }
 
-  const first = incidents[0];
+  const first = relevant[0];
   const description =
-    (typeof first.additionalInformation === "string" &&
-      first.additionalInformation.trim()) ||
     (typeof first.message?.pathToResolution === "string" &&
-      first.message.pathToResolution) ||
-    `Active incident (${incidents.length})`;
+      first.message.pathToResolution.trim()) ||
+    (typeof first.name === "string" && first.name.trim()) ||
+    (typeof first.additionalInformation === "string" &&
+    !/^https?:\/\//i.test(first.additionalInformation.trim())
+      ? first.additionalInformation.trim()
+      : null) ||
+    `Active incident (${relevant.length})`;
 
   return { state, description: description.slice(0, 160) };
 }
@@ -48,6 +89,7 @@ export function findActiveMaintenances(maintenances, nowMs = Date.now()) {
   if (!Array.isArray(maintenances)) return [];
 
   return maintenances.filter((m) => {
+    if (m.isCore === false) return false;
     const start = Date.parse(m.plannedStartTime);
     const end = Date.parse(m.plannedEndTime);
     if (Number.isNaN(start) || Number.isNaN(end)) return false;
@@ -77,6 +119,7 @@ export function findUpcomingMaintenances(maintenances, nowMs = Date.now()) {
 
   return maintenances.filter((m) => {
     if (!isSalesforceMaintenanceEvent(m)) return false;
+    if (m.isCore === false) return false;
     const start = Date.parse(m.plannedStartTime);
     const end = Date.parse(m.plannedEndTime);
     if (Number.isNaN(start) || Number.isNaN(end)) return false;

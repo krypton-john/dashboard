@@ -124,7 +124,10 @@
       "customAdapter": "pingdom-public",
       "url": "https://status.powerreviews.com/",
       "enabled": true,
-      "notes": "Pingdom public checks JSON (/checks)."
+      "options": {
+        "ignoreCheckNamePatterns": ["(?i)^legacy\\b"]
+      },
+      "notes": "Pingdom public checks JSON (/checks); Legacy APIs check is retired."
     },
     {
       "id": "ariba",

@@ -188,29 +188,32 @@ function render(status, incidentsFile) {
     return;
   }
 
-  if (ageMs > STALE_MS) {
-    const mins = Math.floor(ageMs / 60000);
-    setBanner(
-      `Data may be stale (last poll ${mins} minutes ago). Check that the Poll status workflow is running on schedule.`,
-      "warn"
-    );
-  } else {
-    setBanner(null);
-  }
-
   const major = tools.filter((t) => t.state === "major");
   const degraded = tools.filter((t) => t.state === "degraded");
-  if (major.length > 0) {
-    setBanner(
-      `${major.map((t) => t.name).join(", ")} reporting major issues.`,
-      "danger"
-    );
-  } else if (degraded.length > 0) {
-    setBanner(
-      `${degraded.map((t) => t.name).join(", ")} reporting degraded performance.`,
-      "warn"
-    );
+  const stale =
+    !Number.isNaN(updated.getTime()) && ageMs > STALE_MS;
+
+  let message = null;
+  let kind = "warn";
+
+  if (stale) {
+    const mins = Math.floor(ageMs / 60000);
+    message = `Data may be stale (last poll ${mins} minutes ago). Check that the Poll status workflow is running on schedule.`;
   }
+
+  if (major.length > 0) {
+    const names = major.map((t) => t.name).join(", ");
+    const line = `${names} reporting major issues — verify in your apps before escalating.`;
+    message = message ? `${message} ${line}` : line;
+    kind = "danger";
+  } else if (degraded.length > 0) {
+    const names = degraded.map((t) => t.name).join(", ");
+    const line = `${names} reporting degraded — verify in your apps before escalating.`;
+    message = message ? `${message} ${line}` : line;
+    kind = "warn";
+  }
+
+  setBanner(message, kind);
 }
 
 async function load() {
