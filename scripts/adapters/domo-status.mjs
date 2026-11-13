@@ -10,7 +10,9 @@ export function parseDomoStatus(payload) {
   const active = Array.isArray(payload?.overall?.active)
     ? payload.overall.active
     : [];
-  const incidents = Array.isArray(payload?.incidents) ? payload.incidents : [];
+  const incidents = (Array.isArray(payload?.incidents) ? payload.incidents : []).filter(
+    (inc) => inc?.resolved !== true && !inc?.end
+  );
 
   for (const item of active) {
     const severity = String(item?.severity ?? item?.impact ?? item?.status ?? "").toLowerCase();
@@ -20,7 +22,6 @@ export function parseDomoStatus(payload) {
   }
 
   for (const inc of incidents) {
-    if (inc?.resolved === true || inc?.end) continue;
     const severity = String(inc?.severity ?? inc?.impact ?? inc?.status ?? "").toLowerCase();
     if (/critical|major|down|outage/.test(severity)) states.push("major");
     else states.push("degraded");
