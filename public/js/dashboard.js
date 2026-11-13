@@ -2,36 +2,58 @@
 const STALE_MS = 90 * 60 * 1000;
 const REFRESH_MS = 60 * 1000;
 
-/** Display order for tool cards (matches config/tools.json). */
-const CARD_ORDER = [
-  "shopify",
-  "vtex",
-  "salesforce",
-  "adobe-experience-manager",
-  "zendesk",
-  "snowflake",
-  "github",
-  "google-cloud",
-  "paypal",
-  "true-loyal",
-  "stibo",
-  "tiktok-business-api",
-  "bazaarvoice",
-  "powerreviews",
-  "ariba",
-  "mediafly",
-  "sigma",
-  "domo",
-  "stripe",
-  "tungsten-europe",
-  "taulia",
-];
-
 function sortToolsForDisplay(tools) {
-  const rank = new Map(CARD_ORDER.map((id, index) => [id, index]));
-  return [...tools].sort(
-    (a, b) => (rank.get(a.id) ?? 999) - (rank.get(b.id) ?? 999)
-  );
+  return [...tools].sort((a, b) =>
+  a.name.localeCompare(b.name, undefined, { sensitivity: "base" })
+);
+}
+
+/**
+ * Subsequence fuzzy score (higher is better). Returns -1 when query chars are not all matched.
+ * @param {string} query
+ * @param {string} text
+ */
+function fuzzyScore(query, text) {
+  const q = query.trim().toLowerCase();
+  if (!q) return 0;
+  const t = text.toLowerCase();
+  let qi = 0;
+  let score = 0;
+  let prev = -2;
+  let streak = 0;
+
+  for (let ti = 0; ti < t.length && qi < q.length; ti++) {
+    if (t[ti] !== q[qi]) continue;
+    score += 1;
+    if (prev === ti - 1) {
+      streak += 1;
+      score += streak * 3;
+    } else {
+      streak = 0;
+      if (ti === 0 || /[\s\-_/]/.test(t[ti - 1])) score += 6;
+    }
+    if (qi === 0) score += ti === 0 ? 12 : Math.max(0, 8 - ti);
+    prev = ti;
+    qi += 1;
+  }
+
+  if (qi < q.length) return -1;
+  const span = prev - (q.length - 1);
+  score += Math.max(0, 40 - span);
+  if (t.startsWith(q)) score += 20;
+  return score;
+}
+
+function rankToolsByFuzzy(query, tools) {
+  const ranked = [];
+  for (const tool of tools) {
+    const nameScore = fuzzyScore(query, tool.name);
+    const idScore = fuzzyScore(query, tool.id.replace(/-/g, " "));
+    const score = Math.max(nameScore, idScore);
+    if (score >= 0) ranked.push({ tool, score });
+  }
+  ranked.sort((a, b) => b.score - a.score || a.tool.name.localeCompare(b.tool.name));
+  return ranked;
 }
 
 const STATE_LABEL = {
@@ -45,6 +67,19 @@ const STATE_LABEL = {
 const bannerEl = document.getElementById("banner");
 const lastUpdatedEl = document.getElementById("last-updated");
 const gridEl = document.getElementById("tool-grid");
+const stickyHeaderEl = document.getElementById("page-header-sticky");
+const searchInputEl = document.getElementById("tool-search-input");
+const searchResultsEl = document.getElementById("tool-search-results");
+
+/** @type {Array<{ id: string; name: string; state: string }> | null} */
+let displayedTools = null;
+let searchActiveIndex = -1;
+
+function syncStickyScrollMargin() {
+  if (!stickyHeaderEl) return;
+  const h = stickyHeaderEl.getBoundingClientRect().height;
+  document.documentElement.style.setProperty("--sticky-offset", `${Math.ceil(h)}px`);
+}
 
 function formatDate(iso) {
   const d = new Date(iso);
@@ -140,10 +175,26 @@ function setBanner(message, kind) {
   bannerEl.classList.toggle("banner--danger", kind === "danger");
 }
 
+function scrollToToolCard(toolId) {
+  const el = document.getElementById(`tool-card-${toolId}`);
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  el.classList.remove("card--found");
+  // Force reflow so repeat searches retrigger animation.
+  void el.offsetWidth;
+  el.classList.add("card--found");
+  el.addEventListener(
+    "animationend",
+    () => el.classList.remove("card--found"),
+    { once: true }
+  );
+}
+
 function renderToolCard(tool, incidentsFile) {
   const hasLink =
     typeof tool.statusPageUrl === "string" && tool.statusPageUrl.startsWith("https://");
   const shell = document.createElement(hasLink ? "a" : "article");
+  shell.id = `tool-card-${tool.id}`;
   shell.className = `card card--${tool.state}`;
   if (hasLink) {
     shell.href = tool.statusPageUrl;
@@ -190,11 +241,121 @@ function renderToolCard(tool, incidentsFile) {
   return shell;
 }
 
+function setSearchResults(matches, activeIndex = searchActiveIndex) {
+  searchActiveIndex = activeIndex;
+  searchResultsEl.replaceChildren();
+  if (!matches.length) {
+    searchResultsEl.classList.add("tool-search__results--hidden");
+    searchInputEl.setAttribute("aria-expanded", "false");
+    searchActiveIndex = -1;
+    return;
+  }
+
+  searchResultsEl.classList.remove("tool-search__results--hidden");
+  searchInputEl.setAttribute("aria-expanded", "true");
+
+  const visible = matches.slice(0, 10);
+  if (searchActiveIndex >= visible.length) searchActiveIndex = 0;
+
+  visible.forEach((entry, index) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "tool-search__result";
+    btn.setAttribute("role", "option");
+    btn.id = `tool-search-option-${entry.tool.id}`;
+    btn.dataset.toolId = entry.tool.id;
+    if (index === searchActiveIndex) btn.classList.add("tool-search__result--active");
+
+    const name = document.createElement("span");
+    name.textContent = entry.tool.name;
+
+    const state = document.createElement("span");
+    state.className = "tool-search__result-state";
+    state.textContent = STATE_LABEL[entry.tool.state] ?? entry.tool.state;
+
+    btn.append(name, state);
+    btn.addEventListener("click", () => {
+      scrollToToolCard(entry.tool.id);
+      searchInputEl.value = entry.tool.name;
+      setSearchResults([]);
+    });
+    searchResultsEl.append(btn);
+  });
+}
+
+function updateSearchFromInput() {
+  const query = searchInputEl.value;
+  if (!query.trim() || !displayedTools?.length) {
+    setSearchResults([]);
+    return;
+  }
+  const matches = rankToolsByFuzzy(query, displayedTools);
+  setSearchResults(matches, matches.length ? 0 : -1);
+}
+
+function activateSearchSelection() {
+  const options = [...searchResultsEl.querySelectorAll(".tool-search__result")];
+  if (!options.length) {
+    if (!displayedTools?.length) return;
+    const query = searchInputEl.value.trim();
+    if (!query) return;
+    const [best] = rankToolsByFuzzy(query, displayedTools);
+    if (best) scrollToToolCard(best.tool.id);
+    return;
+  }
+  const active = options[searchActiveIndex] ?? options[0];
+  const toolId = active.dataset.toolId;
+  if (toolId) {
+    scrollToToolCard(toolId);
+    const tool = displayedTools?.find((t) => t.id === toolId);
+    if (tool) searchInputEl.value = tool.name;
+    setSearchResults([]);
+  }
+}
+
+function initToolSearch() {
+  searchInputEl.addEventListener("input", updateSearchFromInput);
+  searchInputEl.addEventListener("keydown", (ev) => {
+    const options = [...searchResultsEl.querySelectorAll(".tool-search__result")];
+    if (ev.key === "ArrowDown") {
+      ev.preventDefault();
+      const matches = rankToolsByFuzzy(searchInputEl.value, displayedTools ?? []);
+      if (!matches.length) return;
+      const next = searchActiveIndex < 0 ? 0 : (searchActiveIndex + 1) % Math.min(matches.length, 10);
+      setSearchResults(matches, next);
+      searchResultsEl.querySelector(".tool-search__result--active")?.scrollIntoView({
+        block: "nearest",
+      });
+    } else if (ev.key === "ArrowUp") {
+      ev.preventDefault();
+      const matches = rankToolsByFuzzy(searchInputEl.value, displayedTools ?? []);
+      if (!matches.length) return;
+      const len = Math.min(matches.length, 10);
+      const next =
+        searchActiveIndex < 0 ? len - 1 : (searchActiveIndex - 1 + len) % len;
+      setSearchResults(matches, next);
+      searchResultsEl.querySelector(".tool-search__result--active")?.scrollIntoView({
+        block: "nearest",
+      });
+    } else if (ev.key === "Enter") {
+      ev.preventDefault();
+      activateSearchSelection();
+    } else if (ev.key === "Escape") {
+      setSearchResults([]);
+    }
+  });
+  searchInputEl.addEventListener("blur", () => {
+    window.setTimeout(() => setSearchResults([]), 150);
+  });
+}
+
 function render(status, incidentsFile) {
   const tools = sortToolsForDisplay(
     Array.isArray(status.tools) ? status.tools : []
   );
+  displayedTools = tools;
   gridEl.replaceChildren(...tools.map((t) => renderToolCard(t, incidentsFile)));
+  requestAnimationFrame(syncStickyScrollMargin);
 
   const polledAt = status.lastPolledAt ?? status.generatedAt;
   if (!polledAt) {
@@ -238,6 +399,7 @@ function render(status, incidentsFile) {
   }
 
   setBanner(message, kind);
+  requestAnimationFrame(syncStickyScrollMargin);
 }
 
 async function load() {
@@ -257,5 +419,7 @@ async function load() {
   }
 }
 
+initToolSearch();
+window.addEventListener("resize", syncStickyScrollMargin);
 load();
 setInterval(load, REFRESH_MS);
