@@ -149,6 +149,35 @@ assert.equal(
   "future-maintenance"
 );
 
+assert.equal(
+  parseSalesforceStatus(
+    [
+      {
+        type: "Degradation",
+        isCore: false,
+        additionalInformation: "https://help.salesforce.com/s/issue?id=abc",
+        IncidentImpacts: [{ severity: "minor", type: "featureServiceDisruption" }],
+      },
+    ],
+    []
+  ).state,
+  "operational"
+);
+
+assert.equal(
+  parseSalesforceStatus(
+    [
+      {
+        type: "Degradation",
+        message: { pathToResolution: "Investigating login errors" },
+        IncidentImpacts: [{ severity: "major" }],
+      },
+    ],
+    []
+  ).state,
+  "major"
+);
+
 const sf = parseSalesforceStatus(
   [{ type: "Degradation", additionalInformation: "Stale analytics", IncidentImpacts: [{ severity: "minor" }] }],
   [],
@@ -216,10 +245,23 @@ assert.equal(
   parsePingdomPublicChecks({
     aaData: [
       ['<span class="status up"></span>', '<a>API</a>'],
-      ['<span class="status down"></span>', '<a>Legacy</a>'],
+      ['<span class="status down"></span>', '<a>Legacy APIs</a>'],
     ],
   }).state,
   "major"
+);
+
+assert.equal(
+  parsePingdomPublicChecks(
+    {
+      aaData: [
+        ['<span class="status up"></span>', '<a>Enterprise APIs</a>'],
+        ['<span class="status down"></span>', '<a>Legacy APIs</a>'],
+      ],
+    },
+    ["(?i)^legacy\\b"]
+  ).state,
+  "operational"
 );
 
 assert.equal(

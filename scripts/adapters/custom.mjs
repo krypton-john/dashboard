@@ -34,7 +34,7 @@ export async function fetchCustom(tool, signal) {
       return fetchStatusHub(tool.url, signal);
     case "pingdom-public":
     case "powerreviews":
-      return fetchPingdomPublic(tool.url, signal);
+      return fetchPingdomPublic(tool.url, signal, tool.options);
     case "tiktok-api":
     case "tiktok":
       return fetchTikTokApi(tool.url, signal, tool.options);

@@ -86,6 +86,11 @@
               "format": "uri",
               "description": "tiktok-api: optional override for incident/list API URL"
             },
+            "ignoreCheckNamePatterns": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "pingdom-public: regex patterns for check names to exclude (e.g. retired endpoints)"
+            },
             "productIds": {
               "type": "array",
               "items": { "type": "string" },

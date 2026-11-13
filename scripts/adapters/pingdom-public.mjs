@@ -3,9 +3,31 @@ import { worstState } from "../lib/states.mjs";
 /** @typedef {import('../lib/states.mjs').ToolState} ToolState */
 
 /**
- * @param {object} payload Pingdom public checks DataTables JSON
+ * @param {string} name
+ * @param {string[]} patterns regex strings
  */
-export function parsePingdomPublicChecks(payload) {
+function pingdomCheckIgnored(name, patterns) {
+  if (!patterns?.length) return false;
+  return patterns.some((raw) => {
+    try {
+      let pattern = raw;
+      let flags = "";
+      if (pattern.startsWith("(?i)")) {
+        pattern = pattern.slice(4);
+        flags = "i";
+      }
+      return new RegExp(pattern, flags).test(name);
+    } catch {
+      return false;
+    }
+  });
+}
+
+/**
+ * @param {object} payload Pingdom public checks DataTables JSON
+ * @param {string[]} [ignoreNamePatterns]
+ */
+export function parsePingdomPublicChecks(payload, ignoreNamePatterns = []) {
   const rows = Array.isArray(payload?.aaData) ? payload.aaData : [];
   const states = /** @type {ToolState[]} */ ([]);
   const down = [];
@@ -16,6 +38,7 @@ export function parsePingdomPublicChecks(payload) {
     const statusCell = String(row[0] ?? "");
     const nameCell = String(row[1] ?? "");
     const name = nameCell.replace(/<[^>]+>/g, "").trim() || "Check";
+    if (pingdomCheckIgnored(name, ignoreNamePatterns)) continue;
 
     if (statusCell.includes("status down")) {
       states.push("major");
@@ -47,7 +70,12 @@ export function parsePingdomPublicChecks(payload) {
  * @param {string} pageUrl e.g. https://status.powerreviews.com/
  * @param {AbortSignal} signal
  */
-export async function fetchPingdomPublic(pageUrl, signal) {
+/**
+ * @param {string} pageUrl
+ * @param {AbortSignal} signal
+ * @param {{ ignoreCheckNamePatterns?: string[] }} [options]
+ */
+export async function fetchPingdomPublic(pageUrl, signal, options = {}) {
   const base = pageUrl.replace(/\/$/, "");
   const qs = new URLSearchParams({
     sEcho: "1",
@@ -71,5 +99,5 @@ export async function fetchPingdomPublic(pageUrl, signal) {
   }
 
   const body = await res.json();
-  return parsePingdomPublicChecks(body);
+  return parsePingdomPublicChecks(body, options.ignoreCheckNamePatterns ?? []);
 }
