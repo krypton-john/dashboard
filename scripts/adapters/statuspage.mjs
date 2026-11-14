@@ -1,4 +1,9 @@
 import { summarizeStatuspageMaintenances } from "../lib/statuspage-maintenance.mjs";
+import {
+  statuspageComponentsAllOperational,
+  statuspageMeaningfulIncidents,
+  statuspageOperationalDescription,
+} from "../lib/statuspage-signal.mjs";
 import { worstState } from "../lib/states.mjs";
 
 /** @typedef {import('../lib/states.mjs').ToolState} ToolState */
@@ -30,7 +35,7 @@ export function indicatorToState(indicator) {
  */
 export function parseStatuspageSummary(summary, nowMs = Date.now()) {
   const indicator = summary?.status?.indicator;
-  const description =
+  let description =
     typeof summary?.status?.description === "string"
       ? summary.status.description
       : "No status description";
@@ -38,26 +43,34 @@ export function parseStatuspageSummary(summary, nowMs = Date.now()) {
   let state = indicatorToState(indicator);
   let maintenanceStartsAt = null;
 
-  if (state === "operational" && Array.isArray(summary?.incidents)) {
-    const active = summary.incidents.filter(
-      (i) => i && i.status !== "resolved" && i.status !== "postmortem"
-    );
-    if (active.length > 0) {
-      const impactStates = active.map((i) => {
-        switch (i.impact) {
-          case "critical":
-          case "major":
-            return "major";
-          case "minor":
-            return "degraded";
-          case "maintenance":
-            return i.status === "scheduled" ? "future-maintenance" : "degraded";
-          default:
-            return "degraded";
-        }
-      });
-      state = worstState(impactStates);
-    }
+  const meaningfulIncidents = statuspageMeaningfulIncidents(summary);
+  const componentsOperational = statuspageComponentsAllOperational(summary);
+
+  if (
+    state === "degraded" &&
+    indicator === "minor" &&
+    meaningfulIncidents.length === 0 &&
+    componentsOperational !== false
+  ) {
+    state = "operational";
+    description = statuspageOperationalDescription(summary);
+  }
+
+  if (state === "operational" && meaningfulIncidents.length > 0) {
+    const impactStates = meaningfulIncidents.map((i) => {
+      switch (i.impact) {
+        case "critical":
+        case "major":
+          return "major";
+        case "minor":
+          return "degraded";
+        case "maintenance":
+          return i.status === "scheduled" ? "future-maintenance" : "degraded";
+        default:
+          return "degraded";
+      }
+    });
+    state = worstState(impactStates);
   }
 
   const maintenance = summarizeStatuspageMaintenances(
@@ -75,6 +88,10 @@ export function parseStatuspageSummary(summary, nowMs = Date.now()) {
     if (maintenance.description && state !== "operational") {
       return { state, description: maintenance.description, maintenanceStartsAt };
     }
+  }
+
+  if (state === "operational") {
+    description = statuspageOperationalDescription(summary);
   }
 
   return { state, description, maintenanceStartsAt };

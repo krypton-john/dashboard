@@ -242,6 +242,37 @@ assert.equal(
 );
 
 assert.equal(
+  parseStatusHub(
+    {
+      groups: [{ group_name: "EU", services: [{ service_name: "Email", status: 1 }] }],
+    },
+    [
+      {
+        title: "Potential Email disruption",
+        flags: { archived: false, deleted: false },
+      },
+    ]
+  ).state,
+  "operational"
+);
+
+assert.equal(
+  parseStatuspageSummary({
+    status: { indicator: "minor", description: "Partial System Degradation" },
+    components: [],
+    incidents: [
+      {
+        status: "monitoring",
+        impact: "minor",
+        name: "Third-party email advisory",
+      },
+    ],
+    scheduled_maintenances: [],
+  }).state,
+  "operational"
+);
+
+assert.equal(
   parsePingdomPublicChecks({
     aaData: [
       ['<span class="status up"></span>', '<a>API</a>'],
