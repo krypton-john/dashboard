@@ -3,107 +3,107 @@
   "incidents": [],
   "tools": {
     "shopify": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "vtex": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "salesforce": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "adobe-experience-manager": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "zendesk": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "snowflake": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "github": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "google-cloud": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "paypal": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "true-loyal": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "stibo": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
-      "nonGreenPolls": 1,
-      "pendingStart": "2026-11-14T07:24:29.572Z"
+      "trackingSince": "2026-11-14T10:30:32.145Z",
+      "nonGreenPolls": 0,
+      "pendingStart": null
     },
     "tiktok-business-api": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "bazaarvoice": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "powerreviews": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "ariba": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "mediafly": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "sigma": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "domo": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "stripe": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     },
     "tungsten-europe": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
-      "nonGreenPolls": 1,
-      "pendingStart": "2026-11-14T07:24:29.572Z"
+      "trackingSince": "2026-11-14T10:30:32.145Z",
+      "nonGreenPolls": 0,
+      "pendingStart": null
     },
     "taulia": {
-      "trackingSince": "2026-11-14T07:24:29.572Z",
+      "trackingSince": "2026-11-14T10:30:32.145Z",
       "nonGreenPolls": 0,
       "pendingStart": null
     }
