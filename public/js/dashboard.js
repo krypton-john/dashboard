@@ -141,6 +141,8 @@ function saveVendorFilterPrefs() {
 
 function adoptNewToolsForCustomFilter(sorted) {
   if (vendorFilterPreset !== "custom") return;
+  // First paint in a tab: allTools is empty — use localStorage as-is, do not merge every id.
+  if (allTools.length === 0) return;
   const prev = new Set(allTools.map((t) => t.id));
   for (const t of sorted) {
     if (!prev.has(t.id)) vendorCustomSelected.add(t.id);
