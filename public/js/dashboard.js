@@ -2,6 +2,8 @@
 const STALE_MS = 90 * 60 * 1000;
 const REFRESH_MS = 60 * 1000;
 const VENDOR_FILTER_STORAGE_KEY = "emea-dashboard-vendor-filter-v1";
+const RECENT_IMPROVEMENTS_SEEN_KEY = "emea-dashboard-recent-improvements-v1";
+const RECENT_IMPROVEMENTS_MS = 5000;
 
 /** @type {"all" | "issues" | "custom"} */
 let vendorFilterPreset = "all";
@@ -652,6 +654,39 @@ async function load() {
   }
 }
 
+function initRecentImprovementsToast() {
+  const toast = document.getElementById("recent-improvements-toast");
+  if (!toast) return;
+  try {
+    if (localStorage.getItem(RECENT_IMPROVEMENTS_SEEN_KEY)) return;
+  } catch {
+    return;
+  }
+
+  const markSeen = () => {
+    try {
+      localStorage.setItem(RECENT_IMPROVEMENTS_SEEN_KEY, new Date().toISOString());
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const dismiss = () => {
+    toast.classList.add("improvements-toast--leaving");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const fadeMs = reducedMotion ? 200 : 450;
+    window.setTimeout(() => {
+      toast.classList.add("improvements-toast--hidden");
+      toast.hidden = true;
+      markSeen();
+    }, fadeMs);
+  };
+
+  toast.classList.remove("improvements-toast--hidden");
+  toast.hidden = false;
+  window.setTimeout(dismiss, RECENT_IMPROVEMENTS_MS);
+}
+
 function initAdvisoryDetails() {
   const details = document.getElementById("advisory-details");
   if (!details) return;
@@ -666,6 +701,7 @@ function initAdvisoryDetails() {
 initVendorFilter();
 initToolSearch();
 initAdvisoryDetails();
+initRecentImprovementsToast();
 window.addEventListener("resize", syncStickyScrollMargin);
 load();
 setInterval(load, REFRESH_MS);

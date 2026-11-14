@@ -296,6 +296,58 @@ body {
   color: var(--muted);
 }
 
+.improvements-toast {
+  position: fixed;
+  z-index: 50;
+  left: 50%;
+  bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  width: min(26rem, calc(100vw - 2rem));
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--surface) 96%, var(--bg));
+  box-shadow: 0 12px 32px color-mix(in srgb, #000 22%, transparent);
+  opacity: 1;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  pointer-events: none;
+}
+
+.improvements-toast--hidden {
+  display: none;
+}
+
+.improvements-toast--leaving {
+  opacity: 0;
+  transform: translateX(-50%) translateY(0.5rem);
+}
+
+.improvements-toast__text {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.improvements-toast__text strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .improvements-toast {
+    transition: opacity 0.2s ease;
+  }
+
+  .improvements-toast--leaving {
+    transform: translateX(-50%);
+  }
+}
+
 .grid__empty {
   grid-column: 1 / -1;
   margin: 0;
