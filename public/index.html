@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SaaS Status Dashboard</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="css/main.css?v=7" />
+    <link rel="stylesheet" href="css/main.css?v=8" />
   </head>
   <body>
     <main class="page">
@@ -14,6 +14,63 @@
           <p class="eyebrow eyebrow--compact">EMEA</p>
           <div class="header__top">
             <h1>SaaS Status</h1>
+            <div class="header__actions">
+              <div class="vendor-filter" id="vendor-filter">
+                <button
+                  type="button"
+                  id="vendor-filter-toggle"
+                  class="vendor-filter__toggle"
+                  aria-haspopup="dialog"
+                  aria-expanded="false"
+                  aria-controls="vendor-filter-popover"
+                >
+                  Filter
+                  <span id="vendor-filter-badge" class="vendor-filter__badge vendor-filter__badge--hidden"
+                    >0</span
+                  >
+                </button>
+                <div
+                  id="vendor-filter-popover"
+                  class="vendor-filter__popover vendor-filter__popover--hidden"
+                  role="dialog"
+                  aria-labelledby="vendor-filter-title"
+                  hidden
+                >
+                  <p id="vendor-filter-title" class="vendor-filter__title">Show vendors</p>
+                  <fieldset class="vendor-filter__presets">
+                    <legend class="sr-only">Quick filter</legend>
+                    <label class="vendor-filter__preset">
+                      <input type="radio" name="vendor-filter-preset" value="all" checked />
+                      All vendors
+                    </label>
+                    <label class="vendor-filter__preset">
+                      <input type="radio" name="vendor-filter-preset" value="issues" />
+                      Issues only
+                    </label>
+                    <label class="vendor-filter__preset">
+                      <input type="radio" name="vendor-filter-preset" value="custom" />
+                      My selection
+                    </label>
+                  </fieldset>
+                  <div class="vendor-filter__toolbar">
+                    <button type="button" id="vendor-filter-select-all" class="vendor-filter__link">
+                      Select all
+                    </button>
+                    <button type="button" id="vendor-filter-clear-all" class="vendor-filter__link">
+                      Clear all
+                    </button>
+                  </div>
+                  <div
+                    id="vendor-filter-list"
+                    class="vendor-filter__list"
+                    role="group"
+                    aria-label="Vendors"
+                  ></div>
+                  <p id="vendor-filter-hint" class="vendor-filter__hint">
+                    Choices are saved in this browser.
+                  </p>
+                </div>
+              </div>
             <div class="tool-search" role="search">
               <label class="sr-only" for="tool-search-input">Find a vendor</label>
               <input
@@ -36,6 +93,7 @@
                 role="listbox"
                 aria-label="Matching vendors"
               ></ul>
+            </div>
             </div>
           </div>
           <p id="last-updated" class="last-updated last-updated--bar">Loading…</p>
@@ -65,6 +123,6 @@
         <p>Data refreshes automatically. Polled every 6 hours via GitHub Actions.</p>
       </footer>
     </main>
-    <script src="js/dashboard.js?v=7" type="module"></script>
+    <script src="js/dashboard.js?v=8" type="module"></script>
   </body>
 </html>
