@@ -31,17 +31,10 @@ export function parseStatusHub(statuses, incidents = []) {
     }
   }
 
-  const openIncidents = incidents.filter(
-    (i) => i?.flags && !i.flags.deleted && !i.flags.archived
-  );
-
   let description = "All systems operational";
   if (badNames.length > 0) {
     description = `Affected: ${badNames.slice(0, 3).join("; ")}`;
     if (badNames.length > 3) description += ` (+${badNames.length - 3} more)`;
-  } else if (openIncidents.length > 0) {
-    states.push("degraded");
-    description = openIncidents[0].title ?? description;
   }
 
   const state = states.length ? worstState(states) : "operational";
