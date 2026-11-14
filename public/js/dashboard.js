@@ -1,6 +1,12 @@
 // Warn if no poll in ~90 minutes (hourly schedule + GitHub cron delay).
 const STALE_MS = 90 * 60 * 1000;
 const REFRESH_MS = 60 * 1000;
+const VENDOR_FILTER_STORAGE_KEY = "emea-dashboard-vendor-filter-v1";
+
+/** @type {"all" | "issues" | "custom"} */
+let vendorFilterPreset = "all";
+/** @type {Set<string>} */
+let vendorCustomSelected = new Set();
 
 function sortToolsForDisplay(tools) {
   return [...tools].sort((a, b) =>
@@ -70,15 +76,214 @@ const gridEl = document.getElementById("tool-grid");
 const stickyHeaderEl = document.getElementById("page-header-sticky");
 const searchInputEl = document.getElementById("tool-search-input");
 const searchResultsEl = document.getElementById("tool-search-results");
+const vendorFilterToggleEl = document.getElementById("vendor-filter-toggle");
+const vendorFilterPopoverEl = document.getElementById("vendor-filter-popover");
+const vendorFilterListEl = document.getElementById("vendor-filter-list");
+const vendorFilterBadgeEl = document.getElementById("vendor-filter-badge");
+const vendorFilterHintEl = document.getElementById("vendor-filter-hint");
+const vendorFilterToolbarEl = document.querySelector(".vendor-filter__toolbar");
+const vendorFilterSelectAllEl = document.getElementById("vendor-filter-select-all");
+const vendorFilterClearAllEl = document.getElementById("vendor-filter-clear-all");
 
+/** @type {Array<{ id: string; name: string; state: string }>} */
+let allTools = [];
 /** @type {Array<{ id: string; name: string; state: string }> | null} */
 let displayedTools = null;
+/** @type {unknown} */
+let lastIncidentsFile = null;
+/** @type {object | null} */
+let lastStatusBody = null;
 let searchActiveIndex = -1;
+
+const ISSUE_STATES = new Set(["degraded", "major", "future-maintenance"]);
 
 function syncStickyScrollMargin() {
   if (!stickyHeaderEl) return;
   const h = stickyHeaderEl.getBoundingClientRect().height;
   document.documentElement.style.setProperty("--sticky-offset", `${Math.ceil(h)}px`);
+}
+
+function loadVendorFilterPrefs() {
+  try {
+    const raw = localStorage.getItem(VENDOR_FILTER_STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (data.preset === "all" || data.preset === "issues" || data.preset === "custom") {
+      vendorFilterPreset = data.preset;
+    }
+    if (Array.isArray(data.selectedIds)) {
+      vendorCustomSelected = new Set(
+        data.selectedIds.filter((id) => typeof id === "string" && id)
+      );
+    }
+    const activePreset = document.querySelector(
+      `input[name="vendor-filter-preset"][value="${vendorFilterPreset}"]`
+    );
+    if (activePreset instanceof HTMLInputElement) activePreset.checked = true;
+  } catch {
+    /* ignore corrupt storage */
+  }
+}
+
+function saveVendorFilterPrefs() {
+  try {
+    localStorage.setItem(
+      VENDOR_FILTER_STORAGE_KEY,
+      JSON.stringify({
+        preset: vendorFilterPreset,
+        selectedIds: [...vendorCustomSelected],
+      })
+    );
+  } catch {
+    /* private mode / quota */
+  }
+}
+
+function adoptNewToolsForCustomFilter(sorted) {
+  if (vendorFilterPreset !== "custom") return;
+  const prev = new Set(allTools.map((t) => t.id));
+  for (const t of sorted) {
+    if (!prev.has(t.id)) vendorCustomSelected.add(t.id);
+  }
+}
+
+function filterToolsForDisplay(tools) {
+  if (vendorFilterPreset === "all") return tools;
+  if (vendorFilterPreset === "issues") {
+    return tools.filter((t) => ISSUE_STATES.has(t.state));
+  }
+  return tools.filter((t) => vendorCustomSelected.has(t.id));
+}
+
+function updateVendorFilterBadge(total) {
+  if (!vendorFilterBadgeEl) return;
+  const visible = filterToolsForDisplay(allTools).length;
+  const filtered = vendorFilterPreset !== "all" || visible < total;
+  if (!filtered || total === 0) {
+    vendorFilterBadgeEl.classList.add("vendor-filter__badge--hidden");
+    return;
+  }
+  vendorFilterBadgeEl.textContent = `${visible}/${total}`;
+  vendorFilterBadgeEl.classList.remove("vendor-filter__badge--hidden");
+}
+
+function syncVendorFilterPanelUi() {
+  const custom = vendorFilterPreset === "custom";
+  vendorFilterListEl?.classList.toggle("vendor-filter__list--hidden", !custom);
+  vendorFilterToolbarEl?.classList.toggle("vendor-filter__toolbar--hidden", !custom);
+  if (vendorFilterHintEl) {
+    vendorFilterHintEl.textContent = custom
+      ? "Choices are saved in this browser."
+      : vendorFilterPreset === "issues"
+        ? "Showing degraded, major, or future maintenance only."
+        : "All vendors are shown.";
+  }
+}
+
+function rebuildVendorFilterList() {
+  if (!vendorFilterListEl) return;
+  vendorFilterListEl.replaceChildren();
+  for (const tool of allTools) {
+    const label = document.createElement("label");
+    label.className = "vendor-filter__item";
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.checked = vendorCustomSelected.has(tool.id);
+    input.dataset.toolId = tool.id;
+    input.addEventListener("change", () => {
+      vendorFilterPreset = "custom";
+      const presetInput = document.querySelector(
+        'input[name="vendor-filter-preset"][value="custom"]'
+      );
+      if (presetInput instanceof HTMLInputElement) presetInput.checked = true;
+      if (input.checked) vendorCustomSelected.add(tool.id);
+      else vendorCustomSelected.delete(tool.id);
+      saveVendorFilterPrefs();
+      syncVendorFilterPanelUi();
+      applyDisplayFromCache();
+    });
+    const name = document.createElement("span");
+    name.className = "vendor-filter__item-name";
+    name.textContent = tool.name;
+    label.append(input, name);
+    vendorFilterListEl.append(label);
+  }
+  syncVendorFilterPanelUi();
+  updateVendorFilterBadge(allTools.length);
+}
+
+function setVendorFilterPopoverOpen(open) {
+  if (!vendorFilterToggleEl || !vendorFilterPopoverEl) return;
+  vendorFilterToggleEl.setAttribute("aria-expanded", open ? "true" : "false");
+  vendorFilterPopoverEl.hidden = !open;
+  vendorFilterPopoverEl.classList.toggle("vendor-filter__popover--hidden", !open);
+}
+
+function applyDisplayFromCache() {
+  if (!lastStatusBody) return;
+  paintDashboard(lastStatusBody, lastIncidentsFile);
+}
+
+function initVendorFilter() {
+  loadVendorFilterPrefs();
+  syncVendorFilterPanelUi();
+
+  document.querySelectorAll('input[name="vendor-filter-preset"]').forEach((el) => {
+    el.addEventListener("change", () => {
+      if (!(el instanceof HTMLInputElement) || !el.checked) return;
+      vendorFilterPreset = /** @type {"all" | "issues" | "custom"} */ (el.value);
+      if (vendorFilterPreset === "custom" && vendorCustomSelected.size === 0) {
+        for (const t of allTools) vendorCustomSelected.add(t.id);
+      }
+      saveVendorFilterPrefs();
+      syncVendorFilterPanelUi();
+      rebuildVendorFilterList();
+      applyDisplayFromCache();
+    });
+  });
+
+  vendorFilterSelectAllEl?.addEventListener("click", () => {
+    vendorFilterPreset = "custom";
+    const presetInput = document.querySelector(
+      'input[name="vendor-filter-preset"][value="custom"]'
+    );
+    if (presetInput instanceof HTMLInputElement) presetInput.checked = true;
+    for (const t of allTools) vendorCustomSelected.add(t.id);
+    saveVendorFilterPrefs();
+    syncVendorFilterPanelUi();
+    rebuildVendorFilterList();
+    applyDisplayFromCache();
+  });
+
+  vendorFilterClearAllEl?.addEventListener("click", () => {
+    vendorFilterPreset = "custom";
+    const presetInput = document.querySelector(
+      'input[name="vendor-filter-preset"][value="custom"]'
+    );
+    if (presetInput instanceof HTMLInputElement) presetInput.checked = true;
+    vendorCustomSelected.clear();
+    saveVendorFilterPrefs();
+    syncVendorFilterPanelUi();
+    rebuildVendorFilterList();
+    applyDisplayFromCache();
+  });
+
+  vendorFilterToggleEl?.addEventListener("click", (ev) => {
+    ev.stopPropagation();
+    const open = vendorFilterPopoverEl?.hidden !== false;
+    setVendorFilterPopoverOpen(open);
+    if (open) rebuildVendorFilterList();
+  });
+
+  document.addEventListener("click", (ev) => {
+    const root = document.getElementById("vendor-filter");
+    if (!root || root.contains(/** @type {Node} */ (ev.target))) return;
+    setVendorFilterPopoverOpen(false);
+  });
+
+  document.addEventListener("keydown", (ev) => {
+    if (ev.key === "Escape") setVendorFilterPopoverOpen(false);
+  });
 }
 
 function formatDate(iso) {
@@ -349,12 +554,32 @@ function initToolSearch() {
   });
 }
 
-function render(status, incidentsFile) {
-  const tools = sortToolsForDisplay(
+function paintDashboard(status, incidentsFile) {
+  const sorted = sortToolsForDisplay(
     Array.isArray(status.tools) ? status.tools : []
   );
+  adoptNewToolsForCustomFilter(sorted);
+  allTools = sorted;
+
+  const tools = filterToolsForDisplay(sorted);
   displayedTools = tools;
-  gridEl.replaceChildren(...tools.map((t) => renderToolCard(t, incidentsFile)));
+
+  if (tools.length === 0) {
+    gridEl.replaceChildren();
+    const empty = document.createElement("p");
+    empty.className = "grid__empty";
+    empty.textContent =
+      vendorFilterPreset === "issues"
+        ? "No vendors with active issues match this filter."
+        : "No vendors selected. Open Filter and choose at least one vendor.";
+    gridEl.append(empty);
+  } else {
+    gridEl.replaceChildren(...tools.map((t) => renderToolCard(t, incidentsFile)));
+  }
+
+  updateVendorFilterBadge(allTools.length);
+  if (!vendorFilterPopoverEl?.hidden) rebuildVendorFilterList();
+
   requestAnimationFrame(syncStickyScrollMargin);
 
   const polledAt = status.lastPolledAt ?? status.generatedAt;
@@ -402,6 +627,12 @@ function render(status, incidentsFile) {
   requestAnimationFrame(syncStickyScrollMargin);
 }
 
+function render(status, incidentsFile) {
+  lastStatusBody = status;
+  lastIncidentsFile = incidentsFile;
+  paintDashboard(status, incidentsFile);
+}
+
 async function load() {
   try {
     const [statusRes, incidentsRes] = await Promise.all([
@@ -430,6 +661,7 @@ function initAdvisoryDetails() {
   mq.addEventListener("change", sync);
 }
 
+initVendorFilter();
 initToolSearch();
 initAdvisoryDetails();
 window.addEventListener("resize", syncStickyScrollMargin);
