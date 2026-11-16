@@ -297,20 +297,41 @@ body {
 }
 
 .improvements-toast {
+  --improvements-toast-text: #f0f7ff;
+  --improvements-toast-label: #7ec8ff;
   position: fixed;
   z-index: 50;
   left: 50%;
   bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
   transform: translateX(-50%);
   width: min(26rem, calc(100vw - 2rem));
-  padding: 0.85rem 1rem;
-  border-radius: 12px;
-  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  background: color-mix(in srgb, var(--surface) 96%, var(--bg));
-  box-shadow: 0 12px 32px color-mix(in srgb, #000 22%, transparent);
+  padding: 1rem 1.1rem 1rem 1.35rem;
+  border-radius: 14px;
+  border: 2px solid #3d9dff;
+  background: linear-gradient(
+    135deg,
+    #0d2847 0%,
+    #163a5f 45%,
+    #1a4d7a 100%
+  );
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #5b9fd4 55%, #fff 10%),
+    0 0 28px color-mix(in srgb, var(--accent) 55%, transparent),
+    0 18px 42px color-mix(in srgb, #000 55%, transparent);
   opacity: 1;
   transition: opacity 0.45s ease, transform 0.45s ease;
   pointer-events: none;
+}
+
+.improvements-toast::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65rem;
+  bottom: 0.65rem;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(180deg, #7ec8ff, #3d9dff);
 }
 
 .improvements-toast--hidden {
@@ -324,18 +345,46 @@ body {
 
 .improvements-toast__text {
   margin: 0;
-  font-size: 0.88rem;
-  line-height: 1.45;
-  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--improvements-toast-text);
+  text-shadow: 0 1px 1px color-mix(in srgb, #000 35%, transparent);
 }
 
 .improvements-toast__text strong {
   display: block;
-  margin-bottom: 0.25rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--accent);
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--improvements-toast-label);
+}
+
+@media (prefers-color-scheme: light) {
+  .improvements-toast {
+    --improvements-toast-text: #0a1e33;
+    --improvements-toast-label: #0b4a8f;
+    border-color: #1a6fc9;
+    background: linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #e3f2ff 50%,
+      #c8e4ff 100%
+    );
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, #2563a8 35%, white),
+      0 0 22px color-mix(in srgb, #2563a8 28%, transparent),
+      0 14px 36px color-mix(in srgb, #2563a8 22%, transparent);
+  }
+
+  .improvements-toast::before {
+    background: linear-gradient(180deg, #1a6fc9, #0b4a8f);
+  }
+
+  .improvements-toast__text {
+    text-shadow: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
