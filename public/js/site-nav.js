@@ -11,7 +11,7 @@ export const SITE_VIEWS = [
   {
     id: "critical",
     href: "critical-releases.html",
-    label: "Critical Software Releases",
+    label: "CVE / Critical releases",
     pageTitle: "Critical Software Releases",
   },
   {
@@ -60,4 +60,54 @@ export function syncStickyScrollMarginForHeader() {
   if (!sticky) return;
   const h = sticky.getBoundingClientRect().height;
   document.documentElement.style.setProperty("--sticky-offset", `${Math.ceil(h)}px`);
+}
+
+const RECENT_IMPROVEMENTS_SEEN_KEY = "emea-dashboard-recent-improvements-v2";
+const RECENT_IMPROVEMENTS_MS = 8000;
+
+export function initRecentImprovementsToast() {
+  try {
+    if (localStorage.getItem(RECENT_IMPROVEMENTS_SEEN_KEY)) return;
+  } catch {
+    return;
+  }
+
+  let toast = document.getElementById("recent-improvements-toast");
+  if (!toast) {
+    toast = document.createElement("aside");
+    toast.id = "recent-improvements-toast";
+    toast.className = "improvements-toast improvements-toast--hidden";
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
+    toast.hidden = true;
+    const text = document.createElement("p");
+    text.className = "improvements-toast__text";
+    text.innerHTML =
+      "<strong>Recent improvements</strong>Improved layouts; clickable cards to status pages; search and persistent filtering. Introducing the CVE vulnerability list and Statutory requirements views.";
+    toast.append(text);
+    document.body.append(toast);
+  }
+
+  const markSeen = () => {
+    try {
+      localStorage.setItem(RECENT_IMPROVEMENTS_SEEN_KEY, new Date().toISOString());
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const dismiss = () => {
+    toast.classList.add("improvements-toast--leaving");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const fadeMs = reducedMotion ? 200 : 450;
+    window.setTimeout(() => {
+      toast.classList.add("improvements-toast--hidden");
+      toast.hidden = true;
+      markSeen();
+    }, fadeMs);
+  };
+
+  toast.classList.remove("improvements-toast--hidden");
+  toast.hidden = false;
+  window.setTimeout(dismiss, RECENT_IMPROVEMENTS_MS);
 }
