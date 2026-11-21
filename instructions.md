@@ -143,7 +143,11 @@ The site has three views, switchable from the **View** dropdown in the sticky he
 |------|------|------|
 | SaaS | `index.html` | `data/status.json` (polled) |
 | Critical Software Releases | `critical-releases.html` | `data/critical-releases.json` (manual) |
-| Statutory requirements | `statutory.html` | `data/statutory.json` (manual) |
+| Statutory requirements | `statutory.html` | `data/statutory.json` (country regulatory matrix) |
+
+### Statutory data (`data/statutory.json`)
+
+Replace or update the file with your country matrix (`metadata`, `countries[]`). Each country includes `privacy`, `accessibility`, and `finance_promotions` blocks (`regulator`, `key_notes`, optional `url`, `legislation`, `standard`, `ad_standards`).
 
 To add a critical release, append an object to `data/critical-releases.json` (`product`, `title`, `severity`, `summary`, `actionRequired`, `referenceUrl`, `publishedAt`). Deploy via the usual Pages workflow so `data/` is copied to the site.
 

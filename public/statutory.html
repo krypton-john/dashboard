@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Statutory requirements — EMEA Dashboard</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="css/main.css?v=13" />
+    <link rel="stylesheet" href="css/main.css?v=14" />
   </head>
   <body>
     <main class="page">
@@ -26,18 +26,53 @@
       </div>
 
       <div class="page-intro" id="page-intro">
-        <p class="lede">
-          Regulatory and statutory deadlines for EMEA. Add items to <code>data/statutory.json</code> when
-          requirements are defined.
-        </p>
+        <p class="lede" id="statutory-scope">EMEA regulatory reference by country.</p>
+
+        <div class="statutory-toolbar" role="search">
+          <label class="statutory-toolbar__field">
+            <span class="statutory-toolbar__label">Country</span>
+            <input
+              id="statutory-search-input"
+              class="statutory-toolbar__input"
+              type="search"
+              placeholder="Search country…"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </label>
+          <label class="statutory-toolbar__field">
+            <span class="statutory-toolbar__label">Region</span>
+            <select id="statutory-region-filter" class="statutory-toolbar__select">
+              <option value="all">All regions</option>
+              <option value="EU">EU</option>
+              <option value="EEA">EEA</option>
+              <option value="Non-EU (UK)">United Kingdom</option>
+            </select>
+          </label>
+          <label class="statutory-toolbar__field">
+            <span class="statutory-toolbar__label">Focus</span>
+            <select id="statutory-domain-filter" class="statutory-toolbar__select">
+              <option value="all">All domains</option>
+              <option value="privacy">Privacy</option>
+              <option value="accessibility">Accessibility</option>
+              <option value="finance_promotions">Financial promotions</option>
+            </select>
+          </label>
+        </div>
       </div>
 
-      <section class="grid" id="statutory-grid" aria-label="Statutory requirements"></section>
+      <section
+        class="grid grid--statutory"
+        id="statutory-grid"
+        aria-label="Statutory requirements by country"
+      ></section>
 
       <footer class="footer">
-        <p>Placeholder view — ready for a third dataset.</p>
+        <p>
+          Data from <code>data/statutory.json</code> (privacy, accessibility, financial promotion rules).
+        </p>
       </footer>
     </main>
-    <script src="js/statutory.js?v=1" type="module"></script>
+    <script src="js/statutory.js?v=2" type="module"></script>
   </body>
 </html>

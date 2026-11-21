@@ -295,6 +295,141 @@ a.release-card:hover {
   font-weight: 600;
 }
 
+.statutory-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.statutory-toolbar__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1 1 10rem;
+  min-width: 0;
+}
+
+.statutory-toolbar__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.statutory-toolbar__input,
+.statutory-toolbar__select {
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--muted) 28%, transparent);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.statutory-toolbar__input:focus,
+.statutory-toolbar__select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.grid--statutory {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+}
+
+.statutory-country-card {
+  padding: 1rem 1.1rem 1.15rem;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--muted) 22%, transparent);
+  box-shadow: 0 6px 20px color-mix(in srgb, #000 12%, transparent);
+}
+
+.statutory-country-card__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.statutory-country-card__meta {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.statutory-country-card__domains {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.85rem;
+}
+
+.statutory-domain {
+  padding-top: 0.65rem;
+  border-top: 1px solid color-mix(in srgb, var(--muted) 16%, transparent);
+}
+
+.statutory-domain:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.statutory-domain__title {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.statutory-domain--privacy .statutory-domain__title {
+  color: var(--accent);
+}
+
+.statutory-domain--accessibility .statutory-domain__title {
+  color: var(--ok);
+}
+
+.statutory-domain--finance_promotions .statutory-domain__title {
+  color: var(--warn);
+}
+
+.statutory-domain__facts {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+}
+
+.statutory-domain__facts dt {
+  margin: 0.35rem 0 0.1rem;
+  font-weight: 650;
+  color: var(--text);
+}
+
+.statutory-domain__facts dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+.statutory-domain__link {
+  margin: 0.45rem 0 0;
+  font-size: 0.78rem;
+}
+
+.statutory-domain__link a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.statutory-domain__notes {
+  margin: 0.5rem 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+
 .page-intro code {
   font-size: 0.85em;
   padding: 0.1rem 0.35rem;
