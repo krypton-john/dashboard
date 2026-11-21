@@ -1,4 +1,8 @@
-import { initSiteNav, syncStickyScrollMarginForHeader } from "./site-nav.js";
+import {
+  initRecentImprovementsToast,
+  initSiteNav,
+  syncStickyScrollMarginForHeader,
+} from "./site-nav.js";
 
 const SEVERITY_LABEL = {
   critical: "Critical",
@@ -132,5 +136,6 @@ async function load() {
 }
 
 initSiteNav("critical");
+initRecentImprovementsToast();
 window.addEventListener("resize", syncStickyScrollMarginForHeader);
 load();

@@ -1,4 +1,8 @@
-import { initSiteNav, syncStickyScrollMarginForHeader } from "./site-nav.js";
+import {
+  initRecentImprovementsToast,
+  initSiteNav,
+  syncStickyScrollMarginForHeader,
+} from "./site-nav.js";
 
 const DOMAIN_KEYS = [
   { key: "privacy", label: "Privacy" },
@@ -206,6 +210,7 @@ async function load() {
 }
 
 initSiteNav("statutory");
+initRecentImprovementsToast();
 initStatutoryFilters();
 window.addEventListener("resize", syncStickyScrollMarginForHeader);
 load();

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Statutory requirements — EMEA Dashboard</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="css/main.css?v=14" />
+    <link rel="stylesheet" href="css/main.css?v=15" />
   </head>
   <body>
     <main class="page">
@@ -14,12 +14,13 @@
           <p class="eyebrow eyebrow--compact">EMEA</p>
           <div class="header__top">
             <h1>Statutory</h1>
-            <div class="header__actions">
-              <div class="view-select-wrap">
-                <label class="sr-only" for="site-view-select">Dashboard view</label>
-                <select id="site-view-select" class="view-select" aria-label="Dashboard view"></select>
-              </div>
+          </div>
+          <div class="header__toolbar">
+            <div class="view-select-wrap view-select-wrap--toolbar">
+              <label class="sr-only" for="site-view-select">Dashboard view</label>
+              <select id="site-view-select" class="view-select" aria-label="Dashboard view"></select>
             </div>
+            <div class="header__actions" aria-hidden="true"></div>
           </div>
           <p id="last-updated" class="last-updated last-updated--bar">Loading…</p>
         </header>
@@ -73,6 +74,6 @@
         </p>
       </footer>
     </main>
-    <script src="js/statutory.js?v=2" type="module"></script>
+    <script src="js/statutory.js?v=3" type="module"></script>
   </body>
 </html>

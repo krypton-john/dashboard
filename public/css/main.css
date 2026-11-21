@@ -72,7 +72,20 @@ body {
 }
 
 .header--bar .header__top {
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.15rem;
+}
+
+.header__toolbar {
+  display: grid;
+  grid-template-columns: minmax(10rem, 15rem) minmax(0, 1fr);
+  gap: 0.45rem 0.65rem;
+  align-items: center;
+  margin-bottom: 0.15rem;
+}
+
+.view-select-wrap--toolbar {
+  width: 100%;
+  min-width: 0;
 }
 
 .eyebrow--compact {
@@ -135,7 +148,8 @@ body {
   font: inherit;
   font-size: 0.8rem;
   font-weight: 600;
-  max-width: min(11.5rem, 42vw);
+  width: 100%;
+  max-width: 15rem;
   padding: 0.4rem 1.75rem 0.4rem 0.5rem;
   border-radius: 8px;
   border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--muted));
@@ -612,10 +626,11 @@ a.release-card:hover {
   --improvements-toast-label: #7ec8ff;
   position: fixed;
   z-index: 50;
+  top: 50%;
   left: 50%;
-  bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
-  transform: translateX(-50%);
-  width: min(26rem, calc(100vw - 2rem));
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  width: min(28rem, calc(100vw - 2rem));
   padding: 1rem 1.1rem 1rem 1.35rem;
   border-radius: 14px;
   border: 2px solid #3d9dff;
@@ -651,7 +666,7 @@ a.release-card:hover {
 
 .improvements-toast--leaving {
   opacity: 0;
-  transform: translateX(-50%) translateY(0.5rem);
+  transform: translate(-50%, calc(-50% + 0.75rem));
 }
 
 .improvements-toast__text {
@@ -704,7 +719,7 @@ a.release-card:hover {
   }
 
   .improvements-toast--leaving {
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -1070,9 +1085,24 @@ a.card:focus-visible {
     gap: 0.5rem;
   }
 
+  .header__toolbar {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .view-select {
+    max-width: none;
+    font-size: 0.78rem;
+  }
+
   .header__actions {
     flex-wrap: wrap;
     justify-content: flex-end;
+    width: 100%;
+  }
+
+  .header__actions[aria-hidden="true"] {
+    display: none;
   }
 
   .vendor-filter__popover {
@@ -1081,13 +1111,8 @@ a.card:focus-visible {
     width: min(18.5rem, calc(100vw - 2.5rem));
   }
 
-  .view-select {
-    max-width: min(9.5rem, 38vw);
-    font-size: 0.75rem;
-  }
-
   .tool-search__input {
-    max-width: min(25ch, calc(100vw - 8.5rem));
+    max-width: min(25ch, calc(100vw - 4rem));
   }
 
   .grid {

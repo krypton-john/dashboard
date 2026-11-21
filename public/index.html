@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SaaS Status Dashboard</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="css/main.css?v=13" />
+    <link rel="stylesheet" href="css/main.css?v=15" />
   </head>
   <body>
     <main class="page">
@@ -14,11 +14,13 @@
           <p class="eyebrow eyebrow--compact">EMEA</p>
           <div class="header__top">
             <h1>SaaS Status</h1>
+          </div>
+          <div class="header__toolbar">
+            <div class="view-select-wrap view-select-wrap--toolbar">
+              <label class="sr-only" for="site-view-select">Dashboard view</label>
+              <select id="site-view-select" class="view-select" aria-label="Dashboard view"></select>
+            </div>
             <div class="header__actions">
-              <div class="view-select-wrap">
-                <label class="sr-only" for="site-view-select">Dashboard view</label>
-                <select id="site-view-select" class="view-select" aria-label="Dashboard view"></select>
-              </div>
               <div class="vendor-filter" id="vendor-filter">
                 <button
                   type="button"
@@ -127,18 +129,6 @@
         <p>Data refreshes automatically. Polled every 6 hours via GitHub Actions.</p>
       </footer>
     </main>
-    <aside
-      id="recent-improvements-toast"
-      class="improvements-toast improvements-toast--hidden"
-      role="status"
-      aria-live="polite"
-      hidden
-    >
-      <p class="improvements-toast__text">
-        <strong>Recent improvements:</strong>
-        Improve layouts, Clickable Cards to Status Pages, Search and Persistent Filtering
-      </p>
-    </aside>
-    <script src="js/dashboard.js?v=11" type="module"></script>
+    <script src="js/dashboard.js?v=12" type="module"></script>
   </body>
 </html>
