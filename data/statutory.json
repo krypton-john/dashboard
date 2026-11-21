@@ -1,5 +1,634 @@
 {
-  "version": 1,
-  "updatedAt": null,
-  "items": []
+  "metadata": {
+    "version": "2026.1",
+    "scope": "EU-27, EEA/EFTA, and United Kingdom",
+    "domains": ["GDPR / Privacy", "Web Accessibility (EAA / EN 301 549)", "Financial Promotions"],
+    "last_updated": "2026-11"
+  },
+  "countries": [
+    {
+      "country_code": "AT",
+      "country_name": "Austria",
+      "region_group": "EU",
+      "privacy": {
+        "regulator": "Datenschutzbehörde (DSB)",
+        "url": "https://dsb.gv.at",
+        "key_notes": "Strict scrutiny on US data transfers and cookie pay-or-okay models."
+      },
+      "accessibility": {
+        "legislation": "Barrierefreiheitsgesetz (BaFG)",
+        "standard": "EN 301 549 / WCAG 2.1 AA",
+        "key_notes": "Mandatory accessibility statement required for covered private-sector e-commerce and banking sites."
+      },
+      "finance_promotions": {
+        "regulator": "Financial Market Authority (FMA)",
+        "ad_standards": "Österreichischer Werberat",
+        "key_notes": "Strict rules on retail investment marketing and crypto-asset promotions under MiCA."
+      }
+    },
+    {
+      "country_code": "BE",
+      "country_name": "Belgium",
+      "region_group": "EU",
+      "privacy": {
+        "regulator": "Autorité de protection des données / Gegevensbeschermingsautoriteit (APD/GBA)",
+        "url": "https://dataprotectionauthority.be",
+        "key_notes": "Active enforcement on IAB TCF cookie banners and dark patterns."
+      },
+      "accessibility": {
+        "legislation": "Belgian EAA Transposition Law",
+        "standard": "EN 301 549 / WCAG 2.1 AA",
+        "key_notes": "Multilingual accessibility disclosures required (Dutch, French, German depending on target audience)."
+      },
+      "finance_promotions": {
+        "regulator": "Financial Services and Markets Authority (FSMA)",
+        "ad_standards": "JEP (Jury for Ethical Practices in Advertising)",
+        "key_notes": "Mandatory risk labels and strict prior-notification rules for mass-market retail financial campaigns."
+      }
+    },
+    {
+      "country_code": "BG",
+      "country_name": "Bulgaria",
+      "region_group": "EU",
+      "privacy": {
+        "regulator": "Commission for Personal Data Protection (CPDP)",
+        "url": "https://cpdp.bg",
+        "key_notes": "Follows EDPB guidelines on explicit prior consent for non-essential cookies."
+      },
+      "accessibility": {
+        "legislation": "Accessibility Requirements for Products and Services Act",
+        "standard": "EN 301 549 / WCAG 2.1 AA",
+        "key_notes": "Bulgarian language accessibility statement required for covered digital services."
+      },
+      "finance_promotions": {
+        "regulator": "Financial Supervision Commission (FSC)",
+        "ad_standards": "National Council for Self-Regulation (NCSR)",
+        "key_notes": "Clear separation between informational content and marketing communications required."
+      }
+    },
+    {
+      "country_code": "HR",
+      "country_name": "Croatia",
+      "region_group": "EU",
+      "privacy": {
+        "regulator": "Croatian Personal Data Protection Agency (AZOP)",
+        "url": "https://azop.hr",
+        "key_notes": "Active fining authority focusing on transparent privacy policies and valid cookie consent."
+      },
+      "accessibility": {
+        "legislation": "Croatian EAA Implementation Act",
+        "standard": "EN 301 549 / WCAG 2.1 AA",
+        "key_notes": "Accessibility notice and feedback mechanism required on e-commerce and banking portals."
+      },
+      "finance_promotions": {
+        "regulator": "Croatian Financial Services Supervisory Agency (HANFA)",
+        "ad_standards": "HURA",
+        "key_notes": "Strict compliance with ESMA guidelines on leveraged products and investment risk warnings."
+      }
+    },
+    {
+      "country_code": "CY",
+      "country_name": "Cyprus",
+      "region_group": "EU",
+      "privacy": {
+        "regulator": "Office of the Commissioner for Personal Data Protection",
+        "url": "https://dataprotection.gov.cy",
+        "key_notes": "Requires clear opt-in for analytics and marketing trackers; pre-ticked boxes prohibited."
+      },
+      "accessibility": {
+        "legislation": "Accessibility of Products and Services Law",
+        "standard": "EN 301 549 / WCAG 2.1 AA",
+        "key_notes": "Requires published accessibility compliance information for covered consumer services."
+      },
+      "finance_promotions": {
+        "regulator": "Cyprus Securities and Exchange Commission (CySEC)",
+        "ad_standards": "Cyprus Advertising Regulation Organization (CARO)",
+        "key_notes": "Heavy oversight on cross-border CFD/forex marketing, affiliate marketers, and finfluencers."
+      }
+    },
+    {
+      "country_code": "CZ",
+      "country_name": "Czechia",
+      "region_group": "EU",
+      "privacy": {
+        "regulator": "Office for Personal Data Protection (ÚOOÚ)",
+        "url": "https://uoou.gov.cz",
+        "key_notes": "Enforces strict opt-in cookie regime; active audits of cookie banner reject buttons."
+      },
+      "accessibility": {
+        "legislation": "Act on Accessibility Requirements for Certain Products and Services",
+        "standard": "EN 301 549 / WCAG 2.1 AA",
+        "key_notes": "Supervised by the Czech Trade Inspection Authority (ČOI) for e-commerce websites."
+      },
+      "finance_promotions": {
+        "regulator": "Czech National Bank (ČNB)",
+        "ad_standards": "Rada pro reklamu (RPR)",
+        "key_notes": "Prominent APR/RPSN disclosures mandatory for all consumer credit advertisements."
+      }
+    },
+    {
+      "country_code": "DK",
+      "country_name": "Denmark",
+      "region_group": "EU",
+      "privacy": {
+        "regulator": "Datatilsynet",
+        "url": "https://datatilsynet.dk",
+        "key_notes": "Strict guidelines on tracking pixels, Server-Side GTM, and equal prominence of reject/accept buttons."
+      },
+      "accessibility": {
+        "legislation": "Danish Accessibility Act (Tilgængelighedsloven)",
+        "standard": "EN 301 549 / WCAG 2.1 AA",
+        "key_notes": "Enforced by the Danish Safety Technology Authority; requires accessible customer support channels."
+      },
+      "finance_promotions": {
+        "regulator": "Danish Financial Supervisory Authority (Finanstilsynet)",
+        "ad_standards": "Forbrugerombudsmanden (Consumer Ombudsman)",
+        "key_notes": "Very strict marketing law on consumer loans, hidden fees, and influencer disclosures."
+      }
+    },
+    {
+      "country_code": "EE",
+      "country_name": "Estonia",
+      "region_group": "EU",
+      "privacy": {
+        "regulator": "Estonian Data Protection Inspectorate (AKI)",
+        "url": "https://aki.ee",
+        "key_notes": "Focuses on transparent data processing notices and direct marketing opt-ins."
+      },
+      "accessibility": {
+        "legislation": "Accessibility of Products and Services Act",
+        "standard": "EN 301 549 / WCAG 2.1 AA",
+        "key_notes": "Supervised by the Consumer Protection and Technical Regulatory Authority (TTJA)."
+      },
+      "finance_promotions": {
+        "regulator": "Finantsinspektsioon (FSA)",
+        "ad_standards": "TTJA",
+        "key_notes": "Strict ban on aggressive consumer credit advertising and misleading return projections."
+      }
+    },
+    {
+      "country_code": "FI",
+      "country_name": "Finland",
+      "region_group": "EU",
+      "privacy": {
+        "regulator": "Office of the Data Protection Ombudsman (Tietosuojavaltuutetun toimisto)",
+        "url": "https://tietosuoja.fi",
+        "key_notes": "Traficom oversees cookie consent; requires effortless refusal on the first banner layer."
+      },
+      "accessibility": {
+        "legislation": "Act on the Provision of Digital Services",
+        "standard": "EN 301 549 / WCAG 2.1 AA",
+        "key_notes": "Mandatory accessibility statement and electronic feedback channel monitored by Traficom."
+      },
+      "finance_promotions": {
+        "regulator": "Finnish Financial Supervisory Authority (FIN-FSA)",
+        "ad_standards": "Council of Ethics in Advertising (MEN)",
+        "key_notes": "Strict rules on consumer credit marketing and clear risk/cost disclosures."
+      }
+    },
+    {
+      "country_code": "FR",
+      "country_name": "France",
+      "region_group": "EU",
+      "privacy": {
+        "regulator": "Commission Nationale de l'Informatique et des Libertés (CNIL)",
+        "url": "https://cnil.fr",
+        "key_notes": "Strict enforcement on 'Reject All' visual parity, 6-month consent validity, and approved audience measurement exemptions."
+      },
+      "accessibility": {
+        "legislation": "RGAA (Référentiel Général d'Amélioration de l'Accessibilité)",
+        "standard": "RGAA 4.1 / EN 301 549 / WCAG 2.1 AA",
+        "key_notes": "Mandatory French accessibility statement, multi-year schema, and homepage compliance status tag."
+      },
+      "finance_promotions": {
+        "regulator": "Autorité des Marchés Financiers (AMF) & ACPR",
+        "ad_standards": "ARPP (Autorité de Régulation Professionnelle de la Publicité)",
+        "key_notes": "Strict Loi Influenceurs rules, crypto promotion registration rules, and mandatory risk warnings."
+      }
+    },
+    {
+      "country_code": "DE",
+      "country_name": "Germany",
+      "region_group": "EU",
+      "privacy": {
+        "regulator": "BfDI & 16 State Data Protection Authorities (DSK)",
+        "url": "https://bund.de",
+        "key_notes": "TDDDG governs cookies; strict enforcement against nudging/dark patterns and US ad-tech data transfers."
+      },
+      "accessibility": {
+        "legislation": "Barrierefreiheitsstärkungsgesetz (BFSG)",
+        "standard": "EN 301 549 / WCAG 2.1 AA",
+        "key_notes": "Mandatory German accessibility statement required on B2C e-commerce, banking, and digital service websites."
+      },
+      "finance_promotions": {
+"regulator": "Federal Financial Supervisory Authority (BaFin)",
+"ad_standards": "Deutscher Werberat",
+"key_notes": "Strict rules under WpHG and FinVermV; requires balanced risk/reward framing and clear legal disclaimers."
 }
+},
+{
+"country_code": "GR",
+"country_name": "Greece",
+"region_group": "EU",
+"privacy": {
+"regulator": "Hellenic Data Protection Authority (HDPA)",
+"url": "dpa.gr",
+"key_notes": "Specific guidelines banning pre-ticked boxes and requiring granular cookie category toggles."
+},
+"accessibility": {
+"legislation": "Law 4994/2022 (EAA Transposition)",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Requires Greek-language accessibility information for covered private digital services."
+},
+"finance_promotions": {
+"regulator": "Hellenic Capital Market Commission (HCMC) & Bank of Greece",
+"ad_standards": "SEE (Advertising Self-Regulation Council)",
+"key_notes": "Follows ESMA marketing guidelines; strict oversight of investment and credit advertisements."
+}
+},
+{
+"country_code": "HU",
+"country_name": "Hungary",
+"region_group": "EU",
+"privacy": {
+"regulator": "National Authority for Data Protection and Freedom of Information (NAIH)",
+"url": "naih.hu",
+"key_notes": "Requires clear Hungarian privacy notices and prior consent for marketing cookies."
+},
+"accessibility": {
+"legislation": "Act XVII of 2022 on Accessibility Requirements",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Applies to consumer banking, e-commerce, and electronic communications."
+},
+"finance_promotions": {
+"regulator": "Magyar Nemzeti Bank (MNB - Central Bank of Hungary)",
+"ad_standards": "ÖRT (Self-Regulatory Advertising Board)",
+"key_notes": "Strict consumer protection rules requiring prominent APR (THM) display in credit ads."
+}
+},
+{
+"country_code": "IS",
+"country_name": "Iceland",
+"region_group": "EEA",
+"privacy": {
+"regulator": "Persónuvernd (Icelandic Data Protection Authority)",
+"url": "personuvernd.is",
+"key_notes": "Applies GDPR via EEA Agreement; strict rules on electronic marketing and tracking."
+},
+"accessibility": {
+"legislation": "Icelandic EAA Implementation Act",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Aligned with EU EAA technical requirements for digital consumer services."
+},
+"finance_promotions": {
+"regulator": "Central Bank of Iceland (FSA)",
+"ad_standards": "Neytendastofa (Consumer Agency)",
+"key_notes": "Strict scrutiny on hidden financial fees and misleading credit promotions."
+}
+},
+{
+"country_code": "IE",
+"country_name": "Ireland",
+"region_group": "EU",
+"privacy": {
+"regulator": "Data Protection Commission (DPC)",
+"url": "dataprotection.ie",
+"key_notes": "Lead supervisory authority for many EU multinationals; strict guidance on cookie sliders, nudging, and 6-month consent lifespan."
+},
+"accessibility": {
+"legislation": "S.I. No. 636/2023 (European Union Accessibility Requirements of Products and Services Regulations)",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Enforced by CCPC (e-commerce), Central Bank (banking), and Coimisiún na Meán (media)."
+},
+"finance_promotions": {
+"regulator": "Central Bank of Ireland (CBI)",
+"ad_standards": "Advertising Standards Authority for Ireland (ASAI)",
+"key_notes": "Consumer Protection Code enforces strict rules on regulatory disclosure statements, font sizes, and keeping key conditions out of footnotes."
+}
+},
+{
+"country_code": "IT",
+"country_name": "Italy",
+"region_group": "EU",
+"privacy": {
+"regulator": "Garante per la protezione dei dati personali",
+"url": "garanteprivacy.it",
+"key_notes": "Mandatory 'X' close button on cookie banners that defaults to rejecting all non-essential cookies; 6-month re-prompt rule."
+},
+"accessibility": {
+"legislation": "Legge Stanca & Legislative Decree 82/2022 (AgID)",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Mandatory annual Italian accessibility declaration filed via AgID portal and linked in the footer."
+},
+"finance_promotions": {
+"regulator": "CONSOB & Banca d'Italia",
+"ad_standards": "Istituto dell'Autodisciplina Pubblicitaria (IAP)",
+"key_notes": "Strict scrutiny on investment performance claims, crypto promotions, and mandatory Italian risk warnings."
+}
+},
+{
+"country_code": "LV",
+"country_name": "Latvia",
+"region_group": "EU",
+"privacy": {
+"regulator": "Data State Inspectorate (DVI)",
+"url": "dvi.gov.lv",
+"key_notes": "Enforces GDPR consent standards and strict rules against unsolicited commercial communications."
+},
+"accessibility": {
+"legislation": "Law on Accessibility of Goods and Services",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Monitored by the Consumer Rights Protection Centre (PTAC)."
+},
+"finance_promotions": {
+"regulator": "Latvijas Banka (Bank of Latvia)",
+"ad_standards": "PTAC & Latvian Advertising Association",
+"key_notes": "Strict restrictions on consumer credit advertising hours and aggressive lending claims."
+}
+},
+{
+"country_code": "LI",
+"country_name": "Liechtenstein",
+"region_group": "EEA",
+"privacy": {
+"regulator": "Datenschutzstelle (DSS)",
+"url": "datenschutzstelle.li",
+"key_notes": "Full GDPR applicability via EEA; aligns closely with DACH region privacy standards."
+},
+"accessibility": {
+"legislation": "Liechtenstein EAA Implementation Act",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Requires accessible digital banking and e-commerce interfaces."
+},
+"finance_promotions": {
+"regulator": "Financial Market Authority Liechtenstein (FMA)",
+"ad_standards": "Office of Economic Affairs",
+"key_notes": "Applies EU MiFID II and ESMA financial promotion guidelines."
+}
+},
+{
+"country_code": "LT",
+"country_name": "Lithuania",
+"region_group": "EU",
+"privacy": {
+"regulator": "State Data Protection Inspectorate (VDAI)",
+"url": "lrv.lt",
+"key_notes": "Requires active opt-in for cookies and clear retention periods in privacy notices."
+},
+"accessibility": {
+"legislation": "Law on Accessibility Requirements for Products and Services",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Enforced by the State Consumer Rights Protection Authority (VVTAT)."
+},
+"finance_promotions": {
+"regulator": "Bank of Lithuania (Lietuvos bankas)",
+"ad_standards": "VVTAT",
+"key_notes": "Major fintech hub; strict guidelines on fintech/crypto marketing, cooling-off periods, and risk warnings."
+}
+},
+{
+"country_code": "LU",
+"country_name": "Luxembourg",
+"region_group": "EU",
+"privacy": {
+"regulator": "Commission Nationale pour la Protection des Données (CNPD)",
+"url": "public.lu",
+"key_notes": "Active auditor of DPO appointments and cookie banner compliance for financial/tech entities."
+},
+"accessibility": {
+"legislation": "Law of 8 March 2023 on Accessibility Requirements",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Supervised by OSAPS; requires accessible digital services and public compliance info."
+},
+"finance_promotions": {
+"regulator": "Commission de Surveillance du Secteur Financier (CSSF)",
+"ad_standards": "CLEP",
+"key_notes": "Strict oversight of cross-border fund marketing (UCITS/AIFMD) and investment promotions."
+}
+},
+{
+"country_code": "MT",
+"country_name": "Malta",
+"region_group": "EU",
+"privacy": {
+"regulator": "Office of the Information and Data Protection Commissioner (IDPC)",
+"url": "idpc.org.mt",
+"key_notes": "Enforces ePrivacy cookie consent and transparent data sharing disclosures."
+},
+"accessibility": {
+"legislation": "Accessibility Measures (European Accessibility Act) Regulations",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Monitored by the Malta Competition and Consumer Affairs Authority (MCCAA)."
+},
+"finance_promotions": {
+"regulator": "Malta Financial Services Authority (MFSA)",
+"ad_standards": "MCCAA",
+"key_notes": "Specific rules for virtual financial assets (crypto), investment funds, and retail trading ads."
+}
+},
+{
+"country_code": "NL",
+"country_name": "Netherlands",
+"region_group": "EU",
+"privacy": {
+"regulator": "Autoriteit Persoonsgegevens (AP)",
+"url": "autoriteitpersoonsgegevens.nl",
+"key_notes": "Heavy enforcement against deceptive cookie walls, hidden reject options, and unauthorized tracking pixels."
+},
+"accessibility": {
+"legislation": "Dutch EAA Implementation Act (Implementatiewet toegankelijkheidsvoorschriften)",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Enforced by ACM (e-commerce) and AFM (financial services)."
+},
+"finance_promotions": {
+
+
+"regulator": "Netherlands Authority for the Financial Markets (AFM)",
+"ad_standards": "Stichting Reclame Code (SRC)",
+"key_notes": "Mandatory standardized credit warning banner ('Let op! Geld lenen kost geld') and strict finfluencer rules."
+}
+},
+{
+"country_code": "NO",
+"country_name": "Norway",
+"region_group": "EEA",
+"privacy": {
+"regulator": "Datatilsynet",
+"url": "datatilsynet.no",
+"key_notes": "Applies GDPR via EEA; strict enforcement on behavioral advertising and consent validity."
+},
+"accessibility": {
+"legislation": "Equality and Anti-Discrimination Act (Uu-tilsynet)",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Long-standing strict enforcement on private-sector websites by Uu-tilsynet; mandatory accessibility statement."
+},
+"finance_promotions": {
+"regulator": "Finanstilsynet (Financial Supervisory Authority of Norway)",
+"ad_standards": "Forbrukertilsynet (Consumer Authority)",
+"key_notes": "Strict rules prohibiting aggressive marketing of unsecured consumer credit."
+}
+},
+{
+"country_code": "PL",
+"country_name": "Poland",
+"region_group": "EU",
+"privacy": {
+"regulator": "Personal Data Protection Office (UODO)",
+"url": "uodo.gov.pl",
+"key_notes": "Electronic Communications Law requires explicit, unambiguous cookie consent; UOKiK also fines dark patterns."
+},
+"accessibility": {
+"legislation": "Polish Accessibility Act (Ustawa o zapewnianiu spełniania wymagań dostępności)",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Mandatory Polish accessibility information required for e-commerce, banking, and digital services."
+},
+"finance_promotions": {
+"regulator": "Polish Financial Supervision Authority (KNF)",
+"ad_standards": "UOKiK & Rada Reklamy",
+"key_notes": "Strict scrutiny on finfluencers, investment scams, and mandatory RRSO (APR) disclosures."
+}
+},
+{
+"country_code": "PT",
+"country_name": "Portugal",
+"region_group": "EU",
+"privacy": {
+"regulator": "Comissão Nacional de Proteção de Dados (CNPD)",
+"url": "cnpd.pt",
+"key_notes": "Enforces strict prior opt-in for non-essential cookies and clear Portuguese privacy policies."
+},
+"accessibility": {
+"legislation": "Decree-Law No. 82/2022",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Requires accessibility compliance statements for covered consumer digital platforms."
+},
+"finance_promotions": {
+"regulator": "CMVM (Securities) & Banco de Portugal (Banking)",
+"ad_standards": "ARP (Auto Regulação Publicitária)",
+"key_notes": "Strict rules on retail investment advertisements, social media promotions, and credit TAEG disclosures."
+}
+},
+{
+"country_code": "RO",
+"country_name": "Romania",
+"region_group": "EU",
+"privacy": {
+"regulator": "ANSPDCP",
+"url": "dataprotection.ro",
+"key_notes": "Regular fines for unconsented marketing communications and inadequate cookie consent mechanisms."
+},
+"accessibility": {
+"legislation": "Law No. 232/2022",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Applies to e-commerce, banking, and audiovisual services."
+},
+"finance_promotions": {
+"regulator": "Financial Supervisory Authority (ASF) & National Bank of Romania (BNR)",
+"ad_standards": "Romanian Advertising Council (RAC)",
+"key_notes": "Requires clear risk warnings and transparent fee/APR disclosures in Romanian."
+}
+},
+{
+"country_code": "SK",
+"country_name": "Slovakia",
+"region_group": "EU",
+"privacy": {
+"regulator": "Office for Personal Data Protection (ÚOOÚ SR)",
+"url": "dataprotection.gov.sk",
+"key_notes": "Electronic Communications Act mandates active opt-in for cookies; browser settings alone are insufficient."
+},
+"accessibility": {
+"legislation": "Act No. 351/2022 on Accessibility of Products and Services",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Supervised by the Slovak Trade Inspection (SOI)."
+},
+"finance_promotions": {
+"regulator": "National Bank of Slovakia (NBS)",
+"ad_standards": "Rada pre reklamu (RPR)",
+"key_notes": "Strict rules on consumer loan advertising and mandatory warning notices."
+}
+},
+{
+"country_code": "SI",
+"country_name": "Slovenia",
+"region_group": "EU",
+"privacy": {
+"regulator": "Information Commissioner (Informacijski pooblaščenec - IP)",
+"url": "ip-rs.si",
+"key_notes": "ZEKom-2 enforces strict opt-in for cookies and granular user controls."
+},
+"accessibility": {
+"legislation": "Accessibility of Products and Services Act (ZDPI)",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Applies to e-commerce, banking, and digital consumer platforms."
+},
+"finance_promotions": {
+"regulator": "Securities Market Agency (ATVP) & Bank of Slovenia",
+"ad_standards": "Slovenian Advertising Chamber (SOZ)",
+"key_notes": "Aligned with ESMA cross-border financial marketing guidelines."
+}
+},
+{
+"country_code": "ES",
+"country_name": "Spain",
+"region_group": "EU",
+"privacy": {
+"regulator": "Agencia Española de Protección de Datos (AEPD)",
+"url": "aepd.es",
+"key_notes": "Detailed cookie guide requiring equal 'Accept' and 'Reject' buttons on the first layer; strict rules on 'pay or okay' models."
+},
+"accessibility": {
+"legislation": "Law 11/2023 (EAA Transposition)",
+"standard": "UNE-EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Mandatory accessibility information and complaint mechanisms for covered private websites."
+},
+"finance_promotions": {
+"regulator": "CNMV (Securities) & Banco de España",
+"ad_standards": "AUTOCONTROL",
+"key_notes": "Strict Circular 1/2022 requiring prior notification to CNMV for mass crypto-asset ad campaigns and influencer disclaimers."
+}
+},
+{
+"country_code": "SE",
+"country_name": "Sweden",
+"region_group": "EU",
+"privacy": {
+"regulator": "Integritetsskyddsmyndigheten (IMY)",
+"url": "imy.se",
+"key_notes": "PTS oversees cookie rules; active enforcement on Google Analytics/tracking pixels and transparent data notices."
+},
+"accessibility": {
+"legislation": "Lag om vissa produkters och tjänsters tillgänglighet",
+"standard": "EN 301 549 / WCAG 2.1 AA",
+"key_notes": "Monitored by the Swedish Post and Telecom Authority (PTS)."
+},
+"finance_promotions": {
+"regulator": "Finansinspektionen (FI)",
+"ad_standards": "Konsumentverket (Swedish Consumer Agency) & RO",
+"key_notes": "Strict rules on 'moderate marketing' of consumer credit and mandatory credit cost warnings."
+}
+},
+{
+"country_code": "GB",
+"country_name": "United Kingdom",
+"region_group": "Non-EU (UK)",
+"privacy": {
+"regulator": "Information Commissioner's Office (ICO)",
+"url": "ico.org.uk",
+"key_notes": "Governed by UK GDPR & PECR; active enforcement on top websites lacking a prominent 'Reject All' button."
+},
+"accessibility": {
+"legislation": "Equality Act 2010 & Public Sector Bodies Accessibility Regulations",
+"standard": "WCAG 2.2 AA (Best Practice) / WCAG 2.1 AA",
+"key_notes": "Private-sector websites must make 'reasonable adjustments' for disabled users; WCAG 2.2 AA is the benchmark standard."
+},
+"finance_promotions": {
+"regulator": "Financial Conduct Authority (FCA)",
+"ad_standards": "Advertising Standards Authority (ASA)",
+"key_notes": "Strict Section 21 financial promotion approval rules, cryptoasset cooling-off/risk warnings, and mandatory risk summaries."
+}
+}
+]
+}
+
+
