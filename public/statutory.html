@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Statutory requirements — EMEA Dashboard</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/main.css?v=12" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-header-sticky" id="page-header-sticky">
+        <header class="header header--bar">
+          <p class="eyebrow eyebrow--compact">EMEA</p>
+          <div class="header__top">
+            <h1>Statutory</h1>
+            <div class="header__actions">
+              <div class="view-select-wrap">
+                <label class="sr-only" for="site-view-select">Dashboard view</label>
+                <select id="site-view-select" class="view-select" aria-label="Dashboard view"></select>
+              </div>
+            </div>
+          </div>
+          <p id="last-updated" class="last-updated last-updated--bar">Loading…</p>
+        </header>
+      </div>
+
+      <div class="page-intro" id="page-intro">
+        <p class="lede">
+          Regulatory and statutory deadlines for EMEA. Add items to <code>data/statutory.json</code> when
+          requirements are defined.
+        </p>
+      </div>
+
+      <section class="grid" id="statutory-grid" aria-label="Statutory requirements"></section>
+
+      <footer class="footer">
+        <p>Placeholder view — ready for a third dataset.</p>
+      </footer>
+    </main>
+    <script src="js/statutory.js?v=1" type="module"></script>
+  </body>
+</html>

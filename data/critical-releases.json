@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-21T00:00:00.000Z",
+  "items": [
+    {
+      "id": "php-security-2025-11",
+      "product": "PHP",
+      "title": "PHP security releases — patch affected runtimes",
+      "severity": "critical",
+      "summary": "Security releases for supported PHP branches (8.4.x, 8.3.x, 8.2.x, 8.1.x). Review the official changelog for CVEs fixed in your branch.",
+      "actionRequired": "Upgrade application servers, containers, and CI images to the latest patch for your PHP minor version.",
+      "referenceUrl": "https://www.php.net/downloads",
+      "publishedAt": "2025-11-20"
+    },
+    {
+      "id": "log4shell-vigilance",
+      "product": "Apache Log4j",
+      "title": "Log4Shell (CVE-2021-44228) — legacy Java stacks",
+      "severity": "critical",
+      "summary": "Remote code execution in Log4j 2.x via JNDI lookup. Many EMEA estates still carry aged Java middleware.",
+      "actionRequired": "Confirm no Log4j 2.0–2.14.1; use 2.17.1+ or vendor-supported backports. Scan images and dependency trees.",
+      "referenceUrl": "https://logging.apache.org/log4j/2.x/security.html",
+      "publishedAt": "2021-12-09"
+    },
+    {
+      "id": "java-lts-cpu",
+      "product": "Oracle Java / OpenJDK",
+      "title": "Java Critical Patch Update — review quarterly CPU",
+      "severity": "high",
+      "summary": "CPU bundles security fixes across supported JDK/LTS releases. Spring and application servers inherit JVM patches.",
+      "actionRequired": "Align JDK patch level with vendor CPU for versions in production; schedule rolling restarts after test.",
+      "referenceUrl": "https://www.oracle.com/security-alerts/",
+      "publishedAt": "2025-10-21"
+    }
+  ]
+}

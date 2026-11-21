@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Critical Software Releases — EMEA Dashboard</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/main.css?v=12" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-header-sticky" id="page-header-sticky">
+        <header class="header header--bar">
+          <p class="eyebrow eyebrow--compact">EMEA</p>
+          <div class="header__top">
+            <h1>Critical releases</h1>
+            <div class="header__actions">
+              <div class="view-select-wrap">
+                <label class="sr-only" for="site-view-select">Dashboard view</label>
+                <select id="site-view-select" class="view-select" aria-label="Dashboard view"></select>
+              </div>
+            </div>
+          </div>
+          <p id="last-updated" class="last-updated last-updated--bar">Loading…</p>
+        </header>
+      </div>
+
+      <div class="page-intro" id="page-intro">
+        <p class="lede">
+          Curated security releases and advisories (PHP, Java, Log4j, and similar). Edit
+          <code>data/critical-releases.json</code> to add or update items.
+        </p>
+        <div id="banner" class="banner banner--hidden" role="status" aria-live="polite"></div>
+      </div>
+
+      <section class="grid grid--releases" id="release-grid" aria-label="Critical software releases"></section>
+
+      <footer class="footer">
+        <p>Manually maintained list; not polled automatically yet.</p>
+      </footer>
+    </main>
+    <script src="js/critical-releases.js?v=1" type="module"></script>
+  </body>
+</html>

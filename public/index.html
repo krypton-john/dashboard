@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SaaS Status Dashboard</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="css/main.css?v=11" />
+    <link rel="stylesheet" href="css/main.css?v=12" />
   </head>
   <body>
     <main class="page">
@@ -15,6 +15,10 @@
           <div class="header__top">
             <h1>SaaS Status</h1>
             <div class="header__actions">
+              <div class="view-select-wrap">
+                <label class="sr-only" for="site-view-select">Dashboard view</label>
+                <select id="site-view-select" class="view-select" aria-label="Dashboard view"></select>
+              </div>
               <div class="vendor-filter" id="vendor-filter">
                 <button
                   type="button"
@@ -135,6 +139,6 @@
         Improve layouts, Clickable Cards to Status Pages, Search and Persistent Filtering
       </p>
     </aside>
-    <script src="js/dashboard.js?v=10" type="module"></script>
+    <script src="js/dashboard.js?v=11" type="module"></script>
   </body>
 </html>
