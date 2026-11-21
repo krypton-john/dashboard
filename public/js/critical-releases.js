@@ -44,13 +44,18 @@ function renderReleaseCard(item) {
     shell.classList.add("release-card--link");
   }
 
-  const badge = document.createElement("p");
+  const meta = document.createElement("div");
+  meta.className = "release-card__meta";
+
+  const badge = document.createElement("span");
   badge.className = "release-card__severity";
   badge.textContent = SEVERITY_LABEL[sev] ?? sev;
 
-  const product = document.createElement("p");
+  const product = document.createElement("span");
   product.className = "release-card__product";
   product.textContent = item.product ?? "Software";
+
+  meta.append(badge, product);
 
   const title = document.createElement("h2");
   title.className = "release-card__title";
@@ -70,7 +75,7 @@ function renderReleaseCard(item) {
     ? `Published ${formatDate(item.publishedAt)}`
     : "";
 
-  shell.append(badge, product, title, summary, action, when);
+  shell.append(meta, title, summary, action, when);
   if (hasLink) {
     const hint = document.createElement("p");
     hint.className = "release-card__link-hint";

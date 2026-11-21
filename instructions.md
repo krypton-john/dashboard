@@ -147,6 +147,21 @@ The site has three views, switchable from the **View** dropdown in the sticky he
 
 To add a critical release, append an object to `data/critical-releases.json` (`product`, `title`, `severity`, `summary`, `actionRequired`, `referenceUrl`, `publishedAt`). Deploy via the usual Pages workflow so `data/` is copied to the site.
 
+### Sourcing the critical releases list
+
+Today the list is **manual JSON** (no poller yet). Reliable sources to curate from:
+
+| Source | Good for |
+|--------|----------|
+| [php.net/downloads](https://www.php.net/downloads) + branch changelogs | PHP security releases |
+| [Oracle Critical Patch Updates](https://www.oracle.com/security-alerts/) | Java / JDK CPU, quarterly fixes |
+| [Apache Log4j security](https://logging.apache.org/log4j/2.x/security.html) | Log4j advisories (incl. Log4Shell) |
+| [CISA Known Exploited Vulnerabilities](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | U.S. govt catalog of actively exploited CVEs |
+| [NVD](https://nvd.nist.gov/) / [CVE.org](https://www.cve.org/) | CVE metadata (filter by vendor/product in your estate) |
+| Vendor RSS/Atom (Red Hat, Microsoft MSRC, Ubuntu USN) | OS and middleware patches |
+
+**Practical EMEA workflow:** subscribe to vendor security mailing lists or RSS, triage for stacks you run (PHP apps, JVM, Log4j-era Java), then add one JSON entry per actionable release with `actionRequired` in plain language. A future GitHub Action could ingest an RSS feed or CVE API into `critical-releases.json`; until then, weekly curation is enough.
+
 ## Quick checklist
 
 | Step | Add | Remove |

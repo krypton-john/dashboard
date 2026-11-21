@@ -158,11 +158,19 @@ body {
 
 .release-card {
   position: relative;
-  padding: 1.15rem 1.15rem 1.15rem 3.25rem;
+  padding: 1.15rem;
   background: var(--surface);
   border-radius: 12px;
   border: 1px solid color-mix(in srgb, var(--muted) 22%, transparent);
   box-shadow: 0 6px 20px color-mix(in srgb, #000 12%, transparent);
+}
+
+.release-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .release-card--critical {
@@ -189,35 +197,48 @@ a.release-card:hover {
 }
 
 .release-card__severity {
-  position: absolute;
-  left: 1rem;
-  top: 1.15rem;
+  flex: 0 0 auto;
   margin: 0;
-  font-size: 0.65rem;
+  padding: 0.12rem 0.4rem;
+  font-size: 0.62rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  border-radius: 5px;
+  line-height: 1.35;
 }
 
 .release-card--critical .release-card__severity {
   color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 16%, var(--surface));
 }
 
 .release-card--high .release-card__severity {
   color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 16%, var(--surface));
+}
+
+.release-card--medium .release-card__severity,
+.release-card--low .release-card__severity {
+  color: var(--muted);
+  background: color-mix(in srgb, var(--muted) 14%, var(--surface));
 }
 
 .release-card__product {
   margin: 0;
-  font-size: 0.75rem;
+  flex: 1 1 8rem;
+  min-width: 0;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--accent);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .release-card__title {
-  margin: 0.35rem 0 0;
+  margin: 0;
   font-size: 1.02rem;
   font-weight: 650;
 }
