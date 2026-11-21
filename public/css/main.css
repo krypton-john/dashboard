@@ -126,6 +126,161 @@ body {
   flex: 0 0 auto;
 }
 
+.view-select-wrap {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.view-select {
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  max-width: min(11.5rem, 42vw);
+  padding: 0.4rem 1.75rem 0.4rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--muted));
+  background: var(--surface)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239aa8bc' d='M1.5 1.5 6 6l4.5-4.5'/%3E%3C/svg%3E")
+    no-repeat right 0.45rem center;
+  color: var(--text);
+  cursor: pointer;
+  appearance: none;
+}
+
+.view-select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.grid--releases {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+}
+
+.release-card {
+  position: relative;
+  padding: 1.15rem 1.15rem 1.15rem 3.25rem;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--muted) 22%, transparent);
+  box-shadow: 0 6px 20px color-mix(in srgb, #000 12%, transparent);
+}
+
+.release-card--critical {
+  border-color: color-mix(in srgb, var(--danger) 45%, transparent);
+}
+
+.release-card--high {
+  border-color: color-mix(in srgb, var(--warn) 40%, transparent);
+}
+
+.release-card--medium,
+.release-card--low {
+  border-color: color-mix(in srgb, var(--muted) 30%, transparent);
+}
+
+a.release-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.release-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.release-card__severity {
+  position: absolute;
+  left: 1rem;
+  top: 1.15rem;
+  margin: 0;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.release-card--critical .release-card__severity {
+  color: var(--danger);
+}
+
+.release-card--high .release-card__severity {
+  color: var(--warn);
+}
+
+.release-card__product {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.release-card__title {
+  margin: 0.35rem 0 0;
+  font-size: 1.02rem;
+  font-weight: 650;
+}
+
+.release-card__summary {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.release-card__action {
+  margin: 0.65rem 0 0;
+  padding-top: 0.65rem;
+  border-top: 1px solid color-mix(in srgb, var(--muted) 18%, transparent);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.release-card__date {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.release-card__link-hint {
+  margin: 0.55rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.statutory-card {
+  padding: 1.15rem;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--muted) 22%, transparent);
+}
+
+.statutory-card__title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 650;
+}
+
+.statutory-card__body {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.statutory-card__due {
+  margin: 0.65rem 0 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.page-intro code {
+  font-size: 0.85em;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--muted) 14%, var(--surface));
+}
+
 .tool-search {
   position: relative;
   flex: 0 0 auto;
@@ -768,6 +923,11 @@ a.card:focus-visible {
     right: auto;
     left: 0;
     width: min(18.5rem, calc(100vw - 2.5rem));
+  }
+
+  .view-select {
+    max-width: min(9.5rem, 38vw);
+    font-size: 0.75rem;
   }
 
   .tool-search__input {

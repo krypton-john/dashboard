@@ -135,6 +135,18 @@ Old incidents for that `toolId` stay in `data/incidents.json`; they do not affec
 
 ---
 
+## Dashboard views (multi-page)
+
+The site has three views, switchable from the **View** dropdown in the sticky header:
+
+| View | Page | Data |
+|------|------|------|
+| SaaS | `index.html` | `data/status.json` (polled) |
+| Critical Software Releases | `critical-releases.html` | `data/critical-releases.json` (manual) |
+| Statutory requirements | `statutory.html` | `data/statutory.json` (manual) |
+
+To add a critical release, append an object to `data/critical-releases.json` (`product`, `title`, `severity`, `summary`, `actionRequired`, `referenceUrl`, `publishedAt`). Deploy via the usual Pages workflow so `data/` is copied to the site.
+
 ## Quick checklist
 
 | Step | Add | Remove |

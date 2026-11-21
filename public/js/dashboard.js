@@ -1,3 +1,5 @@
+import { initSiteNav } from "./site-nav.js";
+
 // Warn if no poll in ~90 minutes (hourly schedule + GitHub cron delay).
 const STALE_MS = 90 * 60 * 1000;
 const REFRESH_MS = 60 * 1000;
@@ -698,6 +700,7 @@ function initAdvisoryDetails() {
   mq.addEventListener("change", sync);
 }
 
+initSiteNav("saas");
 initVendorFilter();
 initToolSearch();
 initAdvisoryDetails();
