@@ -3,34 +3,24 @@
   "updatedAt": "2026-11-21T00:00:00.000Z",
   "items": [
     {
-      "id": "php-security-2025-11",
-      "product": "PHP",
-      "title": "PHP security releases — patch affected runtimes",
-      "severity": "critical",
-      "summary": "Security releases for supported PHP branches (8.4.x, 8.3.x, 8.2.x, 8.1.x). Review the official changelog for CVEs fixed in your branch.",
-      "actionRequired": "Upgrade application servers, containers, and CI images to the latest patch for your PHP minor version.",
-      "referenceUrl": "https://www.php.net/downloads",
-      "publishedAt": "2025-11-20"
-    },
-    {
-      "id": "log4shell-vigilance",
-      "product": "Apache Log4j",
-      "title": "Log4Shell (CVE-2021-44228) — legacy Java stacks",
-      "severity": "critical",
-      "summary": "Remote code execution in Log4j 2.x via JNDI lookup. Many EMEA estates still carry aged Java middleware.",
-      "actionRequired": "Confirm no Log4j 2.0–2.14.1; use 2.17.1+ or vendor-supported backports. Scan images and dependency trees.",
-      "referenceUrl": "https://logging.apache.org/log4j/2.x/security.html",
-      "publishedAt": "2021-12-09"
-    },
-    {
-      "id": "java-lts-cpu",
-      "product": "Oracle Java / OpenJDK",
-      "title": "Java Critical Patch Update — review quarterly CPU",
-      "severity": "high",
-      "summary": "CPU bundles security fixes across supported JDK/LTS releases. Spring and application servers inherit JVM patches.",
-      "actionRequired": "Align JDK patch level with vendor CPU for versions in production; schedule rolling restarts after test.",
-      "referenceUrl": "https://www.oracle.com/security-alerts/",
-      "publishedAt": "2025-10-21"
-    }
-  ]
+    "id": "php-security-php2shell-2026",
+    "product": "PHP",
+    "title": "PHP security vulnerabilities CVE-2026-109618 and CVE-2026-109619 (PHP2Shell)",
+    "severity": "critical",
+    "summary": "Security flaws in PHP versions 5.4 through 8.5 involving out-of-memory corruption and stale global state allow unauthenticated remote code execution (RCE) across web configurations (PHP-FPM, Apache mod_php, php-cgi, FrankenPHP, LiteSpeed) and are actively exploited in the wild.",
+    "actionRequired": "Upgrade immediately to PHP 8.5.12, 8.4.27, 8.3.36, or 8.2.35 (or apply source backports for 7.4–8.1) and restart all PHP worker processes.",
+    "referenceUrl": "https://www.tenable.com/blog/php2shell-cve-2026-109618-cve-2026-109619-frequently-asked-questions-about-critical-php-remote",
+    "publishedAt": "2026-10-21T00:00:00Z"
+  },
+  {
+    "id": "java-security-java4shell-2026",
+    "product": "OpenJDK / Oracle Java SE",
+    "title": "Java4Shell Base64 Decoder Heap Overflow (CVE-2026-114938)",
+    "severity": "critical",
+    "summary": "A heap-based buffer overflow in OpenJDK's AVX-512 VBMI Base64 decoder intrinsic (versions 17.0.6+ through 27, plus Oracle Java SE 8u511b33-perf) enables unauthenticated remote code execution on x86-64 hosts in applications like Keycloak, Jira, Confluence, Jenkins, and Artifactory.",
+    "actionRequired": "Update to patched JDK builds (17.0.21.1, 21.0.13.1, 25.0.5.1, 27.0.1.1, or 8u513) or apply the temporary JVM flag -XX:-UseBASE64Intrinsics and restart services.",
+    "referenceUrl": "https://www.tenable.com/blog/java4shell-cve-2026-114938-frequently-asked-questions-about-openjdk-rce-vulnerability",
+    "publishedAt": "2026-11-17T00:00:00Z"
+  }
+      ]
 }
