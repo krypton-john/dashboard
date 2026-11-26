@@ -1,9 +1,11 @@
 name: Poll status
 
+
 on:
   schedule:
-    # Top of every hour (UTC). Scheduled workflows can be delayed on busy runners.
-    - cron: "0 * * * *"
+    # Every 30 minutes (UTC), offset from the hour to avoid scheduler
+    # contention. Scheduled workflows can be delayed on busy runners.
+    - cron: "17,47 * * * *"
   workflow_dispatch:
     inputs:
       send_test_chat_alert:
@@ -11,15 +13,18 @@ on:
         type: boolean
         default: false
 
+
 # Poll commits with GITHUB_TOKEN do not trigger other workflows (e.g. Pages deploy).
 permissions:
   contents: write
   pages: write
   id-token: write
 
+
 concurrency:
   group: poll-status
   cancel-in-progress: false
+
 
 jobs:
   poll:
@@ -31,10 +36,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: "24"
+
 
       - name: Fetch vendor status
         id: fetch
@@ -46,6 +53,7 @@ jobs:
           CHAT_WEBHOOK_PLATFORM: ${{ secrets.CHAT_WEBHOOK_PLATFORM }}
           CHAT_WEBHOOK_PAYMENTS: ${{ secrets.CHAT_WEBHOOK_PAYMENTS }}
         run: node scripts/poll.mjs
+
 
       - name: Send test Slack alert
         if: >-
@@ -60,6 +68,7 @@ jobs:
           CHAT_WEBHOOK_PAYMENTS: ${{ secrets.CHAT_WEBHOOK_PAYMENTS }}
         run: node scripts/notify.mjs
 
+
       - name: Commit status data
         if: steps.fetch.outputs.changed == 'true'
         run: |
@@ -68,17 +77,16 @@ jobs:
           git add data/status.json data/incidents.json data/alerts.json
           git commit -m "chore: update status and incident data"
           git push
-
       - name: Assemble site
         run: |
           mkdir -p _site
           cp -r public/. _site/
           cp -r data _site/data
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+
 
       - name: Deploy to GitHub Pages
         id: deployment
